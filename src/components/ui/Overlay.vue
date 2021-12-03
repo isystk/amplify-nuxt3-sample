@@ -17,20 +17,20 @@
 </template>
 
 <script lang="ts">
-import { PropType } from "vue";
-import { Component, Vue, Prop, PropSync, Watch } from "vue-property-decorator";
 
-@Component({
-  layout: "loginLayout"
-})
 export default class Overlay extends Vue {
   // 表示するかどうか
-  @PropSync("isVisibleOverlay", {
-    type: Boolean,
-    default: false
-  })
-  isVisible;
-
+  props: {
+    isVisibleOverlay: {
+      type: Boolean,
+      required: false
+    }
+  }
+  data() {
+    return {
+      isVisible: false
+    }
+  }
   // オーバーレイを閉じます
   close(): void {
     this.isVisible = false;

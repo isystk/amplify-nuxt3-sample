@@ -1,28 +1,20 @@
-import Env from '../env/'
-
-/**
- * フロントエンド用の URL を作成する
- */
-const getFrontUrl = (path: string): string => {
-  return [Env.internalEndpointUrl, path].join('')
-}
 
 /** API のエンドポイント */
 export const URL = {
   /** HOME */
-  HOME: getFrontUrl('/'),
+  HOME: '/',
   /** ログイン */
-  LOGIN: getFrontUrl('/login'),
+  LOGIN: '/login',
   /** 会員登録 */
-  SIGNUP: getFrontUrl('/signup'),
+  SIGNUP: '/signup',
   /** 会員登録承認 */
-  SIGNUP_VERIFICATION: getFrontUrl('/signup/verification'),
+  SIGNUP_VERIFICATION: '/signup/verification',
   /** 投稿詳細 */
-  POSTS: getFrontUrl('/posts'),
+  POSTS: '/posts',
   /** マイページ TOP */
-  MEMBER: getFrontUrl('/member'),
+  MEMBER: '/member',
   /** マイページ 投稿詳細 */
-  MEMBER_POSTS: getFrontUrl('/member/posts'),
+  MEMBER_POSTS: '/member/posts',
   /** マイページ 投稿 新規登録 */
-  MEMBER_POSTS_NEW: getFrontUrl('/member/posts/new'),
+  MEMBER_POSTS_NEW: '/member/posts/new',
 }

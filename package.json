@@ -1,4 +1,5 @@
 {
+  "name": "nuxt3-typescript-aws",
   "private": true,
   "scripts": {
     "dev": "nuxi dev",
@@ -7,12 +8,19 @@
     "allupdate": "yarn upgrade-interactive --latest"
   },
   "devDependencies": {
+    "@nuxt/types": "^2.15.8",
+    "@nuxtjs/dotenv": "^1.4.1",
     "autoprefixer": "10.4.0",
+    "axios": "^0.24.0",
+    "lodash": "^4.17.21",
+    "moment": "^2.29.1",
     "nuxt3": "3.0.0-27277330.202617b",
     "postcss": "8.3.11",
+    "sanitize-html": "^2.6.0",
     "sass": "1.43.4",
     "sass-loader": "12.3.0",
-    "tailwindcss": "3.0.0-alpha.1"
+    "tailwindcss": "3.0.0-alpha.1",
+    "vue-i18n": "^9.2.0-beta.22"
   },
   "dependencies": {
     "@headlessui/vue": "^1.4.2",
