@@ -2,10 +2,12 @@
  * @file 定数をグローバルにセットする
  */
 import { defineNuxtPlugin } from '#app'
-import * as C from "../common/constants";
+import { URL } from "../common/constants/url";
 
 export default defineNuxtPlugin(nuxtApp => {
-  nuxtApp.provide('C', C);
+  nuxtApp.provide('C', {
+    URL
+  });
 })
 
 declare module '#app' {

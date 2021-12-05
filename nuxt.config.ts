@@ -1,7 +1,28 @@
 import { defineNuxtConfig } from 'nuxt3'
+import {IEnv} from "~/@types/IEnv";
+import EnvLocal from "~/common/env/env.local";
 
 const pkg = require("./package");
-const PUBLIC_PATH = process.env.PUBLIC_PATH || "/";
+
+const getEnv = (): IEnv => {
+    console.log('$config.NODE_ENV: ', process.env.NODE_ENV)
+    if (process.env.NODE_ENV === 'production') {
+        return {
+            envName: 'product',
+            internalEndpointUrl: 'https://nextjs-typescript-aws.vercel.app',
+            externalEndpointUrl:
+                'https://obew4p54y9.execute-api.ap-northeast-1.amazonaws.com/Prod',
+        } as IEnv
+    } else {
+        return {
+            envName: 'local',
+            internalEndpointUrl: 'http://localhost:3000',
+            externalEndpointUrl:
+        'https://obew4p54y9.execute-api.ap-northeast-1.amazonaws.com/Prod',
+        }
+    }
+}
+console.log(getEnv())
 
 const nuxtConfig = defineNuxtConfig({
     mode: "universal",
@@ -11,9 +32,10 @@ const nuxtConfig = defineNuxtConfig({
      * 環境変数
      * ビルド時に渡される env の値は、ここに記載することで文字列に置換される
      */
-    env: {
+    publicRuntimeConfig: {
         APP_NAME: pkg.name,
         APP_DESCRIPTION: pkg.description,
+        ...getEnv(),
         AWS_REGION: process.env.AWS_REGION,
         AWS_USER_POOL_ID: process.env.AWS_USER_POOL_ID,
         AWS_CLIENT_ID: process.env.AWS_CLIENT_ID
@@ -22,11 +44,10 @@ const nuxtConfig = defineNuxtConfig({
     // https://ja.nuxtjs.org/faq/host-port/
     server: {
         port: 3000,
-        // 他のパソコンから IP でつながるように host を変更
-        host: "0.0.0.0" // デフォルト: localhost
+        // // 他のパソコンから IP でつながるように host を変更
+        // host: "0.0.0.0" // デフォルト: localhost
     },
     meta: {
-        titleTemplate: "%s | " + pkg.name,
         meta: [
             { hid: "charset", charset: "utf-8" },
             {
@@ -52,19 +73,25 @@ const nuxtConfig = defineNuxtConfig({
           class: 'column1'
         },
         link: [
-            { rel: "icon", type: "image/x-icon", href: PUBLIC_PATH + "favicon.ico" }
+            { rel: "icon", type: "image/x-icon", href: "/favicon.ico" }
         ]
     },
+    css: [
+        '~/assets/app.scss',
+        '@fortawesome/fontawesome-free/css/all.min.css'
+    ],
+    components: [
+        {
+            path: '@/components/',
+            pathPrefix: false
+        }
+    ],
     buildModules: [
         // pinia plugin - https://pinia.esm.dev
-        ['@pinia/nuxt']
+        ['@pinia/nuxt'],
     ],
     build: {
-        // vue-devtools を許可するかどうかを設定します
-        // https://ja.nuxtjs.org/api/configuration-build/#devtools
-        devtools: true,
         transpile: ['moment'], // pluginがビルドエラーになるので追加
-        extend(config, ctx) {},
         postcss: {
             postcssOptions: {
                 plugins: {

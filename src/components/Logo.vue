@@ -1,28 +1,20 @@
 <template>
   <div class="header-logo">
     <NuxtLink :to="$C.URL.HOME">
-      <a>
-      </a>
+      <h1>
+        <a>{{ $config.APP_NAME }}</a>
+      </h1>
     </NuxtLink>
   </div>
 </template>
 
 <script lang="ts">
-import {useNuxtApp} from "#app";
+import { defineComponent } from 'vue'
 
-export default {
-  data() {
+export default defineComponent({
+  async setup() {
     return {
-      $C: null
     }
   },
-  setup() {
-    const { $C } = useNuxtApp()
-  },
-  mounted() {
-    console.log("aaaaaaaaaaaaaaaaaaaaaa");
-    console.log(process.env.APP_NAME);
-  }
-
-}
+})
 </script>

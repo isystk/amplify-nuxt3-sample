@@ -5,9 +5,7 @@
       </div>
       <div class="entry-content">
         <p>すべての投稿を一覧表示しています。</p>
-        <div class="box-list">
-          <PagesPostsList />
-        </div>
+        <div class="box-list"></div>
       </div>
     </section>
 </template>

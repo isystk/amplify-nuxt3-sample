@@ -1,11 +1,12 @@
-import { defineNuxtPlugin } from '#app'
-import * as _ from "lodash";
+import {defineNuxtPlugin} from "#app";
+import lodash from 'lodash'
 
-export default defineNuxtPlugin(() => {
-  return {
-    provide: {
-      _: _
-    }
-  }
+export default defineNuxtPlugin(nuxtApp => {
+  nuxtApp.vueApp.provide('lodash', lodash);
 })
-// span(v-html="$moment({someDate}).format('')") で利用可能
+
+declare module '#app' {
+  interface NuxtApp {
+    $_: Object
+  }
+}

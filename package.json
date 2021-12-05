@@ -8,8 +8,10 @@
     "allupdate": "yarn upgrade-interactive --latest"
   },
   "devDependencies": {
+    "@fortawesome/fontawesome-free": "^5.15.4",
     "@nuxt/types": "^2.15.8",
     "@nuxtjs/dotenv": "^1.4.1",
+    "@types/lodash": "^4.14.177",
     "autoprefixer": "10.4.0",
     "axios": "^0.24.0",
     "lodash": "^4.17.21",
@@ -20,7 +22,8 @@
     "sass": "1.43.4",
     "sass-loader": "12.3.0",
     "tailwindcss": "3.0.0-alpha.1",
-    "vue-i18n": "^9.2.0-beta.22"
+    "vue-i18n": "^9.2.0-beta.22",
+    "vue-lodash": "^2.1.2"
   },
   "dependencies": {
     "@headlessui/vue": "^1.4.2",

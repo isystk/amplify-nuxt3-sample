@@ -4,28 +4,24 @@
       <nav class="footer-nav">
         <ul>
           <li>
-            <Link :to="$C.URL.HOME">
-              <a @click="">
-              </a>
-            </Link>
+            <NuxtLink :to="$C.URL.HOME" @click="sideMenu.close()" >
+              <i class="fas fa-home" :style="{fontSize: '16px'}"></i>
+            </NuxtLink>
           </li>
           <li>
-            <a
-              href="#"
-              @click=""
-            >
+            <NuxtLink :to="$C.URL.HOME">
+              <i class="fas fa-share-alt" :style="{fontSize: '16px'}"></i>
+            </NuxtLink>
+          </li>
+          <li>
+            <a href="#" @click="toggleMenu">
+              <i class="fas fa-bars" :style="{fontSize: '16px'}"></i>
             </a>
           </li>
           <li>
-            <a
-              href="#"
-              @click=""
-            >
-            </a>
-          </li>
-          <li>
-            <a href="#" class="js-scroll-top" @click="">
-            </a>
+            <NuxtLink :to="$C.URL.HOME">
+              <i class="fas fa-chevron-up" :style="{fontSize: '16px'}"></i>
+            </NuxtLink>
           </li>
         </ul>
       </nav>
@@ -47,6 +43,7 @@
               rel="noreferrer"
             >
               Github
+              <i class="fab fa-github" :style="{fontSize: '16px'}"></i>
             </a>
           </li>
         </ul>
@@ -56,21 +53,24 @@
   </footer>
 </template>
 
-<script setup lang="ts">
-import {useNuxtApp} from "#app";
-
-const { $C } = useNuxtApp()
-</script>
-
 <script lang="ts">
+import { defineComponent, ref, reactive } from "vue";
+import {useSideMenu} from "@/composables/sideMenu";
 
-export default {
-  computed: {
-    // ログイン状態
-    isAuthenticated(): boolean {
-      return false
-      // return this.$store.getters["auth/isAuthenticated"];
+export default defineComponent({
+  setup() {
+    // data
+    const sideMenu = useSideMenu()
+
+    // method
+    const toggleMenu = () => {
+      sideMenu.toggle()
+    }
+
+    return {
+      toggleMenu,
+      sideMenu,
     }
   }
-}
+});
 </script>
