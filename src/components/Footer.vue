@@ -14,14 +14,14 @@
             </NuxtLink>
           </li>
           <li>
-            <a href="#" @click="toggleMenu">
+            <a href="#" @click.prevent="toggleMenu">
               <i class="fas fa-bars" :style="{fontSize: '16px'}"></i>
             </a>
           </li>
           <li>
-            <NuxtLink :to="$C.URL.HOME">
+            <a href="#" @click.prevent="scrollToTop">
               <i class="fas fa-chevron-up" :style="{fontSize: '16px'}"></i>
-            </NuxtLink>
+            </a>
           </li>
         </ul>
       </nav>
@@ -55,7 +55,7 @@
 
 <script lang="ts">
 import { defineComponent, ref, reactive } from "vue";
-import {useSideMenu} from "@/composables/sideMenu";
+import {useSideMenu} from "@/stores/sideMenu";
 
 export default defineComponent({
   setup() {
@@ -66,9 +66,16 @@ export default defineComponent({
     const toggleMenu = () => {
       sideMenu.toggle()
     }
+    const scrollToTop = () => {
+      window.scrollTo({
+        top: 0,
+        behavior: 'smooth'
+      })
+    }
 
     return {
       toggleMenu,
+      scrollToTop,
       sideMenu,
     }
   }

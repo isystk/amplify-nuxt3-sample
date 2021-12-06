@@ -36,7 +36,7 @@
 
 <script lang="ts">
 import { defineComponent, ref, reactive } from "vue";
-import {useSideMenu} from "@/composables/sideMenu";
+import {useSideMenu} from "@/stores/sideMenu";
 
 export default defineComponent({
   setup() {
