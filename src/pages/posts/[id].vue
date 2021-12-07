@@ -3,10 +3,10 @@
      <nav class="breadcrumb">
       <ul>
         <li>
-            <a>
+            <NuxtLink :to="$C.URL.HOME">
               <i class="fas fa-home" :style="{fontSize: '16px'}"></i>
               <span>HOME</span>
-            </a>
+            </NuxtLink>
         </li>
         <li>{{post.title}}</li>
       </ul>
@@ -14,35 +14,30 @@
       <div class="entry-header">
         <h1 class="entry-title">{{post.title}}</h1>
         <div class="article-img">
-          <img alt="sample1" width="644" src="/hoge.jpg" />
+          <img alt="sample1" width="644" :src="post.photo" />
         </div>
         <div class=" clearfix"></div>
       </div>
       <div class="entry-content">
         <div class="entry-content">
-          <p>xxxxxxxxxxxxxxxxxxxxxxxx</p>
+          <p>{{post.description}}</p>
         </div>
         <div class="clearfix"></div>
         <div class="entry-meta">
           <i class="fas fa-clock" :style="{fontSize: '16px'}"></i>
-          2021/11/02
+          {{post.regist_datetime_yyyymmdd}}
         </div>
       </div>
     </section>
 </template>
 
-<script lang="ts">
-import { defineComponent, computed, ref, reactive, onMounted, inject } from "vue";
-import { useRoute, useRouter } from 'vue-router'
-import { useState } from '#app'
-import {usePostsStore} from "@/stores/posts";
-import {useTodoStore} from "@/stores/todos";
-import {Data, Post} from "~~/nextjs-typescript-aws/src/store/StoreTypes";
-import { storeToRefs } from 'pinia'
 
-import { API } from '@/utilities'
-import { getApiEndpoint } from '@/common/constants/api'
-import { useRuntimeConfig } from "#app";
+<script lang="ts">
+import {defineComponent, computed, ref, reactive, onMounted, inject} from "vue";
+import { useRoute, useRouter } from 'vue-router'
+import {usePostsStore} from "@/stores/posts";
+import {Data, Post} from "~~/nextjs-typescript-aws/src/store/StoreTypes";
+
 type PostDisplay = Post & {
   id: string
   regist_data_yyyymmdd: string
@@ -50,45 +45,22 @@ type PostDisplay = Post & {
 
 export default defineComponent({
   setup() {
-
     const { id } = useRoute().params
     const postsStore = usePostsStore()
-    const posts = ref({})
 
     // mounted
     onMounted(async () => {
-      if (typeof id === "string") {
-        const config = useRuntimeConfig();
-        const _ = inject('lodash')
-        const response = await API.get(getApiEndpoint(config).POSTS)
-        const posts = _.mapKeys(response, 'id')
-        console.log(posts)
-        posts.value = posts
-      }
+      await postsStore.fetchPosts()
     })
 
-    const { readposts } = storeToRefs(postsStore)
-    console.log(readposts.value)
-
-   const post = (): PostDisplay[] => {
-      // data
-      return _.map(readposts.value, function (e: Data<Post>) {
-        const data = e.data
-        return {
-          id: e.id,
-          ...data,
-          regist_datetime_yyyymmdd: data.regist_datetime
-              ? moment(data.regist_datetime).format('YYYY/MM/DD')
-              : '',
-        } as PostDisplay
-      })
-
-    }
+    const displayPost = computed(() => {
+      return postsStore.getPost(typeof id === "string" ? id :"")
+    })
 
     return {
-      post: post[id] || {},
+      post: displayPost
     }
   }
-
 });
+
 </script>

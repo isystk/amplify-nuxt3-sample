@@ -42,10 +42,10 @@ export default defineComponent({
       await postsStore.fetchPosts()
     })
 
-    const displayPosts = computed(() => postsStore.displayPosts);
+    const posts = computed(() => postsStore.getPosts());
 
     return {
-      posts: displayPosts,
+      posts
     }
   }
 });

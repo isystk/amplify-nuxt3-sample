@@ -1,22 +1,17 @@
-import { ref, Ref } from "vue";
+import { ref } from "vue";
 import { defineStore } from "pinia";
 
-interface SideMenuState {
-    isOpen: boolean;
-}
+export const useSideMenu = defineStore('sideMenu', () => {
+    const isOpen = ref<boolean>(false)
 
-export const useSideMenu = defineStore('sideMenu', {
-    state: (): SideMenuState => ({
-        isOpen: false,
-    }),
-    actions: {
-        toggle() {
-            this.isOpen = !this.isOpen;
-        },
+    // method
+    const toggle = () => isOpen.value = !isOpen.value;
+    const close = () => isOpen.value = false;
 
-        close() {
-            this.isOpen = false;
-        },
+    return {
+        isOpen,
+        toggle,
+        close
     }
 })
 
