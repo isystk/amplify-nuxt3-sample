@@ -24,6 +24,11 @@
                 マイページ
               </NuxtLink>
             </li>
+            <li>
+              <NuxtLink :to="$C.URL.LOGIN" @click="sideMenu.close">
+                ログイン
+              </NuxtLink>
+            </li>
             <li></li>
           </ul>
         </nav>

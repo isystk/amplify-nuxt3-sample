@@ -1,6 +1,5 @@
 import { defineNuxtConfig } from 'nuxt3'
 import {IEnv} from "~/@types/IEnv";
-import EnvLocal from "~/common/env/env.local";
 
 const pkg = require("./package");
 
@@ -100,7 +99,7 @@ const nuxtConfig = defineNuxtConfig({
                 }
             }
         },
-    }
+    },
 })
 
 

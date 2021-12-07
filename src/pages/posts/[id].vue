@@ -33,15 +33,9 @@
 
 
 <script lang="ts">
-import {defineComponent, computed, ref, reactive, onMounted, inject} from "vue";
-import { useRoute, useRouter } from 'vue-router'
+import {defineComponent, computed, onMounted} from "vue";
+import { useRoute } from 'vue-router'
 import {usePostsStore} from "@/stores/posts";
-import {Data, Post} from "~~/nextjs-typescript-aws/src/store/StoreTypes";
-
-type PostDisplay = Post & {
-  id: string
-  regist_data_yyyymmdd: string
-}
 
 export default defineComponent({
   setup() {

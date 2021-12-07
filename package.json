@@ -8,6 +8,7 @@
     "allupdate": "yarn upgrade-interactive --latest"
   },
   "devDependencies": {
+    "@aws-amplify/auth": "^4.3.18",
     "@fortawesome/fontawesome-free": "^5.15.4",
     "@nuxt/types": "^2.15.8",
     "@nuxtjs/dotenv": "^1.4.1",
