@@ -1,10 +1,10 @@
 <template>
   <div class="header-logo">
-    <NuxtLink :to="$C.URL.HOME">
-      <h1>
-        <a>{{ $config.APP_NAME }}</a>
-      </h1>
-    </NuxtLink>
+    <h1>
+      <NuxtLink :to="$C.URL.HOME">
+        {{ $config.APP_NAME }}
+      </NuxtLink>
+    </h1>
   </div>
 </template>
 
@@ -13,8 +13,7 @@ import {defineComponent} from 'vue'
 
 export default defineComponent({
   async setup() {
-    return {
-    }
+    return {}
   },
 })
 

@@ -10,13 +10,27 @@
               <p>メールアドレス</p>
               <ElementsInputText name="email" type="text" :defaultValue="emailField.props.value.value"
                 @input="(e) => emailField.props.onInput(e)"
+                @blur="(e) => emailField.props.onBlur(e)"
               />
+              <p
+                  class="text-red-500"
+                  v-show="emailField.meta.isTouched.value && emailField.meta.error.value"
+              >
+                メールアドレスを入力してください。
+              </p>
             </div>
             <div class="form-control">
               <p>パスワード</p>
               <ElementsInputText name="password" type="password" :defaultValue="passwordField.props.value.value"
                 @input="(e) => passwordField.props.onInput(e)"
+                @blur="(e) => passwordField.props.onBlur(e)"
               />
+              <p
+                  class="text-red-500"
+                  v-show="passwordField.meta.isTouched.value && passwordField.meta.error.value"
+              >
+                パスワードを入力してください。
+              </p>
             </div>
             <div>
               <ElementsButtonBasic label="ログインする" name="login" @click="onSubmit" />
@@ -33,8 +47,9 @@
 </template>
 
 <script lang="ts">
-import {defineComponent, computed, onMounted, reactive, ref} from "vue";
-import { useRoute } from 'vue-router'
+import {defineComponent, computed, inject, onMounted, reactive, ref} from "vue";
+import { useRoute, useRouter } from 'vue-router'
+import {useState, useRuntimeConfig} from "#app";
 
 const useField = (
     initialValue: string,
@@ -76,6 +91,14 @@ const emailValidator = (value: string) => {
 
 export default defineComponent({
   setup() {
+    const { $C } = useNuxtApp()
+    const router = useRouter()
+    if (process.client) {
+      const auth = localStorage.getItem('authorization')
+      if (auth === 'test') {
+        router.push($C.URL.MEMBER)
+      }
+    }
 
     // 各フィールドの定義(バリデーションメソッドの詳細は後述する)
     const emailField = useField('', emailValidator);
@@ -94,6 +117,8 @@ export default defineComponent({
       }
       // 今回はサーバーリクエストは行っていない
       console.log(emailField.props.value.value, passwordField.props.value.value);
+      localStorage.setItem('authorization', 'test')
+      console.log(localStorage.getItem('authorization'));
     };
 
     // 各フィールド情報とフォーム情報をtemplate層に渡す

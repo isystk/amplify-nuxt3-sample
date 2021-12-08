@@ -8,12 +8,11 @@
     "allupdate": "yarn upgrade-interactive --latest"
   },
   "devDependencies": {
-    "@aws-amplify/auth": "^4.3.18",
     "@fortawesome/fontawesome-free": "^5.15.4",
     "@nuxt/types": "^2.15.8",
-    "@nuxtjs/dotenv": "^1.4.1",
     "@types/lodash": "^4.14.177",
     "autoprefixer": "10.4.0",
+    "aws-sdk": "^2.1044.0",
     "axios": "^0.24.0",
     "lodash": "^4.17.21",
     "moment": "^2.29.1",

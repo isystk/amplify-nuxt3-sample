@@ -22,6 +22,7 @@
         :state="state"
         @change="(e) => onChangeValue(e.target.value || '')"
         @input="(e) => onInputValue(e.target.value || '')"
+        @blur="(e) => onBlurValue(e.target.value || '')"
       >
 
       <div
@@ -107,6 +108,7 @@ export default {
 
     onChange: Function,
     onInput: Function,
+    onBlur: Function,
     onInputForMultibyte: Function,
     onSelect: Function,
   },
@@ -183,6 +185,15 @@ export default {
 
       if (this.onInput && typeof this.onInput === 'function') {
         this.onInput(input)
+      }
+    },
+    onBlurValue: function(input) {
+      if (this.disabled || this.readonly) {
+        return false
+      }
+
+      if (this.onBlur && typeof this.onBlur === 'function') {
+        this.onBlur(input)
       }
     },
     onInputForMultibyteValue: function(e) {
