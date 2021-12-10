@@ -15,7 +15,7 @@ export default defineNuxtPlugin(nuxtApp => {
 
 declare module '#app' {
     interface NuxtApp {
-        $Auth: Object,
-        $CognitoUser: Object
+        $Auth: ReturnType<Auth>,
+        $CognitoUser: ReturnType<CognitoUser>
     }
 }

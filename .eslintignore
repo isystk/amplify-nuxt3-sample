@@ -1,0 +1,23 @@
+# Common
+.github
+node_modules
+dist
+.nuxt
+coverage
+
+# Internals
+.storybook
+.vscode
+internals
+stories
+tools
+
+# build file 
+out/**
+
+# config file 
+.eslintrc.js
+nuxt.config.ts
+tailwind.config.js
+
+
