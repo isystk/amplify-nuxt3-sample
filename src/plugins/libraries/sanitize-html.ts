@@ -7,7 +7,7 @@ export default defineNuxtPlugin(nuxtApp => {
 
 declare module '#app' {
   interface NuxtApp {
-    $sanitize: Object
+    $sanitize: ReturnType<sanitizeHTML>
   }
 }
 // span(v-html="$sanitize({someContent})") で利用可能

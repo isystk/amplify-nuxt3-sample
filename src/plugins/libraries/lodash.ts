@@ -7,6 +7,6 @@ export default defineNuxtPlugin(nuxtApp => {
 
 declare module '#app' {
   interface NuxtApp {
-    $_: Object
+    $_: ReturnType<lodash>
   }
 }

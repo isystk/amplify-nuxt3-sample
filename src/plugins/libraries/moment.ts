@@ -7,7 +7,7 @@ export default defineNuxtPlugin(nuxtApp => {
 
 declare module '#app' {
   interface NuxtApp {
-    $moment: Object
+    $moment: ReturnType<moment>
   }
 }
 // span(v-html="$moment({someDate}).format('')") で利用可能

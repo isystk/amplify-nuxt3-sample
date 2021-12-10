@@ -12,6 +12,10 @@ export default defineNuxtPlugin(nuxtApp => {
 
 declare module '#app' {
   interface NuxtApp {
-    $C: Object
+    $C: Const
   }
+}
+
+type Const = {
+  URL
 }
