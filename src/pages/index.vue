@@ -3,7 +3,7 @@
 </template>
 
 <script lang="ts">
-import { defineComponent } from "vue";
+import { defineComponent } from 'vue'
 import PostsList from './posts/list'
 
 export default defineComponent({
@@ -11,8 +11,7 @@ export default defineComponent({
     PostsList,
   },
   setup() {
-    return {
-    }
-  }
-});
+    return {}
+  },
+})
 </script>

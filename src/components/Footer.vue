@@ -9,12 +9,13 @@
             </NuxtLink>
           </li>
           <li>
-            <NuxtLink :to="$C.URL.HOME">
+            <a href="#" @click.prevent="snsShare.open()">
               <i class="fas fa-share-alt" :style="{ fontSize: '16px' }"></i>
-            </NuxtLink>
+            </a>
+            <WidgetsSnsShareModal />
           </li>
           <li>
-            <a href="#" @click.prevent="toggleMenu">
+            <a href="#" @click.prevent="sideMenu.toggle()">
               <i class="fas fa-bars" :style="{ fontSize: '16px' }"></i>
             </a>
           </li>
@@ -56,16 +57,15 @@
 <script lang="ts">
 import { defineComponent } from 'vue'
 import { useSideMenu } from '@/stores/sideMenu'
+import { useSnsShare } from '@/stores/snsShare'
 
 export default defineComponent({
   setup() {
     // data
     const sideMenu = useSideMenu()
+    const snsShare = useSnsShare()
 
     // method
-    const toggleMenu = () => {
-      sideMenu.toggle()
-    }
     const scrollToTop = () => {
       window.scrollTo({
         top: 0,
@@ -74,9 +74,9 @@ export default defineComponent({
     }
 
     return {
-      toggleMenu,
       scrollToTop,
       sideMenu,
+      snsShare,
     }
   },
 })

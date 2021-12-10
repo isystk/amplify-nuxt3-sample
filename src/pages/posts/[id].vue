@@ -19,14 +19,16 @@
       <div class="clearfix"></div>
     </div>
     <div class="entry-content">
-      <div class="entry-content">
-        <p>{{ post.description }}</p>
-      </div>
+      <p>{{ post.description }}</p>
+    </div>
+    <div class="clearfix"></div>
+    <div class="entry-meta">
+      <i class="fas fa-clock" :style="{ fontSize: '16px' }"></i>
+      {{ post.regist_datetime_yyyymmdd }}
+    </div>
+    <div class="wrap">
+      <SnsShare :title="post.title" />
       <div class="clearfix"></div>
-      <div class="entry-meta">
-        <i class="fas fa-clock" :style="{ fontSize: '16px' }"></i>
-        {{ post.regist_datetime_yyyymmdd }}
-      </div>
     </div>
   </section>
 </template>

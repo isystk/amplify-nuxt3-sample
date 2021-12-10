@@ -5,7 +5,6 @@
     </div>
     <div class="entry-content">
       <p>すべての投稿を一覧表示しています。</p>
-      <modal-window :isOpen="isModalOpen"></modal-window>
       <div class="box-list">
         <PagesPostsList />
       </div>
@@ -14,19 +13,7 @@
 </template>
 
 <script lang="ts">
+import { defineComponent } from 'vue'
 
-import { defineComponent, ref } from "vue";
-import ModalWindow from "@/components/widgets/ModalWindow.vue"
-
-export default defineComponent({
-  components: {
-    ModalWindow,
-  },
-  setup() {
-    const isModalOpen = ref(true);
-
-    return { isModalOpen };
-  }
-});
-
+export default defineComponent({})
 </script>
