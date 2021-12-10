@@ -1,13 +1,13 @@
 /**
  * @file 定数をグローバルにセットする
  */
-import { defineNuxtPlugin, useState } from '#app'
-import { URL } from "../common/constants/url";
+import { defineNuxtPlugin } from '#app'
+import { URL } from '../common/constants/url'
 
-export default defineNuxtPlugin(nuxtApp => {
+export default defineNuxtPlugin((nuxtApp) => {
   nuxtApp.provide('C', {
-    URL
-  });
+    URL,
+  })
 })
 
 declare module '#app' {

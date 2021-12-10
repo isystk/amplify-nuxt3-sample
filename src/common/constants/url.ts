@@ -1,4 +1,3 @@
-
 /** API のエンドポイント */
 export const URL = {
   /** HOME */

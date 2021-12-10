@@ -1,13 +1,10 @@
 <template>
   <div>
-    <img
-      :src="image.source"
-      :class="`${imageClassName || ''}`"
-    >
+    <img :src="image.source" :class="`${imageClassName || ''}`" />
     <div class="custom-file">
       <input
-        type="file"
         :id="`image_input_${name}`"
+        type="file"
         :name="name"
         :pattern="pattern"
         accept="image/*"
@@ -16,7 +13,7 @@
         :readonly="readonly"
         :class="`custom-file-input ${inputClassName || ''} text-left mt-1`"
         @change="onChangeImage"
-      >
+      />
       <label
         class="custom-file-label"
         :for="`image_input_${name}`"
@@ -71,12 +68,17 @@ export default {
     }
   },
   computed: {
-    filename: function() {
+    filename: function () {
       return this.image.name || this.placeholder
     },
   },
+  mounted() {
+    if (this.imagePath) {
+      this.image.source = this.imagePath
+    }
+  },
   methods: {
-    onChangeImage: function(e) {
+    onChangeImage: function (e) {
       if (this.disabled || this.readonly) {
         return false
       }
@@ -88,11 +90,6 @@ export default {
         this.image.type = file.type
       }
     },
-  },
-  mounted() {
-    if (this.imagePath) {
-      this.image.source = this.imagePath
-    }
   },
 }
 </script>

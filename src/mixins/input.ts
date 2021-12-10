@@ -1,13 +1,12 @@
-
 export default {
   computed: {
-    state: function() {
+    state: function () {
       if (this.validated) {
         return true
       }
       return this.errors && this.errors.length > 0 ? false : null
     },
-    error: function() {
+    error: function () {
       if (!this.errors) {
         return ''
       }
@@ -16,7 +15,7 @@ export default {
       }
       return this.errors
     },
-    validatedClassName: function() {
+    validatedClassName: function () {
       if (this.state === true) {
         return ' is-valid'
       }

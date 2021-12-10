@@ -1,8 +1,8 @@
 import { defineNuxtPlugin } from '#app'
-import moment from "moment";
+import moment from 'moment'
 
-export default defineNuxtPlugin(nuxtApp => {
-  nuxtApp.vueApp.provide('moment', moment);
+export default defineNuxtPlugin((nuxtApp) => {
+  nuxtApp.vueApp.provide('moment', moment)
 })
 
 declare module '#app' {

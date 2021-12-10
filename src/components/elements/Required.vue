@@ -1,8 +1,5 @@
 <template>
-  <i
-    class="fas fa-asterisk required"
-    :title="title"
-  ></i>
+  <i class="fas fa-asterisk required" :title="title"></i>
 </template>
 
 <script>
@@ -11,7 +8,7 @@ export default {
     title: {
       type: String,
       default: '必須',
-    }
+    },
   },
 }
 </script>

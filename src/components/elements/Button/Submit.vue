@@ -5,7 +5,7 @@
         type="submit"
         :name="name || 'save'"
         class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded"
-        v-on:click.once="handleClick"
+        @click.once="handleClick"
       >
         {{ label }}
       </button>
@@ -20,7 +20,7 @@ export default {
     name: String,
   },
   methods: {
-    handleClick: function() {
+    handleClick: function () {
       return false
     },
   },

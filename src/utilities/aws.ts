@@ -1,7 +1,4 @@
-import {
-  CognitoUserPool,
-  CognitoUserAttribute,
-} from 'amazon-cognito-identity-js'
+import { CognitoUserPool } from 'amazon-cognito-identity-js'
 
 const config = {
   region: process.env.AWS_REGION,

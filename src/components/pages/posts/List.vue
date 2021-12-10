@@ -10,11 +10,11 @@
       </div>
       <div class="entry-content">
         <img
-            alt="sample1"
-            width="300"
-            height="174"
-            :src="e.photo"
-            class="attachment-medium size-medium wp-post-image"
+          alt="sample1"
+          width="300"
+          height="174"
+          :src="e.photo"
+          class="attachment-medium size-medium wp-post-image"
         />
         <p>{{ e.description }}</p>
         <div class="clearfix"></div>
@@ -24,8 +24,8 @@
 </template>
 
 <script lang="ts">
-import {defineComponent, computed, onMounted} from "vue";
-import {usePostsStore} from "@/stores/posts";
+import { defineComponent, computed, onMounted } from 'vue'
+import { usePostsStore } from '@/stores/posts'
 
 export default defineComponent({
   setup() {
@@ -36,12 +36,11 @@ export default defineComponent({
       await postsStore.fetchPosts()
     })
 
-    const posts = computed(() => postsStore.getPosts());
+    const posts = computed(() => postsStore.getPosts())
 
     return {
-      posts
+      posts,
     }
-  }
-});
-
+  },
+})
 </script>

@@ -1,13 +1,15 @@
 <template>
   <div class="position-relative">
     <div class="input-group">
-      <div class="input-group-prepend" v-if="$slots.prepend">
+      <div v-if="$slots.prepend" class="input-group-prepend">
         <slot name="prepend"></slot>
       </div>
 
       <input
-        :class="`form-control${className ? ' ' + className : ''}${validatedClassName}`"
         :id="`color_${name}`"
+        :class="`form-control${
+          className ? ' ' + className : ''
+        }${validatedClassName}`"
         :name="name"
         type="color"
         :value="value"
@@ -19,18 +21,14 @@
         :state="state"
         @change="(e) => onChangeValue(e.target.value || '')"
         @input="(e) => onInputValue(e.target.value || '')"
-      >
+      />
 
-      <div class="input-group-append" v-if="$slots.append">
+      <div v-if="$slots.append" class="input-group-append">
         <slot name="append"></slot>
       </div>
     </div>
 
-    <spinner
-      v-if="loading"
-      label="loading..."
-      small
-    />
+    <spinner v-if="loading" label="loading..." small />
 
     <invalid-feedback
       v-if="state === false"
@@ -51,15 +49,15 @@ const COLOR_MAP = {
   blue: '#0000ff',
 }
 export default {
-  mixins: [ inputMixins ],
+  mixins: [inputMixins],
   props: {
     type: {
       type: String,
       default: 'text',
     },
     name: String,
-    defaultValue: String|Number,
-    errors: Array|String,
+    defaultValue: [String, Number],
+    errors: [Array, String],
 
     placeholder: String,
     pattern: String,
@@ -92,7 +90,7 @@ export default {
   watch: {
     defaultValue: {
       immediate: true,
-      handler: function() {
+      handler: function () {
         console.log(this.defaultValue)
         this.value = this.parseColor(this.defaultValue)
         console.log(this.defaultValue, this.value)
@@ -100,7 +98,7 @@ export default {
     },
   },
   methods: {
-    onChangeValue: function(changed) {
+    onChangeValue: function (changed) {
       if (this.disabled || this.readonly) {
         return false
       }
@@ -109,7 +107,7 @@ export default {
         this.onChange(changed)
       }
     },
-    onInputValue: function(input) {
+    onInputValue: function (input) {
       if (this.disabled || this.readonly) {
         return false
       }
@@ -118,11 +116,11 @@ export default {
         this.onInput(input)
       }
     },
-    parseColor: function(color) {
+    parseColor: function (color) {
       if (color.indexOf('#') === -1 && color.length === 6) {
         return '#' + color
       }
-      if (typeof(COLOR_MAP[color]) !== 'undefined') {
+      if (typeof COLOR_MAP[color] !== 'undefined') {
         return COLOR_MAP[color]
       }
       return color

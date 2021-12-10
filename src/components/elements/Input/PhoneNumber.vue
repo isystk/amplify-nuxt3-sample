@@ -7,15 +7,14 @@
       :value="phoneNumber"
     />
 
-    <div class="input-group-append" v-if="international">
-      <span class="input-group-text rounded-left">
-        +
-      </span>
+    <div v-if="international" class="input-group-append">
+      <span class="input-group-text rounded-left"> + </span>
     </div>
-    <input :class="`form-control${validatedClassName}`"
+    <input
       v-if="international"
-      type="tel"
       :id="`phonenumber_${name}_country`"
+      :class="`form-control${validatedClassName}`"
+      type="tel"
       :name="`${shadowName}[country]`"
       :value="values.country"
       placeholder="81"
@@ -26,17 +25,17 @@
       :state="state"
       @change="(e) => onChangeValue('country', e.target.value || '')"
       @input="(e) => onInputValue('country', e.target.value || '')"
-    >
-    <div class="input-group-append" v-if="international">
-      <span class="input-group-text border-right-0">
-        -
-      </span>
+    />
+    <div v-if="international" class="input-group-append">
+      <span class="input-group-text border-right-0"> - </span>
     </div>
 
     <input
-      :class="`form-control${international ? '' : ' rounded-left'}${validatedClassName}`"
-      type="tel"
       :id="`phonenumber_${name}_area`"
+      :class="`form-control${
+        international ? '' : ' rounded-left'
+      }${validatedClassName}`"
+      type="tel"
       :name="`${shadowName}[area]`"
       :value="values.area"
       placeholder="03"
@@ -47,16 +46,15 @@
       :state="state"
       @change="(e) => onChangeValue('area', e.target.value || '')"
       @input="(e) => onInputValue('area', e.target.value || '')"
-    >
+    />
     <div class="input-group-append">
-      <span class="input-group-text border-right-0">
-        -
-      </span>
+      <span class="input-group-text border-right-0"> - </span>
     </div>
 
-    <input :class="`form-control${validatedClassName}`"
-      type="tel"
+    <input
       :id="`phonenumber_${name}_local`"
+      :class="`form-control${validatedClassName}`"
+      type="tel"
       :name="`${shadowName}[local]`"
       :value="values.local"
       placeholder="0000"
@@ -67,15 +65,14 @@
       :state="state"
       @change="(e) => onChangeValue('local', e.target.value || '')"
       @input="(e) => onInputValue('local', e.target.value || '')"
-    >
+    />
     <div class="input-group-append">
-      <span class="input-group-text border-right-0">
-        -
-      </span>
+      <span class="input-group-text border-right-0"> - </span>
     </div>
 
-    <input :class="`form-control${validatedClassName}`"
+    <input
       :id="`phonenumber_${name}_branch`"
+      :class="`form-control${validatedClassName}`"
       :name="`${shadowName}[branch]`"
       type="tel"
       :value="values.branch"
@@ -87,7 +84,7 @@
       :state="state"
       @change="(e) => onChangeValue('branch', e.target.value || '')"
       @input="(e) => onInputValue('branch', e.target.value || '')"
-    >
+    />
 
     <invalid-feedback
       v-if="state === false"
@@ -101,11 +98,11 @@
 <script>
 import inputMixins from '~/mixins/input'
 export default {
-  mixins: [ inputMixins ],
+  mixins: [inputMixins],
   props: {
     name: String,
-    defaultValue: String|Number,
-    errors: Array|String,
+    defaultValue: [String, Number],
+    errors: [Array, String],
 
     placeholder: String,
     international: {
@@ -139,38 +136,42 @@ export default {
       },
     }
   },
+  computed: {
+    phoneNumber: function () {
+      const numbers = []
+      if (this.international) {
+        numbers.push('+' + this.values.country)
+      } else if (
+        !this.values.area &&
+        !this.values.local &&
+        !this.values.branch
+      ) {
+        return ''
+      }
+      numbers.push(this.values.area, this.values.local, this.values.branch)
+      return numbers.join('-')
+    },
+  },
   watch: {
     defaultValue: {
       immediate: true,
-      handler: function() {
+      handler: function () {
         this.values = this.parser(this.defaultValue)
       },
     },
   },
-  computed: {
-    phoneNumber: function() {
-      const numbers = []
-      if (this.international) {
-        numbers.push('+' + this.values.country)
-      } else if (!this.values.area && !this.values.local && !this.values.branch) {
-        return ''
-      }
-      numbers.push(
-        this.values.area,
-        this.values.local,
-        this.values.branch,
-      )
-      return numbers.join('-')
-    },
-  },
   methods: {
-    isPhoneString: function(number) {
-      return number && (typeof number === 'string' || number instanceof String) && number.indexOf('-') >= 0
+    isPhoneString: function (number) {
+      return (
+        number &&
+        (typeof number === 'string' || number instanceof String) &&
+        number.indexOf('-') >= 0
+      )
     },
-    isPhoneObject: function(number) {
+    isPhoneObject: function (number) {
       return number && typeof number === 'object'
     },
-    parser: function(number) {
+    parser: function (number) {
       let country = ''
       let area = ''
       let local = ''
@@ -191,9 +192,9 @@ export default {
       if (this.isPhoneString(number)) {
         const numbers = number.split('-')
         if (this.international) {
-          [ country, area = '', local = '', branch = '' ] = numbers
+          ;[country, area = '', local = '', branch = ''] = numbers
         } else {
-          [ area = '', local = '', branch = '' ] = numbers
+          ;[area = '', local = '', branch = ''] = numbers
         }
       }
 
@@ -204,13 +205,13 @@ export default {
         branch,
       }
     },
-    onChangeValue: function(field, changed) {
+    onChangeValue: function (field, changed) {
       this.values[field] = changed
       if (this.onChange && typeof this.onChange === 'function') {
         this.onChange(this.phoneNumber)
       }
     },
-    onInputValue: function(field, input) {
+    onInputValue: function (field, input) {
       if (this.onInput && typeof this.onInput === 'function') {
         this.onInput(this.phoneNumber)
       }

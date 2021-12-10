@@ -1,12 +1,16 @@
 <template>
-  <form :method="`${methodName === 'get' ? 'get' : 'post'}`" :action="action" :class="className">
+  <form
+    :method="`${methodName === 'get' ? 'get' : 'post'}`"
+    :action="action"
+    :class="className"
+  >
     <input type="hidden" name="_token" :value="csrf" />
-    <input type="hidden" name="_method" value="PUT" v-if="isPut" />
-    <input type="hidden" name="_method" value="DELETE" v-if="isDelete" />
+    <input v-if="isPut" type="hidden" name="_method" value="PUT" />
+    <input v-if="isDelete" type="hidden" name="_method" value="DELETE" />
     <button
       type="submit"
       :class="`btn btn-${variant}`"
-      v-on:click.stop.prevent="handleClick"
+      @click.stop.prevent="handleClick"
     >
       {{ label }}
     </button>
@@ -16,7 +20,7 @@
 <script>
 import csrfMixins from '~/mixins/csrf'
 export default {
-  mixins: [ csrfMixins ],
+  mixins: [csrfMixins],
   props: {
     method: String,
     action: String,
@@ -35,26 +39,26 @@ export default {
     },
   },
   computed: {
-    methodName: function() {
+    methodName: function () {
       return this.method ? this.method.toLowerCase() : 'get'
     },
-    isPut: function() {
+    isPut: function () {
       return this.methodName === 'put'
     },
-    isDelete: function() {
+    isDelete: function () {
       return this.methodName === 'delete'
     },
   },
   methods: {
-    handleClick: function() {
+    handleClick: function () {
       if (confirm(this.message)) {
         return this.execute()
       }
-      return false;
+      return false
     },
-    execute: function() {
+    execute: function () {
       this.$el.submit()
-    }
+    },
   },
-};
+}
 </script>

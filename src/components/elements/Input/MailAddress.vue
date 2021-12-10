@@ -7,8 +7,9 @@
       :value="emailAddress"
     />
 
-    <input class="form-control rounded-left"
+    <input
       :id="`email_${name}_username`"
+      class="form-control rounded-left"
       :name="`${shadowName}[username]`"
       type="text"
       :value="values.username"
@@ -19,16 +20,15 @@
       :state="state"
       @change="(e) => onChangeValue('username', e.target.value || '')"
       @input="(e) => onInputValue('username', e.target.value || '')"
-    >
+    />
 
     <div class="input-group-append">
-      <span class="input-group-text border-right-0">
-        @
-      </span>
+      <span class="input-group-text border-right-0"> @ </span>
     </div>
 
-    <input :class="`form-control${validatedClassName}`"
+    <input
       :id="`email_${name}_domain`"
+      :class="`form-control${validatedClassName}`"
       :name="`${shadowName}[domain]`"
       type="text"
       :value="values.domain"
@@ -39,7 +39,7 @@
       :state="state"
       @change="(e) => onChangeValue('domain', e.target.value || '')"
       @input="(e) => onInputValue('domain', e.target.value || '')"
-    >
+    />
 
     <invalid-feedback
       v-if="state === false"
@@ -53,11 +53,11 @@
 <script>
 import inputMixins from '~/mixins/input'
 export default {
-  mixins: [ inputMixins ],
+  mixins: [inputMixins],
   props: {
     name: String,
-    defaultValue: String|Number,
-    errors: Array|String,
+    defaultValue: [String, Number],
+    errors: [Array, String],
 
     placeholder: String,
 
@@ -86,21 +86,28 @@ export default {
     }
   },
   computed: {
-    emailAddress: function() {
+    emailAddress: function () {
       if (!this.values.username && !this.values.domain) {
         return null
       }
       return this.values.username + '@' + this.values.domain
     },
   },
+  mounted() {
+    this.values = this.parser(this.defaultValue)
+  },
   methods: {
-    isAddressString: function(address) {
-      return address && (typeof address === 'string' || address instanceof String) && address.indexOf('@') > 0
+    isAddressString: function (address) {
+      return (
+        address &&
+        (typeof address === 'string' || address instanceof String) &&
+        address.indexOf('@') > 0
+      )
     },
-    isAddressObject: function(address) {
+    isAddressObject: function (address) {
       return address && typeof address === 'object'
     },
-    parser: function(address) {
+    parser: function (address) {
       let username = ''
       let domain = ''
       if (!address) {
@@ -115,7 +122,7 @@ export default {
       }
 
       if (this.isAddressString(address)) {
-        [ username, domain = ''] = address.split('@')
+        ;[username, domain = ''] = address.split('@')
       }
 
       return {
@@ -123,20 +130,17 @@ export default {
         domain,
       }
     },
-    onChangeValue: function(field, changed) {
+    onChangeValue: function (field, changed) {
       this.values[field] = changed
       if (this.onChange && typeof this.onChange === 'function') {
         this.onChange(this.emailAddress)
       }
     },
-    onInputValue: function(field, input) {
+    onInputValue: function (field, input) {
       if (this.onInput && typeof this.onInput === 'function') {
         this.onInput(this.emailAddress)
       }
     },
-  },
-  mounted() {
-    this.values = this.parser(this.defaultValue)
   },
 }
 </script>

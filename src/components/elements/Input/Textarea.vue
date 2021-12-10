@@ -1,7 +1,8 @@
 <template>
   <div>
-    <textarea class="form-control"
+    <textarea
       :id="`textarea_${name}`"
+      class="form-control"
       :name="name"
       :value="value"
       :placeholder="placeholder"
@@ -28,11 +29,11 @@
 <script>
 import inputMixins from '~/mixins/input'
 export default {
-  mixins: [ inputMixins ],
+  mixins: [inputMixins],
   props: {
     name: String,
-    defaultValue: String|Number,
-    errors: Array|String,
+    defaultValue: [String, Number],
+    errors: [Array, Number],
 
     placeholder: String,
     pattern: String,
@@ -68,12 +69,12 @@ export default {
     this.value = this.defaultValue
   },
   methods: {
-    onChangeValue: function(changed) {
+    onChangeValue: function (changed) {
       if (this.onChange && typeof this.onChange === 'function') {
         this.onChange(changed)
       }
     },
-    onInputValue: function(input) {
+    onInputValue: function (input) {
       if (this.onInput && typeof this.onInput === 'function') {
         this.onInput(input)
       }

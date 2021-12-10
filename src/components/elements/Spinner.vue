@@ -20,13 +20,13 @@ export default {
     },
   },
   computed: {
-    className: function() {
+    className: function () {
       let name = 'spinner-' + this.variant
       if (this.small) {
         name += ' ' + name + '-sm'
       }
       return name
-    }
+    },
   },
 }
 </script>

@@ -1,23 +1,35 @@
 module.exports = {
+    "root": true,
     "env": {
         "browser": true,
-        "es2021": true
+        "node": true
+    },
+    "parser": "vue-eslint-parser",
+    "parserOptions": {
+      "parser": "@typescript-eslint/parser"
     },
     "extends": [
-        "eslint:recommended",
-        "plugin:vue/essential",
-        "plugin:@typescript-eslint/recommended",
-        "prettier"
+      "prettier",
+      "plugin:@typescript-eslint/recommended",
+      "plugin:prettier/recommended",
+      "plugin:vue/recommended",
+      "@vue/prettier",
+      "@vue/typescript"
     ],
-    "parserOptions": {
-        "ecmaVersion": 13,
-        "parser": "@typescript-eslint/parser",
-        "sourceType": "module"
-    },
     "plugins": [
-        "vue",
-        "@typescript-eslint"
+        "vue"
     ],
     "rules": {
+        "semi": [2, "never"],
+        "no-unused-vars": ["error", { "args": "none" }],
+        "prettier/prettier": [
+          "error",
+          {
+            "singleQuote": true,
+            "semi": false
+          },
+        ],
+        'vue/multi-word-component-names': ['warn'],
+        'vue/no-multiple-template-root': ['warn']
     }
 };

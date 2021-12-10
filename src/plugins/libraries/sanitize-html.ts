@@ -1,8 +1,8 @@
 import { defineNuxtPlugin } from '#app'
-import sanitizeHTML from "sanitize-html";
+import sanitizeHTML from 'sanitize-html'
 
-export default defineNuxtPlugin(nuxtApp => {
-  nuxtApp.vueApp.provide('sanitize', sanitizeHTML);
+export default defineNuxtPlugin((nuxtApp) => {
+  nuxtApp.vueApp.provide('sanitize', sanitizeHTML)
 })
 
 declare module '#app' {

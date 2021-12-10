@@ -2,4 +2,4 @@
  * @file ユーティリティのエンドポイント
  */
 
-export * from "@/utilities/api";
+export * from '@/utilities/api'

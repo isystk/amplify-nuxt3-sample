@@ -1,38 +1,21 @@
 <template>
-  <div
-    v-if="display"
-    class="page-cover"
-    @click.prevent.stop="() => null"
-  >
-    <div
-      v-if="content.title"
-      class="page-cover-title"
-    >
+  <div v-if="display" class="page-cover" @click.prevent.stop="() => null">
+    <div v-if="content.title" class="page-cover-title">
       {{ content.title }}
     </div>
 
-    <div
-      v-if="content.description"
-      class="page-cover-description"
-    >
+    <div v-if="content.description" class="page-cover-description">
       {{ content.description }}
     </div>
 
-    <div
-      v-if="content.countUp"
-      class="page-cover-countup"
-    >
+    <div v-if="content.countUp" class="page-cover-countup">
       {{ seconds | number2clock }}
     </div>
 
-    <div
-      v-if="content.cancelAction"
-      class="page-cover-cancel"
-    >
-      <div
-        class="btn btn-execute"
-        @click.prevent.stop.once="handleCancel"
-      >{{ content.cancelLabel }}</div>
+    <div v-if="content.cancelAction" class="page-cover-cancel">
+      <div class="btn btn-execute" @click.prevent.stop.once="handleCancel">
+        {{ content.cancelLabel }}
+      </div>
     </div>
     <spinner v-if="content.loading" />
   </div>
@@ -65,18 +48,20 @@ export default {
     }
   },
   computed: {
-    seconds: function() {
+    seconds: function () {
       if (!this.currentTime || !this.startTime) {
         return 0
       }
 
-      return Math.floor((this.currentTime.getTime() - this.startTime.getTime()) / 1000)
+      return Math.floor(
+        (this.currentTime.getTime() - this.startTime.getTime()) / 1000
+      )
     },
   },
   watch: {
     display: {
       immediate: true,
-      handler: function(newDisplay, oldDisplay) {
+      handler: function (newDisplay, oldDisplay) {
         if (newDisplay === oldDisplay) {
           return
         }
@@ -91,7 +76,7 @@ export default {
     content: {
       immediate: false,
       deep: true,
-      handler: function(newContent, _) {
+      handler: function (newContent, _) {
         if (newContent.refreshCount) {
           this.startTimer()
         }
@@ -99,28 +84,34 @@ export default {
     },
   },
   methods: {
-    startTimer: function() {
-      if (typeof this.content.countUp === 'undefined' || !this.content.countUp) {
+    startTimer: function () {
+      if (
+        typeof this.content.countUp === 'undefined' ||
+        !this.content.countUp
+      ) {
         return
       }
 
       this.startTime = new Date()
       this.currentTime = new Date()
       if (!this.timer) {
-        this.timer = setInterval(() => this.currentTime = new Date(), 50)
+        this.timer = setInterval(() => (this.currentTime = new Date()), 50)
       }
     },
-    stopTimer: function() {
+    stopTimer: function () {
       clearInterval(this.timer)
       this.timer = null
       this.startTime = null
       this.currentTime = null
     },
 
-    handleCancel: async function() {
+    handleCancel: async function () {
       this.stopTimer()
 
-      if (this.content.cancelAction && typeof this.content.cancelAction === 'function') {
+      if (
+        this.content.cancelAction &&
+        typeof this.content.cancelAction === 'function'
+      ) {
         await this.content.cancelAction()
       }
     },

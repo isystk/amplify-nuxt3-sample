@@ -1,14 +1,14 @@
 <template>
   <div>
     <div class="input-group">
-      <div class="input-group-prepend" v-if="$slots.prepend">
+      <div v-if="$slots.prepend" class="input-group-prepend">
         <slot name="prepend"></slot>
       </div>
 
       <div class="custom-file">
         <input
-          type="file"
           :id="`file_input_${name}`"
+          type="file"
           :name="name"
           :pattern="pattern"
           :accept="accept"
@@ -19,7 +19,7 @@
           :state="state"
           :multiple="multiple"
           @change="onChangeValue"
-        >
+        />
         <label
           class="custom-file-label"
           :for="`file_input_${name}`"
@@ -29,7 +29,7 @@
         </label>
       </div>
 
-      <div class="input-group-append" v-if="$slots.append">
+      <div v-if="$slots.append" class="input-group-append">
         <slot name="append"></slot>
       </div>
     </div>
@@ -46,10 +46,10 @@
 <script>
 import inputMixins from '~/mixins/input'
 export default {
-  mixins: [ inputMixins ],
+  mixins: [inputMixins],
   props: {
     name: String,
-    errors: Array|String,
+    errors: [Array, String],
 
     pattern: String,
     accept: String,
@@ -89,7 +89,7 @@ export default {
     }
   },
   computed: {
-    filename: function() {
+    filename: function () {
       if (!this.files || this.files.length === 0) {
         return this.placeholder
       }
@@ -102,7 +102,7 @@ export default {
     },
   },
   methods: {
-    onChangeValue: function(e) {
+    onChangeValue: function (e) {
       if (this.disabled || this.readonly) {
         return false
       }

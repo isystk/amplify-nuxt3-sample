@@ -1,38 +1,35 @@
 <template>
   <div>
-    <div
-      v-if="readonly"
-      class="button-group"
-    >
+    <div v-if="readonly" class="button-group">
       <span
         v-for="option in options"
         :key="option.value || option"
-        :class="`btn btn-info${values && (values.includes(option.value) || values.includes(option)) ? ' active' : ' disabled'}`"
+        :class="`btn btn-info${
+          values && (values.includes(option.value) || values.includes(option))
+            ? ' active'
+            : ' disabled'
+        }`"
       >
         {{ option.text || option.value }}
       </span>
     </div>
 
-    <div
-      v-else
-      class="btn-group-toggle btn-group"
-      data-toggle="buttons"
-    >
+    <div v-else class="btn-group-toggle btn-group" data-toggle="buttons">
       <label
         v-for="(option, i) in options"
         :key="option.value || i"
         class="btn btn-outline-secondary"
       >
         <input
-          type="checkbox"
           :id="`checkbox_${name}_${i}`"
+          v-model="values"
+          type="checkbox"
           :name="`${name}[]`"
           :value="option.value"
-          v-model="values"
           :required="required"
           :disabled="disabled"
           @click="() => onChangeValue(option)"
-        >
+        />
         {{ option.text || option.value }}
       </label>
     </div>
@@ -49,12 +46,12 @@
 <script>
 import inputMixins from '~/mixins/input'
 export default {
-  mixins: [ inputMixins ],
+  mixins: [inputMixins],
   props: {
     name: String,
     defaultValue: Array,
     options: Array,
-    errors: Array|String,
+    errors: [Array, String],
 
     validated: Boolean,
     required: {
@@ -81,7 +78,7 @@ export default {
     this.values = this.defaultValue ? [...this.defaultValue] : []
   },
   methods: {
-    onChangeValue: function(option) {
+    onChangeValue: function (option) {
       if (this.onChange && typeof this.onChange === 'function') {
         this.onChange(this.values)
       }

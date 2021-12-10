@@ -13,18 +13,24 @@
       </span>
     </div>
     <input
+      :id="`fullname_${name}_${international ? 'first' : 'last'}`"
       :class="`form-control${validatedClassName}`"
       type="text"
-      :id="`fullname_${name}_${international ? 'first' : 'last'}`"
       :name="`${name}[${international ? 'first' : 'last'}]`"
       :value="international ? values.first : values.last"
       :required="required"
       :disabled="disabled"
       :readonly="readonly"
       :state="state"
-      @change="(e) => onChangeValue(international ? 'first' : 'last', e.target.value || '')"
-      @input="(e) => onInputValue(international ? 'first' : 'last', e.target.value || '')"
-    >
+      @change="
+        (e) =>
+          onChangeValue(international ? 'first' : 'last', e.target.value || '')
+      "
+      @input="
+        (e) =>
+          onInputValue(international ? 'first' : 'last', e.target.value || '')
+      "
+    />
 
     <div class="input-group-append">
       <span class="input-group-text border-right-0" :state="state">
@@ -32,18 +38,24 @@
       </span>
     </div>
     <input
+      :id="`fullname_${name}_${international ? 'last' : 'first'}`"
       :class="`form-control${validatedClassName}`"
       type="text"
-      :id="`fullname_${name}_${international ? 'last' : 'first'}`"
       :name="`${name}[${international ? 'last' : 'first'}]`"
       :value="international ? values.first : values.first"
       :required="required"
       :disabled="disabled"
       :readonly="readonly"
       :state="state"
-      @change="(e) => onChangeValue(international ? 'last' : 'first', e.target.value || '')"
-      @input="(e) => onInputValue(international ? 'last' : 'first', e.target.value || '')"
-    >
+      @change="
+        (e) =>
+          onChangeValue(international ? 'last' : 'first', e.target.value || '')
+      "
+      @input="
+        (e) =>
+          onInputValue(international ? 'last' : 'first', e.target.value || '')
+      "
+    />
 
     <invalid-feedback
       v-if="state === false"
@@ -57,11 +69,11 @@
 <script>
 import inputMixins from '~/mixins/input'
 export default {
-  mixins: [ inputMixins ],
+  mixins: [inputMixins],
   props: {
     name: String,
-    defaultValue: String|Number,
-    errors: Array|String,
+    defaultValue: [String, Number],
+    errors: [Array, String],
 
     firstNameLabel: {
       type: String,
@@ -103,7 +115,7 @@ export default {
     }
   },
   computed: {
-    fullName: function() {
+    fullName: function () {
       if (this.international) {
         return this.values.first + ' ' + this.values.last
       } else {
@@ -111,14 +123,21 @@ export default {
       }
     },
   },
+  mounted() {
+    this.values = this.parser(this.defaultValue)
+  },
   methods: {
-    isNameString: function(name) {
-      return name && (typeof name === 'string' || name instanceof String) && name.indexOf(' ') > 0
+    isNameString: function (name) {
+      return (
+        name &&
+        (typeof name === 'string' || name instanceof String) &&
+        name.indexOf(' ') > 0
+      )
     },
-    isNameObject: function(name) {
+    isNameObject: function (name) {
       return name && typeof name === 'object'
     },
-    parser: function(name) {
+    parser: function (name) {
       if (!name) {
         return {
           first: '',
@@ -150,21 +169,18 @@ export default {
         last: '',
       }
     },
-    onChangeValue: function(field, changed) {
-      console.log({changed})
+    onChangeValue: function (field, changed) {
+      console.log({ changed })
       this.values[field] = changed
       if (this.onChange && typeof this.onChange === 'function') {
         this.onChange(this.fullName)
       }
     },
-    onInputValue: function(field, input) {
+    onInputValue: function (field, input) {
       if (this.onInput && typeof this.onInput === 'function') {
         this.onInput(this.fullName)
       }
     },
-  },
-  mounted() {
-    this.values = this.parser(this.defaultValue)
   },
 }
 </script>

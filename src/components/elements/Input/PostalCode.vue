@@ -8,8 +8,9 @@
         :value="postalCode"
       />
 
-      <input class="form-control rounded-left"
+      <input
         :id="`postalcode_${name}_area`"
+        class="form-control rounded-left"
         :name="`${shadowName}[area]`"
         type="tel"
         :value="values.area"
@@ -21,15 +22,14 @@
         :state="state"
         @change="(e) => onChangeValue('area', e.target.value || '')"
         @input="(e) => onInputValue('area', e.target.value || '')"
-      >
+      />
       <div class="input-group-append">
-        <span class="input-group-text border-right-0">
-          -
-        </span>
+        <span class="input-group-text border-right-0"> - </span>
       </div>
 
-      <input :class="`form-control${validatedClassName}`"
+      <input
         :id="`postalcode_${name}_local`"
+        :class="`form-control${validatedClassName}`"
         :name="`${shadowName}[local]`"
         type="tel"
         :value="values.local"
@@ -41,18 +41,17 @@
         :state="state"
         @change="(e) => onChangeValue('local', e.target.value || '')"
         @input="(e) => onInputValue('local', e.target.value || '')"
-      >
+      />
 
-      <div
-        class="input-group-append"
-        v-if="endpointUri"
-      >
+      <div v-if="endpointUri" class="input-group-append">
         <button
           type="button"
           class="btn btn-secondary"
-          @click="onSearchAddress"
           :disabled="searching"
-        >{{ searchLabel }}</button>
+          @click="onSearchAddress"
+        >
+          {{ searchLabel }}
+        </button>
       </div>
 
       <invalid-feedback
@@ -77,11 +76,11 @@
 <script>
 import inputMixins from '~/mixins/input'
 export default {
-  mixins: [ inputMixins ],
+  mixins: [inputMixins],
   props: {
     name: String,
-    defaultValue: String|Number,
-    errors: Array|String,
+    defaultValue: keyof(String | Number),
+    errors: [String, Number],
 
     endpointUri: String,
     searchLabel: {
@@ -120,30 +119,34 @@ export default {
       searching: false,
     }
   },
-  watch: {
-    defaultValue: {
-      immediate: true,
-      handler: function() {
-        this.values = this.parser(this.defaultValue)
-      },
-    },
-  },
   computed: {
-    postalCode: function() {
+    postalCode: function () {
       if (!this.values.area && !this.values.local) {
         return ''
       }
       return (this.values.area || '') + '-' + (this.values.local || '')
     },
   },
-  methods: {
-    isPostalCodeString: function(code) {
-      return code && (typeof code === 'string' || code instanceof String) && code.indexOf('-') >= 0
+  watch: {
+    defaultValue: {
+      immediate: true,
+      handler: function () {
+        this.values = this.parser(this.defaultValue)
+      },
     },
-    isPostalCodeObject: function(code) {
+  },
+  methods: {
+    isPostalCodeString: function (code) {
+      return (
+        code &&
+        (typeof code === 'string' || code instanceof String) &&
+        code.indexOf('-') >= 0
+      )
+    },
+    isPostalCodeObject: function (code) {
       return code && typeof code === 'object'
     },
-    parser: function(code) {
+    parser: function (code) {
       let area = ''
       let local = ''
       if (!code) {
@@ -158,7 +161,7 @@ export default {
       }
 
       if (this.isPostalCodeString(code)) {
-        [ area = '', local = '' ] = code.split('-')
+        ;[area = '', local = ''] = code.split('-')
       }
 
       return {
@@ -166,18 +169,18 @@ export default {
         local,
       }
     },
-    onChangeValue: function(field, changed) {
+    onChangeValue: function (field, changed) {
       this.values[field] = changed
       if (this.onChange && typeof this.onChange === 'function') {
         this.onChange(this.postalCode)
       }
     },
-    onInputValue: function(field, input) {
+    onInputValue: function (field, input) {
       if (this.onInput && typeof this.onInput === 'function') {
         this.onInput(this.postalCode)
       }
     },
-    onSearchAddress: async function() {
+    onSearchAddress: async function () {
       if (!this.endpointUri) {
         return
       }
@@ -187,26 +190,18 @@ export default {
 
       this.searching = true
       try {
-        const response = await axios.post(
-          this.endpointUri,
-          {
-            type: 'postal_code',
-            postal_code: this.postalCode,
-          },
-        )
-        if (!response || !response.data ) {
+        const response = await axios.post(this.endpointUri, {
+          type: 'postal_code',
+          postal_code: this.postalCode,
+        })
+        if (!response || !response.data) {
           alert('検索に失敗しました')
           this.searching = false
           return
         }
 
-        const { data, status } = response
-        const {
-          result,
-          status_code,
-          message,
-          addresses,
-        } = data
+        const { data } = response
+        const { result, message, addresses } = data
 
         if (!result) {
           alert(message)

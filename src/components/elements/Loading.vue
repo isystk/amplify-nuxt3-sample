@@ -1,10 +1,8 @@
 <template>
-  <div class="d-flex justify-content-center align-items-center overlay no-click">
-    <spinner
-      :label="label"
-      :variant="variant"
-      :small="small"
-    />
+  <div
+    class="d-flex justify-content-center align-items-center overlay no-click"
+  >
+    <spinner :label="label" :variant="variant" :small="small" />
   </div>
 </template>
 <script>

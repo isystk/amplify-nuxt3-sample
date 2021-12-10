@@ -4,44 +4,44 @@
       <Logo />
       <div class="nav">
         <div
-            :class="[sideMenu.isOpen ? 'menu-btn on' : 'menu-btn']"
-            @click="toggleMenu"
+          :class="[sideMenu.isOpen ? 'menu-btn on' : 'menu-btn']"
+          @click="toggleMenu"
         >
-        <figure></figure>
-        <figure></figure>
-        <figure></figure>
+          <figure></figure>
+          <figure></figure>
+          <figure></figure>
+        </div>
+        <div id="side-menu" :class="[sideMenu.isOpen ? 'open' : '']">
+          <nav>
+            <ul>
+              <li>
+                <NuxtLink :to="$C.URL.HOME" @click="sideMenu.close">
+                  HOME
+                </NuxtLink>
+              </li>
+              <li>
+                <NuxtLink :to="$C.URL.MEMBER" @click="sideMenu.close">
+                  マイページ
+                </NuxtLink>
+              </li>
+              <li>
+                <NuxtLink :to="$C.URL.LOGIN" @click="sideMenu.close">
+                  ログイン
+                </NuxtLink>
+              </li>
+              <li></li>
+            </ul>
+          </nav>
+        </div>
+        <div id="layer-panel" :class="[sideMenu.isOpen ? 'on' : '']"></div>
       </div>
-      <div id="side-menu" :class="[sideMenu.isOpen ? 'open' : '']">
-        <nav>
-          <ul>
-            <li>
-              <NuxtLink :to="$C.URL.HOME" @click="sideMenu.close">
-                HOME
-              </NuxtLink>
-            </li>
-            <li>
-              <NuxtLink :to="$C.URL.MEMBER" @click="sideMenu.close">
-                マイページ
-              </NuxtLink>
-            </li>
-            <li>
-              <NuxtLink :to="$C.URL.LOGIN" @click="sideMenu.close">
-                ログイン
-              </NuxtLink>
-            </li>
-            <li></li>
-          </ul>
-        </nav>
-      </div>
-      <div id="layer-panel" :class="[sideMenu.isOpen ? 'on' : '']"></div>
-    </div>
     </div>
   </header>
 </template>
 
 <script lang="ts">
-import { defineComponent, ref, reactive } from "vue";
-import {useSideMenu} from "@/stores/sideMenu";
+import { defineComponent } from 'vue'
+import { useSideMenu } from '@/stores/sideMenu'
 
 export default defineComponent({
   setup() {
@@ -57,9 +57,6 @@ export default defineComponent({
       toggleMenu,
       sideMenu,
     }
-  }
-});
-
+  },
+})
 </script>
-
-

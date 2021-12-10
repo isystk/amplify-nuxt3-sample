@@ -4,23 +4,23 @@
       <nav class="footer-nav">
         <ul>
           <li>
-            <NuxtLink :to="$C.URL.HOME" @click="sideMenu.close()" >
-              <i class="fas fa-home" :style="{fontSize: '16px'}"></i>
+            <NuxtLink :to="$C.URL.HOME" @click="sideMenu.close()">
+              <i class="fas fa-home" :style="{ fontSize: '16px' }"></i>
             </NuxtLink>
           </li>
           <li>
             <NuxtLink :to="$C.URL.HOME">
-              <i class="fas fa-share-alt" :style="{fontSize: '16px'}"></i>
+              <i class="fas fa-share-alt" :style="{ fontSize: '16px' }"></i>
             </NuxtLink>
           </li>
           <li>
             <a href="#" @click.prevent="toggleMenu">
-              <i class="fas fa-bars" :style="{fontSize: '16px'}"></i>
+              <i class="fas fa-bars" :style="{ fontSize: '16px' }"></i>
             </a>
           </li>
           <li>
             <a href="#" @click.prevent="scrollToTop">
-              <i class="fas fa-chevron-up" :style="{fontSize: '16px'}"></i>
+              <i class="fas fa-chevron-up" :style="{ fontSize: '16px' }"></i>
             </a>
           </li>
         </ul>
@@ -43,7 +43,7 @@
               rel="noreferrer"
             >
               Github
-              <i class="fab fa-github" :style="{fontSize: '16px'}"></i>
+              <i class="fab fa-github" :style="{ fontSize: '16px' }"></i>
             </a>
           </li>
         </ul>
@@ -54,8 +54,8 @@
 </template>
 
 <script lang="ts">
-import { defineComponent, ref, reactive } from "vue";
-import {useSideMenu} from "@/stores/sideMenu";
+import { defineComponent } from 'vue'
+import { useSideMenu } from '@/stores/sideMenu'
 
 export default defineComponent({
   setup() {
@@ -69,7 +69,7 @@ export default defineComponent({
     const scrollToTop = () => {
       window.scrollTo({
         top: 0,
-        behavior: 'smooth'
+        behavior: 'smooth',
       })
     }
 
@@ -78,6 +78,6 @@ export default defineComponent({
       scrollToTop,
       sideMenu,
     }
-  }
-});
+  },
+})
 </script>

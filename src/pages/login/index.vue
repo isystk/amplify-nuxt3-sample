@@ -4,72 +4,83 @@
       <h1 class="entry-title">ログイン</h1>
     </div>
     <div class="entry-content">
-        <div class="bg-white rounded px-8 pt-6 pb-8 mb-4">
-          <div class="grid grid-cols-1 md:grid-cols-1">
-            <div class="form-control">
-              <p>メールアドレス</p>
-              <ElementsInputText name="email" type="text" :defaultValue="emailField.props.value.value"
-                @input="(e) => emailField.props.onInput(e)"
-                @blur="(e) => emailField.props.onBlur(e)"
-              />
-              <p
-                  class="text-red-500"
-                  v-show="emailField.meta.isTouched.value && emailField.meta.error.value"
-              >
-                メールアドレスを入力してください。
-              </p>
-            </div>
-            <div class="form-control">
-              <p>パスワード</p>
-              <ElementsInputText name="password" type="password" :defaultValue="passwordField.props.value.value"
-                @input="(e) => passwordField.props.onInput(e)"
-                @blur="(e) => passwordField.props.onBlur(e)"
-              />
-              <p
-                  class="text-red-500"
-                  v-show="passwordField.meta.isTouched.value && passwordField.meta.error.value"
-              >
-                パスワードを入力してください。
-              </p>
-            </div>
-            <div>
-              <ElementsButtonBasic label="ログインする" name="login" @click="onSubmit" />
-            </div>
-            <div class="mt-5">
-              <NuxtLink :to="$C.URL.SIGNUP" >
-                会員登録はこちら
-              </NuxtLink>
-            </div>
+      <div class="bg-white rounded px-8 pt-6 pb-8 mb-4">
+        <div class="grid grid-cols-1 md:grid-cols-1">
+          <div class="form-control">
+            <p>メールアドレス</p>
+            <ElementsInputText
+              name="email"
+              type="text"
+              :default-value="emailField.props.value.value"
+              @input="(e) => emailField.props.onInput(e)"
+              @blur="(e) => emailField.props.onBlur(e)"
+            />
+            <p
+              v-show="
+                emailField.meta.isTouched.value && emailField.meta.error.value
+              "
+              class="text-red-500"
+            >
+              メールアドレスを入力してください。
+            </p>
+          </div>
+          <div class="form-control">
+            <p>パスワード</p>
+            <ElementsInputText
+              name="password"
+              type="password"
+              :default-value="passwordField.props.value.value"
+              @input="(e) => passwordField.props.onInput(e)"
+              @blur="(e) => passwordField.props.onBlur(e)"
+            />
+            <p
+              v-show="
+                passwordField.meta.isTouched.value &&
+                passwordField.meta.error.value
+              "
+              class="text-red-500"
+            >
+              パスワードを入力してください。
+            </p>
+          </div>
+          <div>
+            <ElementsButtonBasic
+              label="ログインする"
+              name="login"
+              @click="onSubmit"
+            />
+          </div>
+          <div class="mt-5">
+            <NuxtLink :to="$C.URL.SIGNUP"> 会員登録はこちら </NuxtLink>
           </div>
         </div>
+      </div>
     </div>
   </section>
 </template>
 
 <script lang="ts">
-import {defineComponent, computed, inject, onMounted, reactive, ref} from "vue";
-import { useRoute, useRouter } from 'vue-router'
-import {useState, useRuntimeConfig} from "#app";
+import { defineComponent, computed, ref } from 'vue'
+import { useRouter } from 'vue-router'
 
 const useField = (
-    initialValue: string,
-    validate: (value: string) => boolean = () => false
+  initialValue: string,
+  validate: (value: string) => boolean = () => false
 ) => {
-
-  const value = ref(initialValue);
-  const isTouched = ref(false);
+  const value = ref(initialValue)
+  const isTouched = ref(false)
 
   const error = computed(() => {
-    return !validate(value.value);
-  });
+    return !validate(value.value)
+  })
 
   const onInput = (v) => {
-    value.value = v;
-  };
+    value.value = v
+  }
 
   const onBlur = () => {
-    isTouched.value = true;
-  };
+    isTouched.value = true
+  }
 
   return {
     props: { value, onInput, onBlur },
@@ -77,17 +88,17 @@ const useField = (
       isTouched,
       error,
     },
-  };
-};
+  }
+}
 
 const presenceValidator = (value: string) => {
-  return value.length > 0;
-};
+  return value.length > 0
+}
 
 const emailValidator = (value: string) => {
-  const re = /^\w+([-+.]\w+)*@\w+([-.]\w+)*\.\w+([-.]\w+)*$/;
-  return re.test(value);
-};
+  const re = /^\w+([-+.]\w+)*@\w+([-.]\w+)*\.\w+([-.]\w+)*$/
+  return re.test(value)
+}
 
 export default defineComponent({
   setup() {
@@ -101,25 +112,25 @@ export default defineComponent({
     }
 
     // 各フィールドの定義(バリデーションメソッドの詳細は後述する)
-    const emailField = useField('', emailValidator);
-    const passwordField = useField('', presenceValidator);
+    const emailField = useField('', emailValidator)
+    const passwordField = useField('', presenceValidator)
 
     // フォームのエラー判定。各フィールドにエラー情報を元に判定する。
     const error = computed(() => {
-      return emailField.meta.error.value || passwordField.meta.error.value;
-    });
+      return emailField.meta.error.value || passwordField.meta.error.value
+    })
 
     // submitメソッド。各フィールドの値を使い、サーバーにPOSTリクエストを送信する。
     const onSubmit = async () => {
       if (error.value) {
-        console.log(error.value);
-        return;
+        console.log(error.value)
+        return
       }
       // 今回はサーバーリクエストは行っていない
-      console.log(emailField.props.value.value, passwordField.props.value.value);
+      console.log(emailField.props.value.value, passwordField.props.value.value)
       localStorage.setItem('authorization', 'test')
-      console.log(localStorage.getItem('authorization'));
-    };
+      console.log(localStorage.getItem('authorization'))
+    }
 
     // 各フィールド情報とフォーム情報をtemplate層に渡す
     return {
@@ -129,7 +140,7 @@ export default defineComponent({
       meta: {
         error,
       },
-    };
-  }
-});
+    }
+  },
+})
 </script>

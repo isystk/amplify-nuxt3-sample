@@ -1,8 +1,8 @@
-import {defineNuxtPlugin} from "#app";
+import { defineNuxtPlugin } from '#app'
 import lodash from 'lodash'
 
-export default defineNuxtPlugin(nuxtApp => {
-  nuxtApp.vueApp.provide('lodash', lodash);
+export default defineNuxtPlugin((nuxtApp) => {
+  nuxtApp.vueApp.provide('lodash', lodash)
 })
 
 declare module '#app' {
