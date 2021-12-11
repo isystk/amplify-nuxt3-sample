@@ -41,12 +41,12 @@
       @input="(e) => onInputValue('domain', e.target.value || '')"
     />
 
-    <invalid-feedback
+    <ElementsInvalidFeedback
       v-if="state === false"
       :id="`error_${name}`"
       class="d-block"
       :error="error"
-    ></invalid-feedback>
+    ></ElementsInvalidFeedback>
   </div>
 </template>
 

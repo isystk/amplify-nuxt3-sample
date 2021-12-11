@@ -1,5 +1,5 @@
 <template>
-  <i class="fas fa-asterisk required" :title="title"></i>
+  <i class="fas fa-asterisk text-red-500 text-xs" :title="title"></i>
 </template>
 
 <script>

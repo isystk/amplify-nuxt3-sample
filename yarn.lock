@@ -3591,6 +3591,11 @@ he@^1.1.0:
   resolved "https://registry.yarnpkg.com/he/-/he-1.2.0.tgz#84ae65fa7eafb165fddb61566ae14baf05664f0f"
   integrity sha512-F/1DnUGPopORZi0ni+CvrCgHQ5FyEAHRLSApuYWMmrbSwoN2Mn/7k+Gl38gJnR7yyDZk6WLXwiGod1JOWNDKGw==
 
+heic2any@0.0.3:
+  version "0.0.3"
+  resolved "https://registry.yarnpkg.com/heic2any/-/heic2any-0.0.3.tgz#59248665a3646424b1f88c0aaaa1abba3bbd1aae"
+  integrity sha512-1KG0LzZuIPiqyJjwLgGlgrgWd3UBwUE9g5+tOuHy8PbeH2hF0U4gc4ZWT4ChlCmcdISr1xVRimSehsTOPdRXnQ==
+
 hookable@^5.0.0:
   version "5.0.0"
   resolved "https://registry.yarnpkg.com/hookable/-/hookable-5.0.0.tgz#bac6f1d4b56e3f590f21cfe3f813731372c0c69f"
@@ -6494,6 +6499,13 @@ vue@^3.2.21:
     "@vue/runtime-dom" "3.2.24"
     "@vue/server-renderer" "3.2.24"
     "@vue/shared" "3.2.24"
+
+vuejs-image-base64@^1.1.0:
+  version "1.1.0"
+  resolved "https://registry.yarnpkg.com/vuejs-image-base64/-/vuejs-image-base64-1.1.0.tgz#1897d5ebc3c04570927324e6eae1e935a649754c"
+  integrity sha512-DHNiufif4PeyxSURWfIi1Sn4J59qwoop7Iq+4d6NyM7Y5u9jdwBsZrBDp3RFp0QRBZFLBf0w895KzwL8whqTVw==
+  dependencies:
+    heic2any "0.0.3"
 
 watchpack@^2.3.1:
   version "2.3.1"

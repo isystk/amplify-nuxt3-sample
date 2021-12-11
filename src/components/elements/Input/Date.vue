@@ -81,17 +81,17 @@
       <slot name="append"></slot>
     </div>
 
-    <invalid-feedback
+    <ElementsInvalidFeedback
       v-if="state === false"
       :id="`error_${name}`"
       class="d-block"
       :error="error"
-    ></invalid-feedback>
+    ></ElementsInvalidFeedback>
   </div>
 </template>
 
 <script>
-import dayjs from 'dayjs'
+import moment from 'moment'
 import inputMixins from '~/mixins/input'
 export default {
   mixins: [inputMixins],
@@ -152,7 +152,7 @@ export default {
   },
   methods: {
     date: function (date) {
-      return dayjs(date || new Date())
+      return moment(date || new Date())
     },
     setter: function (date) {
       this.object = date

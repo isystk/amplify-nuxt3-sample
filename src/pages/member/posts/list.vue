@@ -16,7 +16,11 @@
     </div>
     <div class="entry-content">
       <p>
-        <input type="button" onClick="" value="新規登録" />
+        <input
+          type="button"
+          value="新規登録"
+          @click="router.push($C.URL.MEMBER_POSTS_NEW)"
+        />
       </p>
       <table>
         <thead>
@@ -62,19 +66,13 @@ import { useMemberPostsStore } from '@/stores/memberPosts'
 
 export default defineComponent({
   setup() {
-    const { $C } = useNuxtApp()
     const router = useRouter()
     const memberPostsStore = useMemberPostsStore()
 
     // mounted
     onMounted(async () => {
       const auth = localStorage.getItem('authorization')
-      if (auth !== 'test') {
-        router.push($C.URL.LOGIN)
-      }
-      const userId =
-        'CognitoIdentityServiceProvider.b5mlqbm890h8tabqhro9bno8j.test.userData'
-      await memberPostsStore.fetchPosts(userId)
+      await memberPostsStore.fetchPosts(auth || '')
     })
 
     const posts = computed(() => {
@@ -83,6 +81,7 @@ export default defineComponent({
 
     return {
       posts,
+      router,
     }
   },
 })

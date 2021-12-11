@@ -11,6 +11,7 @@ type PostDisplay = Post & {
 }
 
 export const usePostsStore = defineStore('posts', () => {
+  const config = useRuntimeConfig()
   const posts = ref<Posts>({})
 
   // method
@@ -39,13 +40,11 @@ export const usePostsStore = defineStore('posts', () => {
     } as PostDisplay
   }
   const fetchPosts = async () => {
-    const config = useRuntimeConfig()
     const _ = inject('lodash')
     const response = await API.get(getApiEndpoint(config).POSTS)
     posts.value = _.mapKeys(response, 'id')
   }
   const fetchPost = async (id: string) => {
-    const config = useRuntimeConfig()
     const response = await API.get(`${getApiEndpoint(config).POSTS}/${id}`)
     posts.value = { ...posts.value, [id]: response }
   }

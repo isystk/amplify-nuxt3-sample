@@ -25,9 +25,12 @@
                 </NuxtLink>
               </li>
               <li>
-                <NuxtLink :to="$C.URL.LOGIN" @click="sideMenu.close">
+                <NuxtLink v-show="!Auth.isLogin()" :to="$C.URL.LOGIN" @click="sideMenu.close">
                   ログイン
                 </NuxtLink>
+                <a v-show="Auth.isLogin()" @click="Auth.logout">
+                  ログアウト
+                </a>
               </li>
               <li></li>
             </ul>
@@ -42,6 +45,7 @@
 <script lang="ts">
 import { defineComponent } from 'vue'
 import { useSideMenu } from '@/stores/sideMenu'
+import {Auth} from '@/auth/auth'
 
 export default defineComponent({
   setup() {
@@ -56,6 +60,7 @@ export default defineComponent({
     return {
       toggleMenu,
       sideMenu,
+      Auth
     }
   },
 })

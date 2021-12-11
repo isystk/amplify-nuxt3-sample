@@ -11,6 +11,7 @@ type PostDisplay = Post & {
 }
 
 export const useMemberPostsStore = defineStore('memberPosts', () => {
+  const config = useRuntimeConfig()
   const posts = ref<Posts>({})
 
   // method
@@ -39,7 +40,6 @@ export const useMemberPostsStore = defineStore('memberPosts', () => {
     } as PostDisplay
   }
   const fetchPosts = async (userId: string) => {
-    const config = useRuntimeConfig()
     const _ = inject('lodash')
     const response = await API.get(
       `${getApiEndpoint(config).POSTS}?userId=${userId}`
@@ -47,9 +47,24 @@ export const useMemberPostsStore = defineStore('memberPosts', () => {
     posts.value = _.mapKeys(response, 'id')
   }
   const fetchPost = async (id: string) => {
-    const config = useRuntimeConfig()
     const response = await API.get(`${getApiEndpoint(config).POSTS}/${id}`)
     posts.value = { ...posts.value, [id]: response }
+  }
+  const registPost = async (value: Post) => {
+    const response = await API.post(getApiEndpoint(config).POSTS, value)
+    posts.value = { ...posts.value, [response.id]: response }
+  }
+  const updatePost = async (id: string, value: Post) => {
+    const response = await API.put(
+      `${getApiEndpoint(config).POSTS}/${id}`,
+      value
+    )
+    posts.value = { ...posts.value, [response.id]: response }
+  }
+  const deletePost = async (id: string) => {
+    const response = await API.del(`${getApiEndpoint(config).POSTS}/${id}`)
+    delete posts.value[id]
+    posts.value = { ...posts.value }
   }
 
   return {
@@ -57,5 +72,8 @@ export const useMemberPostsStore = defineStore('memberPosts', () => {
     getPost,
     fetchPosts,
     fetchPost,
+    registPost,
+    updatePost,
+    deletePost,
   }
 })

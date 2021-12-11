@@ -6,25 +6,16 @@
       </div>
 
       <div class="custom-file">
-        <input
-          :id="`file_input_${name}`"
-          type="file"
-          :name="name"
-          :pattern="pattern"
-          :accept="accept"
-          :required="required"
-          :disabled="disabled"
-          :readonly="readonly"
-          :class="`custom-file-input ${className || ''}`"
-          :state="state"
-          :multiple="multiple"
-          @change="onChangeValue"
+        <VueImageBase64
+          :max-file-size="10485760"
+          :thumbnail-size="100"
+          :drop="true"
+          drop-text="ファイルをドラッグ＆ドロップもしくは"
+          capture="environment"
+          :multiple="false"
+          @handleChange="onChangeValue"
         />
-        <label
-          class="custom-file-label"
-          :for="`file_input_${name}`"
-          :data-browse="browseText"
-        >
+        <label class="custom-file-label">
           {{ filename }}
         </label>
       </div>
@@ -45,7 +36,13 @@
 
 <script>
 import inputMixins from '~/mixins/input'
+// import VueImageBase64 from 'vuejs-image-base64'
+import VueImageBase64 from './VueImageBase64'
+
 export default {
+  components: {
+    VueImageBase64,
+  },
   mixins: [inputMixins],
   props: {
     name: String,
@@ -102,16 +99,11 @@ export default {
     },
   },
   methods: {
-    onChangeValue: function (e) {
+    onChangeValue: function (data) {
       if (this.disabled || this.readonly) {
         return false
       }
-
-      this.files = e.target.files
-
-      if (this.onChange && typeof this.onChange === 'function') {
-        this.onChange(this.files)
-      }
+      this.onChange(data)
     },
   },
 }

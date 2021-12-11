@@ -1,5 +1,4 @@
-declare module 'react-image-base64' {
-  import { FC } from 'react'
+declare module 'vuejs-image-base64' {
   declare type Props = {
     id?: string
     accept?: string
@@ -21,6 +20,6 @@ declare module 'react-image-base64' {
     fileSize?: number
     fileType?: string
   }
-  declare const ImageFile: FC<Props>
+  declare const ImageFile: (props: Props) => Return
   export default ImageFile
 }

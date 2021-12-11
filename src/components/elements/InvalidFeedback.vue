@@ -1,7 +1,7 @@
 <template>
-  <div :class="`invalid-feedback${className ? ' ' + className : ''}`">
+  <p :class="`text-red-500${className ? ' ' + className : ''}`">
     {{ error }}
-  </div>
+  </p>
 </template>
 <script>
 export default {

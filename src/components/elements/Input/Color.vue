@@ -30,7 +30,7 @@
 
     <spinner v-if="loading" label="loading..." small />
 
-    <invalid-feedback
+    <ElementsInvalidFeedback
       v-if="state === false"
       :id="`error_${name}`"
       class="d-block"

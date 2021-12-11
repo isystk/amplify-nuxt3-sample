@@ -12,17 +12,14 @@
               name="email"
               type="text"
               :default-value="emailField.props.value.value"
+              :errors="
+                emailField.meta.isTouched.value && emailField.meta.error.value
+                  ? 'メールアドレスを入力してください。'
+                  : ''
+              "
               @input="(e) => emailField.props.onInput(e)"
               @blur="(e) => emailField.props.onBlur(e)"
             />
-            <p
-              v-show="
-                emailField.meta.isTouched.value && emailField.meta.error.value
-              "
-              class="text-red-500"
-            >
-              メールアドレスを入力してください。
-            </p>
           </div>
           <div class="form-control">
             <p>パスワード</p>
@@ -30,18 +27,15 @@
               name="password"
               type="password"
               :default-value="passwordField.props.value.value"
+              :errors="
+                passwordField.meta.isTouched.value &&
+                passwordField.meta.error.value
+                  ? 'パスワードを入力してください。'
+                  : ''
+              "
               @input="(e) => passwordField.props.onInput(e)"
               @blur="(e) => passwordField.props.onBlur(e)"
             />
-            <p
-              v-show="
-                passwordField.meta.isTouched.value &&
-                passwordField.meta.error.value
-              "
-              class="text-red-500"
-            >
-              パスワードを入力してください。
-            </p>
           </div>
           <div>
             <ElementsButtonBasic
@@ -61,7 +55,8 @@
 
 <script lang="ts">
 import { defineComponent, computed, ref } from 'vue'
-import { useRouter } from 'vue-router'
+import { Auth } from '@/auth/auth'
+import {useRouter} from "vue-router";
 
 const useField = (
   initialValue: string,
@@ -102,14 +97,8 @@ const emailValidator = (value: string) => {
 
 export default defineComponent({
   setup() {
-    const { $C } = useNuxtApp()
     const router = useRouter()
-    if (process.client) {
-      const auth = localStorage.getItem('authorization')
-      if (auth === 'test') {
-        router.push($C.URL.MEMBER)
-      }
-    }
+    const { $C } = useNuxtApp()
 
     // 各フィールドの定義(バリデーションメソッドの詳細は後述する)
     const emailField = useField('', emailValidator)
@@ -127,9 +116,8 @@ export default defineComponent({
         return
       }
       // 今回はサーバーリクエストは行っていない
-      console.log(emailField.props.value.value, passwordField.props.value.value)
-      localStorage.setItem('authorization', 'test')
-      console.log(localStorage.getItem('authorization'))
+      Auth.setUserId('CognitoIdentityServiceProvider.b5mlqbm890h8tabqhro9bno8j.test.userData')
+      router.push($C.URL.MEMBER)
     }
 
     // 各フィールド情報とフォーム情報をtemplate層に渡す

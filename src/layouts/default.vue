@@ -11,7 +11,12 @@
             <NuxtLink :to="$C.URL.MEMBER">マイページ</NuxtLink>
           </li>
           <li>
-            <NuxtLink :to="$C.URL.LOGIN">ログイン</NuxtLink>
+            <NuxtLink v-show="!Auth.isLogin()" :to="$C.URL.LOGIN" >
+              ログイン
+            </NuxtLink>
+            <a v-show="Auth.isLogin()" @click="Auth.logout">
+              ログアウト
+            </a>
           </li>
         </ul>
       </nav>
@@ -35,6 +40,7 @@
 
 <script lang="ts">
 import { defineComponent, onErrorCaptured, ref, Ref } from 'vue'
+import {Auth} from '@/auth/auth'
 
 export default defineComponent({
   setup() {
@@ -49,6 +55,7 @@ export default defineComponent({
 
     return {
       error,
+      Auth
     }
   },
 })

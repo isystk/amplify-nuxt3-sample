@@ -28,12 +28,12 @@
       </option>
     </select>
 
-    <invalid-feedback
+    <ElementsInvalidFeedback
       v-if="state === false"
       :id="`error_${name}`"
       class="d-block"
       :error="error"
-    ></invalid-feedback>
+    ></ElementsInvalidFeedback>
   </div>
 </template>
 

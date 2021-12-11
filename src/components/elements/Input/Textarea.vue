@@ -4,7 +4,6 @@
       :id="`textarea_${name}`"
       class="form-control"
       :name="name"
-      :value="value"
       :placeholder="placeholder"
       :pattern="pattern"
       :required="required"
@@ -13,11 +12,12 @@
       :autocomplete="autocomplete === false ? 'off' : ''"
       :state="state"
       :rows="rows"
+      :text="value"
       @change="(e) => onChangeValue(e.target.value || '')"
       @input="(e) => onInputValue(e.target.value || '')"
-    ></textarea>
+    />
 
-    <invalid-feedback
+    <ElementsInvalidFeedback
       v-if="state === false"
       :id="`error_${name}`"
       class="d-block"
