@@ -55,7 +55,6 @@
 
 <script lang="ts">
 import { defineComponent, computed, ref } from 'vue'
-import { Auth } from '@/auth/auth'
 import { useRouter } from 'vue-router'
 
 const useField = (
@@ -106,7 +105,9 @@ export default defineComponent({
 
     // フォームのエラー判定。各フィールドにエラー情報を元に判定する。
     const error = computed(() => {
-      return emailField.meta.error.value || verificationCodeField.meta.error.value
+      return (
+        emailField.meta.error.value || verificationCodeField.meta.error.value
+      )
     })
 
     // submitメソッド。各フィールドの値を使い、サーバーにPOSTリクエストを送信する。

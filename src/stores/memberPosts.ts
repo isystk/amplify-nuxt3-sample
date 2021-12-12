@@ -62,7 +62,7 @@ export const useMemberPostsStore = defineStore('memberPosts', () => {
     posts.value = { ...posts.value, [response.id]: response }
   }
   const deletePost = async (id: string) => {
-    const response = await API.del(`${getApiEndpoint(config).POSTS}/${id}`)
+    await API.del(`${getApiEndpoint(config).POSTS}/${id}`)
     delete posts.value[id]
     posts.value = { ...posts.value }
   }

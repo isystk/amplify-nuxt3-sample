@@ -8,7 +8,9 @@
     "allupdate": "yarn upgrade-interactive --latest",
     "lint": "eslint --ext .js,.ts,.vue .",
     "lintfix": "eslint --fix --ext .js,.ts,.vue .",
-    "precommit": "npm run lint"
+    "test": "jest",
+    "test:coverage": "jest --collect-coverage",
+    "precommit": "npm run lint && npm run test"
   },
   "devDependencies": {
     "@fortawesome/fontawesome-free": "^5.15.4",
@@ -31,6 +33,7 @@
     "eslint-loader": "^4.0.2",
     "eslint-plugin-prettier": "^4.0.0",
     "eslint-plugin-vue": "^8.2.0",
+    "jest": "^27.4.4",
     "lodash": "^4.17.21",
     "moment": "^2.29.1",
     "nuxt3": "3.0.0-27277330.202617b",

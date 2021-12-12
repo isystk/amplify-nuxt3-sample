@@ -36,8 +36,8 @@
 
 <script>
 import inputMixins from '~/mixins/input'
-import VueImageBase64 from 'vuejs-image-base64'
-// import VueImageBase64 from './VueImageBase64'
+// import VueImageBase64 from 'vuejs-image-base64'
+import VueImageBase64 from './VueImageBase64'
 
 export default {
   components: {

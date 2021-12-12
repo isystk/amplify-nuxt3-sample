@@ -20,7 +20,7 @@
       <h1 class="entry-title">投稿変更</h1>
     </div>
     <div class="entry-content">
-      <PagesMemberPostsForm v-if="!nowLoading" v-model:post="post" />
+      <PagesMemberPostsForm v-if="!nowLoading" :post="post" />
     </div>
   </section>
 </template>

@@ -121,7 +121,7 @@ export default defineComponent({
   props: {
     post: {
       type: Object,
-      default: Post,
+      default: () => {},
     },
   },
   setup(props) {
@@ -134,7 +134,7 @@ export default defineComponent({
     const { $C } = useNuxtApp()
     const { post } = toRefs(props)
 
-    const isEdit = !!post.value.id
+    const isEdit = !!post.value
 
     if (isEdit) {
       titleField.props.value.value = post.value.title

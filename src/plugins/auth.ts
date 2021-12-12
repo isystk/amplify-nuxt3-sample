@@ -1,5 +1,5 @@
 import { defineNuxtPlugin } from '#app'
-import { RouteLocationNormalized } from 'vue-router'
+import { NavigationGuardNext, RouteLocationNormalized } from 'vue-router'
 import { NuxtApp } from '#app/nuxt'
 import { Auth } from '@/auth/auth'
 
@@ -10,7 +10,7 @@ export default defineNuxtPlugin((nuxtApp: NuxtApp) => {
     (
       to: RouteLocationNormalized,
       from: RouteLocationNormalized,
-      next: Function
+      next: NavigationGuardNext
     ) => {
       // console.log('beforeEach', to, from)
       if (process.client) {

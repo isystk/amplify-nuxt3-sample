@@ -18,9 +18,7 @@
 </template>
 
 <script>
-import csrfMixins from '~/mixins/csrf'
 export default {
-  mixins: [csrfMixins],
   props: {
     method: String,
     action: String,

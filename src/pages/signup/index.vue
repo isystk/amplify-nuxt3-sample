@@ -55,7 +55,6 @@
 
 <script lang="ts">
 import { defineComponent, computed, ref } from 'vue'
-import { Auth } from '@/auth/auth'
 import { useRouter } from 'vue-router'
 
 const useField = (
