@@ -4,7 +4,7 @@
       <button
         type="button"
         :name="name || 'save'"
-        class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded"
+        :class="`bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded ${buttonClass}`"
         @click="handleClick"
       >
         {{ label }}
@@ -18,6 +18,7 @@ export default {
   props: {
     label: String,
     name: String,
+    buttonClass: String,
   },
   methods: {
     handleClick: function () {

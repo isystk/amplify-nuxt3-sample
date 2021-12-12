@@ -1,7 +1,7 @@
 <template>
   <section>
     <div class="entry-header">
-      <h1 class="entry-title">ログイン</h1>
+      <h1 class="entry-title">会員登録</h1>
     </div>
     <div class="entry-content">
       <div class="bg-white rounded px-8 pt-6 pb-8 mb-4">
@@ -22,30 +22,30 @@
             />
           </div>
           <div class="form-control">
-            <p>パスワード</p>
+            <p>承認コード</p>
             <ElementsInputText
-              name="password"
-              type="password"
-              :default-value="passwordField.props.value.value"
+              name="verificationCode"
+              type="verificationCode"
+              :default-value="verificationCodeField.props.value.value"
               :errors="
-                passwordField.meta.isTouched.value &&
-                passwordField.meta.error.value
-                  ? 'パスワードを入力してください。'
+                verificationCodeField.meta.isTouched.value &&
+                verificationCodeField.meta.error.value
+                  ? '承認コードを入力してください。'
                   : ''
               "
-              @input="(e) => passwordField.props.onInput(e)"
-              @blur="(e) => passwordField.props.onBlur(e)"
+              @input="(e) => verificationCodeField.props.onInput(e)"
+              @blur="(e) => verificationCodeField.props.onBlur(e)"
             />
           </div>
           <div>
             <ElementsButtonBasic
-              label="ログインする"
-              name="login"
+              label="認証する"
+              name="Regist"
               @click="onSubmit"
             />
           </div>
           <div class="mt-5">
-            <NuxtLink :to="$C.URL.SIGNUP"> 会員登録はこちら </NuxtLink>
+            <NuxtLink :to="$C.URL.LOGIN"> ログインはこちら </NuxtLink>
           </div>
         </div>
       </div>
@@ -102,11 +102,11 @@ export default defineComponent({
 
     // 各フィールドの定義(バリデーションメソッドの詳細は後述する)
     const emailField = useField('', emailValidator)
-    const passwordField = useField('', presenceValidator)
+    const verificationCodeField = useField('', presenceValidator)
 
     // フォームのエラー判定。各フィールドにエラー情報を元に判定する。
     const error = computed(() => {
-      return emailField.meta.error.value || passwordField.meta.error.value
+      return emailField.meta.error.value || verificationCodeField.meta.error.value
     })
 
     // submitメソッド。各フィールドの値を使い、サーバーにPOSTリクエストを送信する。
@@ -115,17 +115,13 @@ export default defineComponent({
         console.log(error.value)
         return
       }
-      // 今回はサーバーリクエストは行っていない
-      Auth.setUserId(
-        'CognitoIdentityServiceProvider.b5mlqbm890h8tabqhro9bno8j.test.userData'
-      )
-      router.push($C.URL.MEMBER)
+      router.push($C.URL.LOGIN)
     }
 
     // 各フィールド情報とフォーム情報をtemplate層に渡す
     return {
       emailField,
-      passwordField,
+      verificationCodeField,
       onSubmit,
       meta: {
         error,

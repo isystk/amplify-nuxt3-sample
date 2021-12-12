@@ -12,9 +12,9 @@
       :autocomplete="autocomplete === false ? 'off' : ''"
       :state="state"
       :rows="rows"
-      :text="value"
       @change="(e) => onChangeValue(e.target.value || '')"
       @input="(e) => onInputValue(e.target.value || '')"
+      v-text="value"
     />
 
     <ElementsInvalidFeedback
@@ -64,6 +64,14 @@ export default {
     return {
       value: '',
     }
+  },
+  watch: {
+    defaultValue: {
+      immediate: true,
+      handler: function () {
+        this.value = this.defaultValue
+      },
+    },
   },
   mounted() {
     this.value = this.defaultValue

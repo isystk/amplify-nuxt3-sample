@@ -68,6 +68,7 @@ export const useMemberPostsStore = defineStore('memberPosts', () => {
   }
 
   return {
+    posts,
     getPosts,
     getPost,
     fetchPosts,

@@ -25,10 +25,23 @@
                 </NuxtLink>
               </li>
               <li>
-                <NuxtLink v-show="!Auth.isLogin()" :to="$C.URL.LOGIN" @click="sideMenu.close">
+                <NuxtLink
+                  v-show="!Auth.isLogin()"
+                  :to="$C.URL.LOGIN"
+                  @click="sideMenu.close"
+                >
                   ログイン
                 </NuxtLink>
-                <a v-show="Auth.isLogin()" @click="Auth.logout">
+                <a
+                  v-show="Auth.isLogin()"
+                  @click.prevent="
+                    () => {
+                      Auth.logout()
+                      router.push($C.URL.HOME)
+                      sideMenu.close()
+                    }
+                  "
+                >
                   ログアウト
                 </a>
               </li>
@@ -45,10 +58,12 @@
 <script lang="ts">
 import { defineComponent } from 'vue'
 import { useSideMenu } from '@/stores/sideMenu'
-import {Auth} from '@/auth/auth'
+import { Auth } from '@/auth/auth'
+import { useRouter } from 'vue-router'
 
 export default defineComponent({
   setup() {
+    const router = useRouter()
     // data
     const sideMenu = useSideMenu()
 
@@ -60,7 +75,8 @@ export default defineComponent({
     return {
       toggleMenu,
       sideMenu,
-      Auth
+      Auth,
+      router,
     }
   },
 })

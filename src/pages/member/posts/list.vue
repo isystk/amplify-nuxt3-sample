@@ -50,7 +50,11 @@
               {{ e.regist_datetime_yyyymmdd }}
             </td>
             <td :style="{ width: '15%' }" class="text-center">
-              <input type="button" value="変更" @click.prevent="" />
+              <input
+                type="button"
+                value="変更"
+                @click.prevent="router.push(`${$C.URL.MEMBER_POSTS}/${e.id}`)"
+              />
             </td>
           </tr>
         </tbody>

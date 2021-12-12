@@ -8,27 +8,19 @@
             <span>HOME</span>
           </NuxtLink>
         </li>
-        <li>{{ post.title }}</li>
+        <li>
+          <NuxtLink :to="$C.URL.MEMBER">
+            <span>マイページ</span>
+          </NuxtLink>
+        </li>
+        <li>投稿変更</li>
       </ul>
     </nav>
     <div class="entry-header">
-      <h1 class="entry-title">{{ post.title }}</h1>
-      <div class="article-img">
-        <img alt="sample1" width="644" :src="post.photo" />
-      </div>
-      <div class="clearfix"></div>
+      <h1 class="entry-title">投稿変更</h1>
     </div>
     <div class="entry-content">
-      <p>{{ post.description }}</p>
-    </div>
-    <div class="clearfix"></div>
-    <div class="entry-meta">
-      <i class="fas fa-clock" :style="{ fontSize: '16px' }"></i>
-      {{ post.regist_datetime_yyyymmdd }}
-    </div>
-    <div class="wrap">
-      <SnsShare :title="post.title" />
-      <div class="clearfix"></div>
+      <PagesMemberPostsForm v-if="!nowLoading" v-model:post="post" />
     </div>
   </section>
 </template>
@@ -36,22 +28,22 @@
 <script lang="ts">
 import { defineComponent, computed, onMounted } from 'vue'
 import { useRoute } from 'vue-router'
-import { usePostsStore } from '@/stores/posts'
+import { useMemberPostsStore } from '@/stores/memberPosts'
 
 export default defineComponent({
   setup() {
     const { id } = useRoute().params
-    const postsStore = usePostsStore()
+    const memberPostsStore = useMemberPostsStore()
     const nowLoading = ref(true)
 
     // mounted
     onMounted(async () => {
-      await postsStore.fetchPosts()
+      await memberPostsStore.fetchPost(id)
       nowLoading.value = false
     })
 
     const displayPost = computed(() => {
-      return postsStore.getPost(typeof id === 'string' ? id : '')
+      return memberPostsStore.getPost(typeof id === 'string' ? id : '')
     })
 
     return {

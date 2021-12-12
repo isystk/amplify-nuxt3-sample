@@ -11,6 +11,6 @@ export type Post = {
   userId: string
   title: string
   description: string
-  regist_datetime: Date | null
+  regist_datetime?: Date
   photo: string
 }

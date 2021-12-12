@@ -1,8 +1,9 @@
 <template>
-  <div
-    class="d-flex justify-content-center align-items-center overlay no-click"
-  >
-    <spinner :label="label" :variant="variant" :small="small" />
+  <div class="text-center my-10"></div>
+  <div id="site_loader_overlay">
+    <div className="site_loader_spinner">
+      <ElementsSpinner :label="label" :variant="variant" :small="small" />
+    </div>
   </div>
 </template>
 <script>
