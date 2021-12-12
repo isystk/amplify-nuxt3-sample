@@ -1,88 +1,72 @@
-# Nuxt 3 Starter
+🌙 nuxt3-typescript-aws
+====
 
-We recommend to look at the [documentation](https://v3.nuxtjs.org).
+![GitHub issues](https://img.shields.io/github/issues/isystk/nuxt3-typescript-aws)
+![GitHub forks](https://img.shields.io/github/forks/isystk/nuxt3-typescript-aws)
+![GitHub stars](https://img.shields.io/github/stars/isystk/nuxt3-typescript-aws)
+![GitHub license](https://img.shields.io/github/license/isystk/nuxt3-typescript-aws)
 
-## Preview
+## 📗 プロジェクトの概要
 
-
-[![Open in StackBlitz](https://developer.stackblitz.com/img/open_in_stackblitz.svg)](https://stackblitz.com/github/productdevbook/nuxt3-app)
-
-## Deploy your own
-
-[![Deploy to Netlify](https://www.netlify.com/img/deploy/button.svg)](https://app.netlify.com/start/deploy?repository=https://github.com/productdevbook/nuxt3-app)
-
-[![Deploy with Vercel](https://vercel.com/button)](https://vercel.com/new/git/external?repository-url=https://github.com/productdevbook/nuxt3-app)
-
-This starter template also includes:
-
-- [Tailwind CSS v3.0.0-alpha ⚠](https://github.com/tailwindlabs/tailwindcss/releases/tag/v3.0.0-alpha.1)
-- [Headless UI](https://headlessui.dev/vue/menu) - unstyled, fully accessible UI components, designed to integrate beautifully with Tailwind CSS
-- [Heroicons](https://github.com/tailwindlabs/heroicons#vue) - beautiful hand-crafted SVG icons,
-by the makers of Tailwind CSS
-
-First-party plugins needed for Tailwind UI:
-
-- [tailwindcss/forms](https://github.com/tailwindlabs/tailwindcss-forms)
-- [tailwindcss/typography](https://github.com/tailwindlabs/tailwindcss-typography)
-- [tailwindcss/line-clamp](https://github.com/tailwindlabs/tailwindcss-line-clamp)
-- [tailwindcss/aspect-ratio](https://github.com/tailwindlabs/tailwindcss-aspect-ratio)
+Nuxt3 ＆ AWS の学習用サンプルアプリケーションです。
 
 
-Best Nuxt with Plugins:
-- [Pinia](https://github.com/posva/pinia)
+### 利用している技術
 
-## Setup
+- Nuxt3
+- Typescript 4.5
+- Tailwind Css
 
-Make sure to install the dependencies
 
-```bash
-yarn install
+## 🌐 Demo
+
+![投稿一覧画面](./app1.png "投稿一覧画面")
+![投稿画面](./app2.png "投稿画面")
+
+- ログイン/ログアウト
+- 会員登録
+- 投稿一覧
+- 投稿詳細
+- マイページ（一覧・登録・更新・削除）
+
+
+## 📦 ディレクトリ構造
+
+```
+.
+├── src/ (Next.js のソースコード)
+│   ├── assets/
+│   ├── auth/
+│   ├── common/
+│   ├── components/
+│   ├── layouts/
+│   ├── mixins/
+│   ├── pages/
+│   ├── plugins/
+│   ├── store/
+│   ├── test/
+│   └── utilities/
+└── package.json/
 ```
 
-## Development
+## 💬 使い方
 
-Start the development server on http://localhost:3000
-
-```bash
+```
+yarn
 yarn dev
 ```
 
-## Production
+## 🎨 参考
 
-Build the application for production:
+| プロジェクト| 概要|
+| :---------------------------------------| :-------------------------------|
+| [Nuxt3 Docs](https://v3.nuxtjs.org/docs/usage/data-fetching)| Nuxt3 Docs |
 
-```bash
-yarn build
-```
+## 🎫 Licence
 
-```bash
-yarn start
-```
+[MIT](https://github.com/isystk/nuxt3-typescript-aws/blob/master/LICENSE)
 
-## Dependencies Update
+## 👀 Author
 
-If you want to update the libraries, I left a nice command for you. Select it with space and press enter.
+[isystk](https://github.com/isystk)
 
-```bash
-yarn allupdate
-```
-Example
-```
-➜  nuxt3-app git:(master) yarn allupdate
-yarn run v1.22.11
-$ yarn upgrade-interactive --latest
-info Color legend : 
- "<red>"    : Major Update backward-incompatible updates 
- "<yellow>" : Minor Update backward-compatible features 
- "<green>"  : Patch Update backward-compatible bug fixes
-? Choose which packages to update. (Press <space> to select, <a> to toggle all, <i> to invert selection)
- devDependencies
-   name   range   from                       to                      url
-❯◯ nuxt3  latest  3.0.0-27237303.6acfdcd  ❯  3.0.0-27238235.a1bcc53  
-```
-
-## Stay in touch
-- Website - [https://productdevbook.com](https://productdevbook.com/)
-- Twitter - [@productdevbook](https://twitter.com/productdevbook)
-
-Checkout the [deployment documentation](https://v3.nuxtjs.org/docs/deployment).
