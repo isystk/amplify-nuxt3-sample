@@ -56,6 +56,7 @@
       <div>
         <div class="grid grid-cols-3 md:grid-cols-6">
           <ElementsButtonBasic
+            v-show="isEdit"
             label="削除する"
             name="delete"
             button-class="bg-red-500"
@@ -72,11 +73,17 @@
   </div>
 </template>
 
-<script lang="ts">
-import { defineComponent, computed, ref, toRefs } from 'vue'
+<script lang="ts" setup>
 import { useMemberPostsStore } from '@/stores/memberPosts'
 import { Post } from '~/@types/Posts'
-import { useRouter } from 'vue-router'
+
+type Props = {
+  post: () => {}
+}
+
+const props = withDefaults(defineProps<Props>(), {
+  post: {},
+})
 
 const useField = (
   initialValue: string,
@@ -117,84 +124,61 @@ const presenceValidator = (value: string) => {
   return value.length > 0
 }
 
-export default defineComponent({
-  props: {
-    post: {
-      type: Object,
-      default: () => {},
-    },
-  },
-  setup(props) {
-    // 各フィールドの定義(バリデーションメソッドの詳細は後述する)
-    const titleField = useField('', presenceValidator)
-    const descriptionField = useField('', presenceValidator)
-    const photoField = useField('', presenceValidator)
-    const memberPostsStore = useMemberPostsStore()
-    const router = useRouter()
-    const { $C } = useNuxtApp()
-    const { post } = toRefs(props)
+// 各フィールドの定義(バリデーションメソッドの詳細は後述する)
+const titleField = useField('', presenceValidator)
+const descriptionField = useField('', presenceValidator)
+const photoField = useField('', presenceValidator)
+const memberPostsStore = useMemberPostsStore()
+const router = useRouter()
+const { $C } = useNuxtApp()
+const { post } = toRefs(props)
 
-    const isEdit = !!post.value
+const isEdit = post.value && post.value.id
 
-    if (isEdit) {
-      titleField.props.value.value = post.value.title
-      descriptionField.props.value.value = post.value.description
-      photoField.props.value.value = post.value.photo
-    }
+if (isEdit) {
+  titleField.props.value.value = post.value.title
+  descriptionField.props.value.value = post.value.description
+  photoField.props.value.value = post.value.photo
+}
 
-    // フォームのエラー判定。各フィールドにエラー情報を元に判定する。
-    const error = computed(() => {
-      return (
-        titleField.meta.error.value ||
-        descriptionField.meta.error.value ||
-        photoField.meta.error.value
-      )
-    })
-
-    // submitメソッド。各フィールドの値を使い、サーバーにPOSTリクエストを送信する。
-    const onSubmit = async () => {
-      if (error.value) {
-        console.log(error.value)
-        return
-      }
-      // 今回はサーバーリクエストは行っていない
-      const userId =
-        'CognitoIdentityServiceProvider.b5mlqbm890h8tabqhro9bno8j.test.userData'
-      const data: Post = {
-        ...post,
-        userId,
-        title: titleField.props.value.value,
-        description: descriptionField.props.value.value,
-        photo: photoField.props.value.value,
-      }
-      if (isEdit) {
-        await memberPostsStore.updatePost(post.id, data)
-      } else {
-        await memberPostsStore.registPost(data)
-      }
-      router.push($C.URL.MEMBER)
-    }
-
-    const onDelete = async () => {
-      if (!window.confirm('削除します。よろしいですか？')) {
-        return
-      }
-      await memberPostsStore.deletePost(post.id)
-      router.push($C.URL.MEMBER)
-    }
-
-    // 各フィールド情報とフォーム情報をtemplate層に渡す
-    return {
-      isEdit,
-      titleField,
-      descriptionField,
-      photoField,
-      onSubmit,
-      onDelete,
-      meta: {
-        error,
-      },
-    }
-  },
+// フォームのエラー判定。各フィールドにエラー情報を元に判定する。
+const error = computed(() => {
+  return (
+    titleField.meta.error.value ||
+    descriptionField.meta.error.value ||
+    photoField.meta.error.value
+  )
 })
+
+// submitメソッド。各フィールドの値を使い、サーバーにPOSTリクエストを送信する。
+const onSubmit = async () => {
+  if (error.value) {
+    console.log(error.value)
+    return
+  }
+  // 今回はサーバーリクエストは行っていない
+  const userId =
+    'CognitoIdentityServiceProvider.b5mlqbm890h8tabqhro9bno8j.test.userData'
+  const data: Post = {
+    ...post.value,
+    userId,
+    title: titleField.props.value.value,
+    description: descriptionField.props.value.value,
+    photo: photoField.props.value.value,
+  }
+  if (isEdit) {
+    await memberPostsStore.updatePost(post.value.id, data)
+  } else {
+    await memberPostsStore.registPost(data)
+  }
+  router.push($C.URL.MEMBER)
+}
+
+const onDelete = async () => {
+  if (!window.confirm('削除します。よろしいですか？')) {
+    return
+  }
+  await memberPostsStore.deletePost(post.value.id)
+  router.push($C.URL.MEMBER)
+}
 </script>

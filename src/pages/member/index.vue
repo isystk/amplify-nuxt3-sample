@@ -2,16 +2,6 @@
   <MemberPostsList />
 </template>
 
-<script lang="ts">
-import { defineComponent } from 'vue'
+<script lang="ts" setup>
 import MemberPostsList from './posts/list'
-
-export default defineComponent({
-  components: {
-    MemberPostsList,
-  },
-  setup() {
-    return {}
-  },
-})
 </script>

@@ -63,30 +63,19 @@
   </section>
 </template>
 
-<script lang="ts">
-import { defineComponent, computed, onMounted } from 'vue'
-import { useRouter } from 'vue-router'
+<script lang="ts" setup>
 import { useMemberPostsStore } from '@/stores/memberPosts'
 
-export default defineComponent({
-  setup() {
-    const router = useRouter()
-    const memberPostsStore = useMemberPostsStore()
+const router = useRouter()
+const memberPostsStore = useMemberPostsStore()
 
-    // mounted
-    onMounted(async () => {
-      const auth = localStorage.getItem('authorization')
-      await memberPostsStore.fetchPosts(auth || '')
-    })
+// mounted
+onMounted(async () => {
+  const auth = localStorage.getItem('authorization')
+  await memberPostsStore.fetchPosts(auth || '')
+})
 
-    const posts = computed(() => {
-      return memberPostsStore.getPosts()
-    })
-
-    return {
-      posts,
-      router,
-    }
-  },
+const posts = computed(() => {
+  return memberPostsStore.getPosts()
 })
 </script>

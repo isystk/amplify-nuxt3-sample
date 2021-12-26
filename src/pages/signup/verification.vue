@@ -53,10 +53,7 @@
   </section>
 </template>
 
-<script lang="ts">
-import { defineComponent, computed, ref } from 'vue'
-import { useRouter } from 'vue-router'
-
+<script lang="ts" setup>
 const useField = (
   initialValue: string,
   validate: (value: string) => boolean = () => false
@@ -94,40 +91,24 @@ const emailValidator = (value: string) => {
   return re.test(value)
 }
 
-export default defineComponent({
-  setup() {
-    const router = useRouter()
-    const { $C } = useNuxtApp()
+const router = useRouter()
+const { $C } = useNuxtApp()
 
-    // 各フィールドの定義(バリデーションメソッドの詳細は後述する)
-    const emailField = useField('', emailValidator)
-    const verificationCodeField = useField('', presenceValidator)
+// 各フィールドの定義(バリデーションメソッドの詳細は後述する)
+const emailField = useField('', emailValidator)
+const verificationCodeField = useField('', presenceValidator)
 
-    // フォームのエラー判定。各フィールドにエラー情報を元に判定する。
-    const error = computed(() => {
-      return (
-        emailField.meta.error.value || verificationCodeField.meta.error.value
-      )
-    })
-
-    // submitメソッド。各フィールドの値を使い、サーバーにPOSTリクエストを送信する。
-    const onSubmit = async () => {
-      if (error.value) {
-        console.log(error.value)
-        return
-      }
-      router.push($C.URL.LOGIN)
-    }
-
-    // 各フィールド情報とフォーム情報をtemplate層に渡す
-    return {
-      emailField,
-      verificationCodeField,
-      onSubmit,
-      meta: {
-        error,
-      },
-    }
-  },
+// フォームのエラー判定。各フィールドにエラー情報を元に判定する。
+const error = computed(() => {
+  return emailField.meta.error.value || verificationCodeField.meta.error.value
 })
+
+// submitメソッド。各フィールドの値を使い、サーバーにPOSTリクエストを送信する。
+const onSubmit = async () => {
+  if (error.value) {
+    console.log(error.value)
+    return
+  }
+  router.push($C.URL.LOGIN)
+}
 </script>

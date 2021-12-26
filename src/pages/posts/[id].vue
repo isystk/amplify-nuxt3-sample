@@ -33,31 +33,20 @@
   </section>
 </template>
 
-<script lang="ts">
-import { defineComponent, computed, onMounted } from 'vue'
-import { useRoute } from 'vue-router'
+<script lang="ts" setup>
 import { usePostsStore } from '@/stores/posts'
 
-export default defineComponent({
-  setup() {
-    const { id } = useRoute().params
-    const postsStore = usePostsStore()
-    const nowLoading = ref(true)
+const { id } = useRoute().params
+const postsStore = usePostsStore()
+const nowLoading = ref(true)
 
-    // mounted
-    onMounted(async () => {
-      await postsStore.fetchPosts()
-      nowLoading.value = false
-    })
+// mounted
+onMounted(async () => {
+  await postsStore.fetchPosts()
+  nowLoading.value = false
+})
 
-    const displayPost = computed(() => {
-      return postsStore.getPost(typeof id === 'string' ? id : '')
-    })
-
-    return {
-      post: displayPost,
-      nowLoading,
-    }
-  },
+const post = computed(() => {
+  return postsStore.getPost(typeof id === 'string' ? id : '')
 })
 </script>

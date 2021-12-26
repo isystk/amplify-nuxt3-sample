@@ -53,10 +53,8 @@
   </section>
 </template>
 
-<script lang="ts">
-import { defineComponent, computed, ref } from 'vue'
+<script lang="ts" setup>
 import { Auth } from '@/auth/auth'
-import { useRouter } from 'vue-router'
 
 const useField = (
   initialValue: string,
@@ -95,42 +93,28 @@ const emailValidator = (value: string) => {
   return re.test(value)
 }
 
-export default defineComponent({
-  setup() {
-    const router = useRouter()
-    const { $C } = useNuxtApp()
+const router = useRouter()
+const { $C } = useNuxtApp()
 
-    // 各フィールドの定義(バリデーションメソッドの詳細は後述する)
-    const emailField = useField('', emailValidator)
-    const passwordField = useField('', presenceValidator)
+// 各フィールドの定義(バリデーションメソッドの詳細は後述する)
+const emailField = useField('', emailValidator)
+const passwordField = useField('', presenceValidator)
 
-    // フォームのエラー判定。各フィールドにエラー情報を元に判定する。
-    const error = computed(() => {
-      return emailField.meta.error.value || passwordField.meta.error.value
-    })
-
-    // submitメソッド。各フィールドの値を使い、サーバーにPOSTリクエストを送信する。
-    const onSubmit = async () => {
-      if (error.value) {
-        console.log(error.value)
-        return
-      }
-      // 今回はサーバーリクエストは行っていない
-      Auth.setUserId(
-        'CognitoIdentityServiceProvider.b5mlqbm890h8tabqhro9bno8j.test.userData'
-      )
-      router.push($C.URL.MEMBER)
-    }
-
-    // 各フィールド情報とフォーム情報をtemplate層に渡す
-    return {
-      emailField,
-      passwordField,
-      onSubmit,
-      meta: {
-        error,
-      },
-    }
-  },
+// フォームのエラー判定。各フィールドにエラー情報を元に判定する。
+const error = computed(() => {
+  return emailField.meta.error.value || passwordField.meta.error.value
 })
+
+// submitメソッド。各フィールドの値を使い、サーバーにPOSTリクエストを送信する。
+const onSubmit = async () => {
+  if (error.value) {
+    console.log(error.value)
+    return
+  }
+  // 今回はサーバーリクエストは行っていない
+  Auth.setUserId(
+    'CognitoIdentityServiceProvider.b5mlqbm890h8tabqhro9bno8j.test.userData'
+  )
+  router.push($C.URL.MEMBER)
+}
 </script>

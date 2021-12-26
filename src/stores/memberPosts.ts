@@ -1,4 +1,4 @@
-import { inject, ref } from 'vue'
+import { inject, reactive } from 'vue'
 import { defineStore } from 'pinia'
 import { API } from '@/utilities'
 import { getApiEndpoint } from '@/common/constants/api'
@@ -12,7 +12,7 @@ type PostDisplay = Post & {
 
 export const useMemberPostsStore = defineStore('memberPosts', () => {
   const config = useRuntimeConfig()
-  const posts = ref<Posts>({})
+  const posts = reactive<Posts>({})
 
   // method
   const getPosts = () => {
@@ -44,7 +44,7 @@ export const useMemberPostsStore = defineStore('memberPosts', () => {
     const response = await API.get(
       `${getApiEndpoint(config).POSTS}?userId=${userId}`
     )
-    posts.value = _.mapKeys(response, 'id')
+    posts.value = { ..._.mapKeys(response, 'id') }
   }
   const fetchPost = async (id: string) => {
     const response = await API.get(`${getApiEndpoint(config).POSTS}/${id}`)

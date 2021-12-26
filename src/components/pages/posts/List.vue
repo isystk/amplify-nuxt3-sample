@@ -23,24 +23,15 @@
   </section>
 </template>
 
-<script lang="ts">
-import { defineComponent, computed, onMounted } from 'vue'
+<script lang="ts" setup>
 import { usePostsStore } from '@/stores/posts'
 
-export default defineComponent({
-  setup() {
-    const postsStore = usePostsStore()
+const postsStore = usePostsStore()
 
-    // mounted
-    onMounted(async () => {
-      await postsStore.fetchPosts()
-    })
-
-    const posts = computed(() => postsStore.getPosts())
-
-    return {
-      posts,
-    }
-  },
+// mounted
+onMounted(async () => {
+  await postsStore.fetchPosts()
 })
+
+const posts = computed(() => postsStore.getPosts())
 </script>

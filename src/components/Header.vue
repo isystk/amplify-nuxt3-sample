@@ -55,29 +55,16 @@
   </header>
 </template>
 
-<script lang="ts">
-import { defineComponent } from 'vue'
+<script lang="ts" setup>
 import { useSideMenu } from '@/stores/sideMenu'
 import { Auth } from '@/auth/auth'
-import { useRouter } from 'vue-router'
 
-export default defineComponent({
-  setup() {
-    const router = useRouter()
-    // data
-    const sideMenu = useSideMenu()
+const router = useRouter()
+// data
+const sideMenu = useSideMenu()
 
-    // method
-    const toggleMenu = () => {
-      sideMenu.toggle()
-    }
-
-    return {
-      toggleMenu,
-      sideMenu,
-      Auth,
-      router,
-    }
-  },
-})
+// method
+const toggleMenu = () => {
+  sideMenu.toggle()
+}
 </script>
