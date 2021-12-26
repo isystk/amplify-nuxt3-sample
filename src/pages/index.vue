@@ -2,16 +2,6 @@
   <PostsList />
 </template>
 
-<script lang="ts">
-import { defineComponent } from 'vue'
+<script lang="ts" setup>
 import PostsList from './posts/list'
-
-export default defineComponent({
-  components: {
-    PostsList,
-  },
-  setup() {
-    return {}
-  },
-})
 </script>

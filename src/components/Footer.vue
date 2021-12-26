@@ -54,30 +54,19 @@
   </footer>
 </template>
 
-<script lang="ts">
-import { defineComponent } from 'vue'
+<script lang="ts" setup>
 import { useSideMenu } from '@/stores/sideMenu'
 import { useSnsShare } from '@/stores/snsShare'
 
-export default defineComponent({
-  setup() {
-    // data
-    const sideMenu = useSideMenu()
-    const snsShare = useSnsShare()
+// data
+const sideMenu = useSideMenu()
+const snsShare = useSnsShare()
 
-    // method
-    const scrollToTop = () => {
-      window.scrollTo({
-        top: 0,
-        behavior: 'smooth',
-      })
-    }
-
-    return {
-      scrollToTop,
-      sideMenu,
-      snsShare,
-    }
-  },
-})
+// method
+const scrollToTop = () => {
+  window.scrollTo({
+    top: 0,
+    behavior: 'smooth',
+  })
+}
 </script>

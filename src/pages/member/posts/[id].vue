@@ -25,31 +25,20 @@
   </section>
 </template>
 
-<script lang="ts">
-import { defineComponent, computed, onMounted } from 'vue'
-import { useRoute } from 'vue-router'
+<script lang="ts" setup>
 import { useMemberPostsStore } from '@/stores/memberPosts'
 
-export default defineComponent({
-  setup() {
-    const { id } = useRoute().params
-    const memberPostsStore = useMemberPostsStore()
-    const nowLoading = ref(true)
+const { id } = useRoute().params
+const memberPostsStore = useMemberPostsStore()
+const nowLoading = ref(true)
 
-    // mounted
-    onMounted(async () => {
-      await memberPostsStore.fetchPost(id)
-      nowLoading.value = false
-    })
+// mounted
+onMounted(async () => {
+  await memberPostsStore.fetchPost(id)
+  nowLoading.value = false
+})
 
-    const displayPost = computed(() => {
-      return memberPostsStore.getPost(typeof id === 'string' ? id : '')
-    })
-
-    return {
-      post: displayPost,
-      nowLoading,
-    }
-  },
+const post = computed(() => {
+  return memberPostsStore.getPost(typeof id === 'string' ? id : '')
 })
 </script>
