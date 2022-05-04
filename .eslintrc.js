@@ -30,6 +30,9 @@ module.exports = {
           },
         ],
         'vue/multi-word-component-names': ['warn'],
-        'vue/no-multiple-template-root': ['warn']
+        'vue/no-multiple-template-root': ['warn'],
+        "@typescript-eslint/ban-ts-comment": "off",
+        "@typescript-eslint/no-this-alias": "off",
+        "@typescript-eslint/no-var-requires": "off"
     }
 };
