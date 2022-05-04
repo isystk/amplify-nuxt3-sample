@@ -78,12 +78,15 @@ import { useMemberPostsStore } from '@/stores/memberPosts'
 import { Post } from '~/@types/Posts'
 
 type Props = {
-  post: () => {}
+  post: {
+    id: string
+    title: string
+    description: string
+    photo: string
+  }
 }
 
-const props = withDefaults(defineProps<Props>(), {
-  post: {},
-})
+const props = withDefaults(defineProps<Props>(), {})
 
 const useField = (
   initialValue: string,
