@@ -52,8 +52,14 @@ Nuxt3 ＆ AWS の学習用サンプルアプリケーションです。
 ## 💬 使い方
 
 ```
-yarn
-yarn dev
+$ node -v
+v16.13.1
+
+$ yarn
+$ yarn dev
+
+# open storybook
+$ yarn storybook
 ```
 
 ## 🎨 参考
