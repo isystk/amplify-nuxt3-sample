@@ -15,6 +15,7 @@
   },
   "devDependencies": {
     "@fortawesome/fontawesome-free": "^5.15.4",
+    "@mdi/font": "^6.7.96",
     "@nuxt/types": "^2.15.8",
     "@types/babel-core": "^6.25.7",
     "@types/eslint": "^8.2.1",
@@ -46,12 +47,9 @@
     "sass-loader": "12.3.0",
     "tailwindcss": "3.0.0-alpha.1",
     "typescript": "^4.5.3",
-    "vue-i18n": "^9.2.0-beta.22",
     "vue-lodash": "^2.1.2",
-    "vuejs-image-base64": "^1.1.0",
-    "vuetify": "^3.0.0-beta.1"
-  },
-  "dependencies": {
+    "vuejs-image-base64": "^1.2.0",
+    "vuetify": "^3.0.0-beta.2",
     "@headlessui/vue": "^1.4.2",
     "@heroicons/vue": "1.0.5",
     "@pinia/nuxt": "0.1.5",

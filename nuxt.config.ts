@@ -49,36 +49,23 @@ const nuxtConfig = defineNuxtConfig({
     meta: {
         meta: [
             { hid: "charset", charset: "utf-8" },
-            {
-                hid: "viewport",
-                name: "viewport",
-                content: "width=device-width, initial-scale=1"
-            },
-            {
-                hid: "description",
-                name: "description",
-                content: pkg.description
-            },
+            {hid: "viewport", name: "viewport", content: "width=device-width, initial-scale=1"},
+            {hid: "description", name: "description", content: pkg.description},
             { hid: "noydir", name: "robots", content: "noydir" },
             { hid: "noodp", name: "robots", content: "noodp" },
             { hid: "index,follow", name: "robots", content: "index,follow" },
-            {
-                hid: "format-detection",
-                name: "format-detection",
-                content: "telephone=no"
-            }
+            {hid: "format-detection", name: "format-detection", content: "telephone=no"}
         ],
         bodyAttrs: {
-          class: 'column1'
+            // bodyタグにClassを指定する場合はここに指定する
         },
         link: [
             { rel: "icon", type: "image/x-icon", href: "/favicon.ico" }
         ]
     },
     css: [
-        'vuetify/lib/styles/main.sass',
+        "vuetify/lib/styles/main.sass",
         '~/assets/app.scss',
-        '@fortawesome/fontawesome-free/css/all.min.css'
     ],
     components: [
         {
@@ -86,6 +73,7 @@ const nuxtConfig = defineNuxtConfig({
             pathPrefix: false
         }
     ],
+
     buildModules: [
         // pinia plugin - https://pinia.esm.dev
         ['@pinia/nuxt'],
@@ -99,6 +87,11 @@ const nuxtConfig = defineNuxtConfig({
                     autoprefixer: {},
                 }
             }
+        },
+    },
+    vite: {
+        define: {
+            "process.env.DEBUG": false,
         },
     },
 })

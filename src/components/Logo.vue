@@ -1,8 +1,7 @@
 <template>
-<!--  <router-link :to="Url.TOP">-->
-<!--    <v-toolbar-title class="w-64"> nuxt3-typescript-aws </v-toolbar-title>-->
-<!--  </router-link>-->
-  nuxt3-typescript-aws
+  <NuxtLink :to="Url.TOP" >
+    <v-toolbar-title class="w-64">nuxt3-typescript-aws</v-toolbar-title>
+  </NuxtLink>
 </template>
 
 <script setup lang="ts">

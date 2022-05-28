@@ -1,6 +1,6 @@
 <template>
   <v-app>
-    <Header :store="store" />
+    <Header :store="main" />
     <v-main>
       <Suspense>
         <template #default>
@@ -9,18 +9,17 @@
         <template #fallback> loading... </template>
       </Suspense>
     </v-main>
+    <Footer :store="main" />
   </v-app>
 </template>
 
 <script lang="ts" setup>
 // import { useHead } from '@vueuse/head'
 import MainService from '@/services/main'
+import { injectStore } from '@/stores'
+const main = injectStore()
 import { computed } from 'vue'
-const props = defineProps<{
-  store: MainService | undefined
-  title: string
-  description?: string
-}>()
+
 import { name, description } from '../../package.json'
 // useHead({
 //   title: computed(() => `${props.title || ''} | ${name}`),
