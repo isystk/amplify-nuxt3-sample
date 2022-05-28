@@ -1,5 +1,6 @@
 {
   "name": "nuxt3-typescript-aws",
+  "description": "Nuxt3 の学習用サンプルアプリケーションです。",
   "private": true,
   "scripts": {
     "dev": "nuxi dev",
@@ -24,6 +25,7 @@
     "@typescript-eslint/parser": "^5.6.0",
     "@vue/eslint-config-prettier": "^6.0.0",
     "@vue/eslint-config-typescript": "^9.1.0",
+    "amazon-cognito-identity-js": "^5.2.9",
     "autoprefixer": "10.4.0",
     "aws-sdk": "^2.1044.0",
     "axios": "^0.24.0",
@@ -46,7 +48,8 @@
     "typescript": "^4.5.3",
     "vue-i18n": "^9.2.0-beta.22",
     "vue-lodash": "^2.1.2",
-    "vuejs-image-base64": "^1.1.0"
+    "vuejs-image-base64": "^1.1.0",
+    "vuetify": "^3.0.0-beta.1"
   },
   "dependencies": {
     "@headlessui/vue": "^1.4.2",

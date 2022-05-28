@@ -1,70 +1,126 @@
 <template>
-  <header class="header">
-    <div class="wrapper">
-      <Logo />
-      <div class="nav">
-        <div
-          :class="[sideMenu.isOpen ? 'menu-btn on' : 'menu-btn']"
-          @click="toggleMenu"
-        >
-          <figure></figure>
-          <figure></figure>
-          <figure></figure>
-        </div>
-        <div id="side-menu" :class="[sideMenu.isOpen ? 'open' : '']">
-          <nav>
-            <ul>
-              <li>
-                <NuxtLink :to="$C.URL.HOME" @click="sideMenu.close">
-                  HOME
-                </NuxtLink>
-              </li>
-              <li>
-                <NuxtLink :to="$C.URL.MEMBER" @click="sideMenu.close">
-                  マイページ
-                </NuxtLink>
-              </li>
-              <li>
-                <NuxtLink
-                  v-show="!Auth.isLogin()"
-                  :to="$C.URL.LOGIN"
-                  @click="sideMenu.close"
-                >
-                  ログイン
-                </NuxtLink>
-                <a
-                  v-show="Auth.isLogin()"
-                  @click.prevent="
-                    () => {
-                      Auth.logout()
-                      router.push($C.URL.HOME)
-                      sideMenu.close()
-                    }
-                  "
-                >
-                  ログアウト
-                </a>
-              </li>
-              <li></li>
-            </ul>
-          </nav>
-        </div>
-        <div id="layer-panel" :class="[sideMenu.isOpen ? 'on' : '']"></div>
-      </div>
-    </div>
-  </header>
+  <v-app-bar class="overflow-visible" color="primary" prominent>
+    <Logo />
+    <v-spacer />
+
+<!--    <template v-if="isLogined">-->
+<!--      <v-card-->
+<!--          class="mx-auto top-0 right-0 invisible md:visible"-->
+<!--          width="300"-->
+<!--          absolute-->
+<!--      >-->
+<!--        <v-list density="compact" theme="dark" nav>-->
+<!--          <v-list-group>-->
+<!--            <template #activator="{ props }">-->
+<!--              <v-list-item-->
+<!--                  v-bind="props"-->
+<!--                  two-line-->
+<!--                  prepend-avatar="/images/user_dummy.png"-->
+<!--                  :title="userName"-->
+<!--                  subtitle="Logged in"-->
+<!--              />-->
+<!--            </template>-->
+<!--            <v-list-item-->
+<!--                v-for="(item, i) in items"-->
+<!--                :key="i"-->
+<!--                :value="item.text"-->
+<!--                :title="item.text"-->
+<!--                :prepend-icon="item.icon"-->
+<!--                @click="item.func"-->
+<!--            />-->
+<!--          </v-list-group>-->
+<!--        </v-list>-->
+<!--      </v-card>-->
+<!--    </template>-->
+<!--    <template v-else>-->
+<!--&lt;!&ndash;      <router-link :to="Url.LOGIN" class="invisible md:visible">&ndash;&gt;-->
+<!--&lt;!&ndash;        {{ t('ログイン') }}&ndash;&gt;-->
+<!--&lt;!&ndash;      </router-link>&ndash;&gt;-->
+<!--    </template>-->
+
+    <v-app-bar-nav-icon
+        variant="text"
+        class="visible md:invisible"
+        @click.stop="toggleMenu"
+    />
+  </v-app-bar>
+
+<!--  <v-navigation-drawer v-model="drawer" bottom temporary position="right">-->
+<!--    <v-list>-->
+<!--      <v-list-item-->
+<!--          prepend-avatar="/images/user_dummy.png"-->
+<!--          :title="userName"-->
+<!--          subtitle="Logged in"-->
+<!--      />-->
+<!--    </v-list>-->
+<!--    <v-divider />-->
+<!--    <v-list density="compact">-->
+<!--      <v-list-subheader>Menu</v-list-subheader>-->
+<!--      <v-list-item-group>-->
+<!--        <v-list-item-->
+<!--            v-for="(item, i) in items"-->
+<!--            :key="i"-->
+<!--            :value="item"-->
+<!--            active-color="primary"-->
+<!--            @click="item.func"-->
+<!--        >-->
+<!--          <v-list-item-avatar start>-->
+<!--            <v-icon :icon="item.icon" />-->
+<!--          </v-list-item-avatar>-->
+<!--          <v-list-item-title>{{ item.text }}</v-list-item-title>-->
+<!--        </v-list-item>-->
+<!--      </v-list-item-group>-->
+<!--    </v-list>-->
+<!--  </v-navigation-drawer>-->
 </template>
 
-<script lang="ts" setup>
-import { useSideMenu } from '@/stores/sideMenu'
-import { Auth } from '@/auth/auth'
+<script setup lang="ts">
+// // import { useI18n } from 'vue-i18n'
+// // const { t } = useI18n()
+import { computed, ref } from 'vue'
+// // import { useRouter } from 'vue-router'
+import { Url } from '@/constants/url'
+import MainService from '@/services/main'
+const props = defineProps<{
+  store: MainService
+}>()
 
-const router = useRouter()
-// data
-const sideMenu = useSideMenu()
+// // const router = useRouter()
+const drawer = ref(false)
 
-// method
 const toggleMenu = () => {
-  sideMenu.toggle()
+  drawer.value = !drawer.value
 }
+
+// const isLogined = props.store?.auth.signCheck()
+const isLogined = false
+const { userName } = props.store?.auth || {}
+
+const items = computed(() => {
+  return [
+    // isLogined
+    //     ? {
+    //       text: 'ログアウト',
+    //       icon: 'mdi-login-variant',
+    //       func: async () => {
+    //         // const result = await props.store?.auth.signOut()
+    //         // if (result) {
+    //         //   await router.push(Url.LOGIN)
+    //         // }
+    //       },
+    //     }
+    //     : {
+    //       text: 'ログイン',
+    //       icon: 'mdi-login-variant',
+    //       // func: () => router.push(Url.LOGIN),
+    //     },
+    {
+      text: 'マイページ',
+      icon: 'mdi-account',
+      func: () => {
+        // router.push(Url.MEMBER),
+      }
+    },
+  ]
+})
 </script>

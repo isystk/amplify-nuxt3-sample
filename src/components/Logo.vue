@@ -1,11 +1,12 @@
 <template>
-  <div class="header-logo">
-    <h1>
-      <NuxtLink :to="$C.URL.HOME">
-        {{ $config.APP_NAME }}
-      </NuxtLink>
-    </h1>
-  </div>
+<!--  <router-link :to="Url.TOP">-->
+<!--    <v-toolbar-title class="w-64"> nuxt3-typescript-aws </v-toolbar-title>-->
+<!--  </router-link>-->
+  nuxt3-typescript-aws
 </template>
 
-<script lang="ts" setup></script>
+<script setup lang="ts">
+// import { useI18n } from 'vue-i18n'
+// const { t } = useI18n()
+import { Url } from '@/constants/url'
+</script>

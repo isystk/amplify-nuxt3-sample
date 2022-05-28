@@ -76,6 +76,7 @@ const nuxtConfig = defineNuxtConfig({
         ]
     },
     css: [
+        'vuetify/lib/styles/main.sass',
         '~/assets/app.scss',
         '@fortawesome/fontawesome-free/css/all.min.css'
     ],
@@ -90,7 +91,7 @@ const nuxtConfig = defineNuxtConfig({
         ['@pinia/nuxt'],
     ],
     build: {
-        transpile: ['moment'], // pluginがビルドエラーになるので追加
+        transpile: ['vuetify', 'moment'], // pluginがビルドエラーになるので追加
         postcss: {
             postcssOptions: {
                 plugins: {
