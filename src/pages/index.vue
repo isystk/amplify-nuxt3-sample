@@ -9,7 +9,7 @@
             md="4"
         >
           <v-card>
-            <router-link :to="`${Url.POSTS}/${postId}`">
+            <NuxtLink :to="`${Url.POSTS}/${postId}`">
               <v-img
                   :src="data.photo"
                   style="width: 92vw; height: 50vh"
@@ -29,7 +29,7 @@
                     icon="mdi-heart"
                 />
               </v-card-actions>
-            </router-link>
+            </NuxtLink>
           </v-card>
         </v-col>
       </v-row>
@@ -38,15 +38,15 @@
 </template>
 
 <script setup lang="ts">
-// import { computed, onBeforeMount } from 'vue'
-// import { Url } from '@/constants/url'
+import { computed, onBeforeMount } from 'vue'
+import { Url } from '@/constants/url'
 // import { useI18n } from 'vue-i18n'
 // const { t } = useI18n()
 import { injectStore } from '@/stores'
 const main = injectStore()
-// onBeforeMount(async () => {
-//   // 投稿一覧の取得
-//   await main?.post?.readPosts()
-// })
-// const posts = computed(() => main?.post?.posts)
+onBeforeMount(async () => {
+  // 投稿一覧の取得
+  await main?.post?.readPosts()
+})
+const posts = computed(() => main?.post?.posts)
 </script>

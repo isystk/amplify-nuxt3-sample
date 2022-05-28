@@ -15,12 +15,12 @@ export default class AuthService {
 
   constructor(main: MainService) {
     this.main = main
-    const userPool = getUserPool()
-    this.user = userPool ? userPool.getCurrentUser() : null
-    this.userName = userPool
-      ? userPool.getCurrentUser()?.getUsername() + ''
-      : ''
-    this.userId = userPool ? userPool.getCurrentUser()?.userDataKey + '' : ''
+    // const userPool = getUserPool()
+    // this.user = userPool ? userPool.getCurrentUser() : null
+    // this.userName = userPool
+    //   ? userPool.getCurrentUser()?.getUsername() + ''
+    //   : ''
+    // this.userId = userPool ? userPool.getCurrentUser()?.userDataKey + '' : ''
   }
 
   // // ログアウト

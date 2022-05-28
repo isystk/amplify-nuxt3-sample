@@ -10,11 +10,10 @@ export const getUserPool = () => {
   if (!config.UserPoolId || !config.ClientId) {
     return null
   }
-  // return new CognitoUserPool({
-  //   UserPoolId: config.UserPoolId,
-  //   ClientId: config.ClientId,
-  // })
-  return {}
+  return new CognitoUserPool({
+    UserPoolId: config.UserPoolId,
+    ClientId: config.ClientId,
+  })
 }
 //
 // export const isAuthenticated = (): Promise<boolean> => {
