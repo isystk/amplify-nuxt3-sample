@@ -1,7 +1,7 @@
 <template>
 
   <v-app-bar color="primary" prominent>
-    <Logo />
+    <pages-logo />
     <v-spacer />
 
     <template v-if="isLogined">
@@ -79,48 +79,45 @@
 // // import { useI18n } from 'vue-i18n'
 // // const { t } = useI18n()
 import { computed, ref } from 'vue'
-// // import { useRouter } from 'vue-router'
+import { useRouter } from 'vue-router'
 import { Url } from '@/constants/url'
 import MainService from '@/services/main'
 const props = defineProps<{
   store: MainService
 }>()
 
-// // const router = useRouter()
+const router = useRouter()
 const drawer = ref(false)
 
 const toggleMenu = () => {
   drawer.value = !drawer.value
 }
 
-// const isLogined = props.store?.auth.signCheck()
-const isLogined = false
+const isLogined = props.store?.auth.signCheck()
 const { userName } = props.store?.auth || {}
 
 const items = computed(() => {
   return [
-    // isLogined
-    //     ? {
-    //       text: 'ログアウト',
-    //       icon: 'mdi-login-variant',
-    //       func: async () => {
-    //         // const result = await props.store?.auth.signOut()
-    //         // if (result) {
-    //         //   await router.push(Url.LOGIN)
-    //         // }
-    //       },
-    //     }
-    //     : {
-    //       text: 'ログイン',
-    //       icon: 'mdi-login-variant',
-    //       // func: () => router.push(Url.LOGIN),
-    //     },
+    isLogined
+        ? {
+          text: 'ログアウト',
+          icon: 'mdi-login-variant',
+          func: async () => {
+            const result = await props.store?.auth.signOut()
+            if (result) {
+              await router.push(Url.LOGIN)
+            }
+          },
+        }
+        : {
+          text: 'ログイン',
+          icon: 'mdi-login-variant',
+          func: () => router.push(Url.LOGIN),
+        },
     {
       text: 'マイページ',
       icon: 'mdi-account',
-      func: () => {
-        // router.push(Url.MEMBER),
-      }
+      func: () => router.push(Url.MEMBER),
     },
   ]
 })

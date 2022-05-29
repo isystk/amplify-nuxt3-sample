@@ -1,6 +1,6 @@
 <template>
   <v-app>
-    <Header :store="main" />
+    <pages-header :store="main" />
     <v-main>
       <Suspense>
         <template #default>
@@ -9,14 +9,14 @@
         <template #fallback> loading... </template>
       </Suspense>
     </v-main>
-    <Footer :store="main" />
+    <pages-footer :store="main" />
   </v-app>
 </template>
 
 <script lang="ts" setup>
 // import { useHead } from '@vueuse/head'
 import MainService from '@/services/main'
-import { injectStore } from '@/stores'
+import { injectStore } from '@/store'
 const main = injectStore()
 import { computed } from 'vue'
 

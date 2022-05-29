@@ -1,5 +1,5 @@
 <template>
-  <div class="text-center my-10"></div>
+  <div class="text-center my-10" />
   <div id="site_loader_overlay">
     <div className="site_loader_spinner">
       <ElementsSpinner :label="label" :variant="variant" :small="small" />

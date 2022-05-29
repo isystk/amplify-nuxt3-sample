@@ -1,5 +1,8 @@
 <template>
-  <pages-box :breadcrumbs="[{ text: $t('会員登録') }]" :small="true">
+  <pages-box
+    :breadcrumbs="[{ text: $t('メールに記載の認証コードを入力して下さい') }]"
+    :small="true"
+  >
     <VeeForm
       v-slot="{ errors }"
       :validation-schema="schema"
@@ -20,36 +23,21 @@
         </div>
         <div class="mb-4">
           <label class="block text-gray-700 text-sm font-bold mb-2">
-            パスワード
+            認証コード
           </label>
           <Field
-            name="password"
-            type="password"
+            name="verificationCode"
+            type="verificationCode"
             class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
-            :class="{ 'is-invalid': errors.password }"
+            :class="{ 'is-invalid': errors.verificationCode }"
           />
-          <ErrorMessage class="text-red" name="password" />
+          <ErrorMessage class="text-red" name="verificationCode" />
         </div>
         <div class="mb-4">
-          <label class="block text-gray-700 text-sm font-bold mb-2">
-            パスワード (確認)
-          </label>
-          <Field
-            name="confirmPassword"
-            type="password"
-            class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
-            :class="{ 'is-invalid': errors.confirmPassword }"
-          />
-          <ErrorMessage class="text-red" name="confirmPassword" />
-        </div>
-        <div class="mb-4">
-          <v-btn depressed color="primary" type="submit"> 登録 </v-btn>
+          <v-btn depressed color="primary" type="submit"> 送信する </v-btn>
         </div>
       </div>
     </VeeForm>
-    <NuxtLink :to="Url.LOGIN">
-      ログインはこちら
-    </NuxtLink>
   </pages-box>
 </template>
 
@@ -57,37 +45,30 @@
 import { Form as VeeForm, Field, ErrorMessage } from 'vee-validate'
 import * as Yup from 'yup'
 import { injectStore } from '@/store'
-// import { useI18n } from 'vue-i18n'
-// const { t } = useI18n()
 import { Url } from '@/constants/url'
-import router from '@/router'
+import {useRouter} from "vue-router";
+const router = useRouter()
 const main = injectStore()
 
 const schema = Yup.object().shape({
   email: Yup.string()
     .required('メールアドレスを入力してください')
     .email('メールアドレスを正しく入力してください'),
-  password: Yup.string()
-    .min(6, 'パスワードは6文字以上で入力して下さい')
-    .required('パスワードを入力してください'),
-  confirmPassword: Yup.string()
-    .oneOf([Yup.ref('password'), null], 'パスワードが一致しません')
-    .required('パスワード(確認)を入力してください'),
+  verificationCode: Yup.string().required('認証コードを入力してください'),
 })
 
 type FormValues = {
   email: string
-  password: string
-  confirmPassword: string
+  verificationCode: string
 }
 
 const onSubmit = async (values: FormValues) => {
   try {
     console.log(values)
-    const { email, password } = values
-    const result = await main?.auth.signUp(email, password)
+    const { email, verificationCode } = values
+    const result = await main?.auth.confirmRegistration(email, verificationCode)
     console.log(result)
-    await router.push(Url.SIGNUP_VERIFICATION)
+    await router.push(Url.MEMBER)
   } catch (e) {
     alert(e.message)
   }

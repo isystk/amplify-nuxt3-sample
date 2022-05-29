@@ -42,7 +42,7 @@ import { computed, onBeforeMount } from 'vue'
 import { Url } from '@/constants/url'
 // import { useI18n } from 'vue-i18n'
 // const { t } = useI18n()
-import { injectStore } from '@/stores'
+import { injectStore } from '@/store'
 const main = injectStore()
 onBeforeMount(async () => {
   // 投稿一覧の取得

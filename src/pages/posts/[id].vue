@@ -1,52 +1,45 @@
 <template>
-  <section>
-    <nav class="breadcrumb">
-      <ul>
-        <li>
-          <NuxtLink :to="$C.URL.HOME">
-            <i class="fas fa-home" :style="{ fontSize: '16px' }"></i>
-            <span>HOME</span>
-          </NuxtLink>
-        </li>
-        <li>{{ post.title }}</li>
-      </ul>
-    </nav>
-    <div class="entry-header">
-      <h1 class="entry-title">{{ post.title }}</h1>
-      <div class="article-img">
-        <img alt="sample1" width="644" :src="post.photo" />
-      </div>
-      <div class="clearfix"></div>
-    </div>
-    <div class="entry-content">
-      <p>{{ post.description }}</p>
-    </div>
-    <div class="clearfix"></div>
-    <div class="entry-meta">
-      <i class="fas fa-clock" :style="{ fontSize: '16px' }"></i>
-      {{ post.regist_datetime_yyyymmdd }}
-    </div>
-    <div class="wrap">
-      <SnsShare :title="post.title" />
-      <div class="clearfix"></div>
-    </div>
-  </section>
+  <div v-if="loading">Loading..</div>
+  <div v-else>
+    <pages-box :breadcrumbs="[{ text: post.title }]">
+      <v-img :src="post.photo" />
+
+      <p class="pb-3">
+        {{ post.description }}
+      </p>
+    </pages-box>
+  </div>
 </template>
 
-<script lang="ts" setup>
-import { usePostsStore } from '@/stores/posts'
+<script setup lang="ts">
+import { onBeforeMount, computed, ref } from 'vue'
+import { injectStore } from '@/store'
+import { useRoute } from 'vue-router'
+// import { useI18n } from 'vue-i18n'
+// const { t } = useI18n()
+import { Post } from '@/services/post'
+const main = injectStore()
+const route = useRoute()
 
-const { id } = useRoute().params
-const postsStore = usePostsStore()
-const nowLoading = ref(true)
+const id = ref<string>()
+const loading = ref<boolean>(true)
 
-// mounted
-onMounted(async () => {
-  await postsStore.fetchPosts()
-  nowLoading.value = false
+onBeforeMount(async () => {
+  id.value = route.params.id + ''
+  // 投稿詳細の取得
+  await main?.post?.readPost(id.value + '')
+  loading.value = false
 })
 
-const post = computed(() => {
-  return postsStore.getPost(typeof id === 'string' ? id : '')
+const post = computed<Post>(() => {
+  if (!id.value) {
+    return {
+      userId: '',
+      title: '',
+      description: '',
+      photo: '',
+    }
+  }
+  return main?.post?.posts[id.value].data
 })
 </script>

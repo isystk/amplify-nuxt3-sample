@@ -147,9 +147,9 @@ export default class AuthService {
   //     })
   //   })
   // }
-  //
-  // // 認証チェック
-  // signCheck(): boolean {
-  //   return !!this.user
-  // }
+
+  // 認証チェック
+  signCheck(): boolean {
+    return !!this.user
+  }
 }
