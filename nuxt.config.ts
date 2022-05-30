@@ -3,7 +3,8 @@ import { defineNuxtConfig } from 'nuxt3'
 import { name, description } from './package.json'
 
 const nuxtConfig = defineNuxtConfig({
-    mode: "universal",
+    // Amplifyを利用する為SSRをOFFにする
+    ssr: false,
     srcDir: "src/",
 
     /**
@@ -22,24 +23,20 @@ const nuxtConfig = defineNuxtConfig({
     },
     meta: {
         meta: [
-            { hid: "charset", charset: "utf-8" },
-            {hid: "viewport", name: "viewport", content: "width=device-width, initial-scale=1"},
-            {hid: "description", name: "description", content: description},
-            { hid: "noydir", name: "robots", content: "noydir" },
-            { hid: "noodp", name: "robots", content: "noodp" },
-            { hid: "index,follow", name: "robots", content: "index,follow" },
-            {hid: "format-detection", name: "format-detection", content: "telephone=no"}
+            { name: "viewport", content: "width=device-width, initial-scale=1"},
+            { name: "description", content: description},
         ],
         bodyAttrs: {
-            // bodyタグにClassを指定する場合はここに指定する
+          // bodyタグにClassを指定する場合はここに指定する
+          // class: 'column1'
         },
         link: [
             { rel: "icon", type: "image/x-icon", href: "/favicon.ico" }
-        ]
+        ],
     },
     css: [
         "vuetify/lib/styles/main.sass",
-        '~/assets/app.scss',
+        '~/assets/sass/app.scss',
     ],
     components: [
         {
@@ -66,6 +63,7 @@ const nuxtConfig = defineNuxtConfig({
     vite: {
         define: {
             "process.env.DEBUG": false,
+            global: {}
         },
     },
 })

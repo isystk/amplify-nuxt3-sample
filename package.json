@@ -14,7 +14,7 @@
     "precommit": "npm run lint && npm run test"
   },
   "devDependencies": {
-    "@aws-amplify/ui-vue": "^0.0.0-next-2bbfaa2-20220527225211",
+    "@aws-amplify/ui-vue": "^2.4.2",
     "@fortawesome/fontawesome-free": "^5.15.4",
     "@headlessui/vue": "^1.4.2",
     "@heroicons/vue": "1.0.5",
@@ -34,9 +34,8 @@
     "@typescript-eslint/parser": "^5.6.0",
     "@vue/eslint-config-prettier": "^6.0.0",
     "@vue/eslint-config-typescript": "^9.1.0",
-    "amazon-cognito-identity-js": "^5.2.9",
     "autoprefixer": "10.4.0",
-    "aws-amplify": "^2.1.0",
+    "aws-amplify": "^4.3.21",
     "aws-sdk": "^2.1044.0",
     "axios": "^0.24.0",
     "babel-eslint": "^10.1.0",

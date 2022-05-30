@@ -1,155 +1,109 @@
+import { Amplify, Auth } from 'aws-amplify'
+import API, { graphqlOperation } from '@aws-amplify/api'
+import { getUser } from '@/services/graphql/queries'
+import { createUser } from '@/services/graphql/mutations'
 import MainService from '@/services/main'
-import {
-  CognitoUser,
-  CognitoUserAttribute,
-  AuthenticationDetails,
-  ISignUpResult,
-} from 'amazon-cognito-identity-js'
-import { getUserPool } from '@/utilities/aws'
 
 export default class AuthService {
   main: MainService
-  user: CognitoUser | null
-  userName: string
-  userId: string
+
+  id?: string
+  name: string
+  token: string
 
   constructor(main: MainService) {
     this.main = main
-    // const userPool = getUserPool()
-    // this.user = userPool ? userPool.getCurrentUser() : null
-    // this.userName = userPool
-    //   ? userPool.getCurrentUser()?.getUsername() + ''
-    //   : ''
-    // this.userId = userPool ? userPool.getCurrentUser()?.userDataKey + '' : ''
+    this.id = undefined
+    this.name = ''
+    this.token = ''
   }
 
-  // // ログアウト
-  // signOut(): Promise<boolean> {
-  //   return new Promise((resolve, reject) => {
-  //     if (!this.user) {
-  //       reject(new Error('既にログアウトされています'))
-  //     } else {
-  //       this.user.signOut(() => {
-  //         localStorage.clear()
-  //         console.log('signed out')
-  //         this.user = null
-  //         // window.location.reload()
-  //         resolve(true)
-  //       })
-  //     }
-  //   })
-  // }
-  //
-  // // ログイン
-  // async signIn(email: string, password: string): Promise<CognitoUser> {
-  //   return new Promise((resolve, reject) => {
-  //     const userPool = getUserPool()
-  //     if (!userPool) {
-  //       reject(new Error('no userPool'))
-  //       return
-  //     }
-  //     const authenticationDetails = new AuthenticationDetails({
-  //       Username: email,
-  //       Password: password,
-  //     })
-  //     const cognitoUser = new CognitoUser({
-  //       Username: email,
-  //       Pool: userPool,
-  //     })
-  //     cognitoUser.authenticateUser(authenticationDetails, {
-  //       onSuccess: (result) => {
-  //         const accessToken = result.getAccessToken().getJwtToken()
-  //         console.log('AccessToken: ' + accessToken)
-  //         this.user = userPool.getCurrentUser()
-  //         this.userName = userPool
-  //           ? userPool.getCurrentUser()?.getUsername() + ''
-  //           : ''
-  //         this.userId = userPool
-  //           ? userPool.getCurrentUser()?.userDataKey + ''
-  //           : ''
-  //         // window.location.reload()
-  //         if (this.user) {
-  //           resolve(this.user)
-  //         }
-  //       },
-  //       onFailure: (err) => {
-  //         console.error(err)
-  //         reject(new Error('ログインに失敗しました'))
-  //       },
-  //       // newPasswordRequired: function (userAttributes, requiredAttributes) {
-  //       //   // コンソールからユーザを登録した場合、初回認証時に強制的にパスワードを変える必要がある。
-  //       //   // https://qiita.com/k_hoso/items/afe9aa8183b8bf0651a1
-  //       //   cognitoUser.completeNewPasswordChallenge('Test@1234', {}, this)
-  //       // },
-  //     })
-  //   })
-  // }
-  //
-  // // 会員仮登録
-  // async signUp(email: string, password: string): Promise<ISignUpResult> {
-  //   return new Promise((resolve, reject) => {
-  //     const userPool = getUserPool()
-  //     if (!userPool) {
-  //       reject(new Error('no userPool'))
-  //       return
-  //     }
-  //     const attributeList = [
-  //       new CognitoUserAttribute({
-  //         Name: 'email',
-  //         Value: email,
-  //       }),
-  //     ]
-  //     userPool.signUp(email, password, attributeList, [], (err, result) => {
-  //       if (err) {
-  //         console.log('error signup in', err)
-  //         if (err.message.match(/User already exists/)) {
-  //           reject(
-  //             new Error(
-  //               '既に会員登録されています。認証済みでない場合はメールを確認してください。'
-  //             )
-  //           )
-  //         }
-  //         reject(err)
-  //         return
-  //       }
-  //       if (!result) {
-  //         reject(new Error('no SignUpResult'))
-  //         return
-  //       }
-  //       resolve(result)
-  //     })
-  //   })
-  // }
-  //
-  // // 会員登録認証
-  // async confirmRegistration(
-  //   email: string,
-  //   verificationCode: string
-  // ): Promise<boolean> {
-  //   return new Promise((resolve, reject) => {
-  //     const userPool = getUserPool()
-  //     if (!userPool) {
-  //       reject(new Error('no userPool'))
-  //       return
-  //     }
-  //     const cognitoUser = new CognitoUser({
-  //       Username: email,
-  //       Pool: userPool,
-  //     })
-  //     cognitoUser.confirmRegistration(verificationCode, true, (err: any) => {
-  //       if (err) {
-  //         console.log(err)
-  //         reject(err)
-  //         return
-  //       }
-  //       console.log('verification succeeded')
-  //       resolve(true)
-  //     })
-  //   })
-  // }
+  async signOut() {
+    try {
+      await Auth.signOut()
+      this.id = undefined
+      this.name = ''
+      this.token = ''
+    } catch (error) {
+      console.log('error signing out', error)
+    }
+  }
 
-  // 認証チェック
-  signCheck(): boolean {
-    return !!this.user
+  async signIn(email: string, password: string) {
+    try {
+      const user = await Auth.signIn(email, password)
+      if (user) {
+        console.log('success signing in', user)
+        this.useAuthTypeApiKey()
+        const userData = await API.graphql(graphqlOperation(getUser, { userSub: user.username }))
+        // @ts-ignore
+        const { id, fullName } = userData.data.listUsers.items[0]
+        this.id = id
+        this.name = fullName
+        this.token = await this.getJwtToken()
+      }
+    } catch (error) {
+      console.log('error signing in', error)
+      alert('メールアドレスまたはパスワードが違います')
+    }
+  }
+
+  // @ts-ignore
+  async signUp(name: string, email: string, password: string): boolean {
+    try {
+      const user = await Auth.signUp(email, password)
+      if (user) {
+        console.log('success signup', user)
+
+        // @ts-ignore
+        const input = {
+          userSub: user.userSub,
+          fullName: name,
+          profileImageFileName: '',
+        }
+        this.useAuthTypeApiKey()
+        await API.graphql(graphqlOperation(createUser, { input }))
+        return true
+      }
+    } catch (error) {
+      console.log('error signup in', error)
+      if ((error as string).match(/UsernameExistsException/)) {
+        alert('既に会員登録されています。認証済みでない場合はメールを確認してください。')
+      }
+      return false
+    }
+  }
+
+  async signCheck() {
+    console.log('signCheck')
+    if (this.name) return
+    const user = await Auth.currentUserInfo()
+    if (user) {
+      this.useAuthTypeApiKey()
+      const userData = await API.graphql(graphqlOperation(getUser, { userSub: user.username }))
+      // @ts-ignore
+      const { id, fullName } = userData.data.listUsers.items[0]
+
+      this.id = id
+      this.name = fullName
+      this.token = await this.getJwtToken()
+    }
+  }
+
+  async getJwtToken() {
+    const session = await Auth.currentSession() //現在のセッション情報を取得
+    return session.getIdToken().getJwtToken()
+  }
+
+  useAuthTypeCognito() {
+    Amplify.configure({
+      aws_appsync_authenticationType: 'AMAZON_COGNITO_USER_POOLS',
+    })
+  }
+
+  useAuthTypeApiKey() {
+    Amplify.configure({
+      aws_appsync_authenticationType: 'API_KEY',
+    })
   }
 }
