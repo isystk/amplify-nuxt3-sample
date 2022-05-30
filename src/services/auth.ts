@@ -3,6 +3,7 @@ import API, { graphqlOperation } from '@aws-amplify/api'
 import { getUser } from '@/services/graphql/queries'
 import { createUser } from '@/services/graphql/mutations'
 import MainService from '@/services/main'
+import {CognitoUser, CognitoUserPool} from "amazon-cognito-identity-js";
 
 export default class AuthService {
   main: MainService
@@ -68,6 +69,38 @@ export default class AuthService {
         await API.graphql(graphqlOperation(createUser, { input }))
         return true
       }
+    } catch (error) {
+      console.log('error signup in', error)
+      if ((error as string).match(/UsernameExistsException/)) {
+        alert('既に会員登録されています。認証済みでない場合はメールを確認してください。')
+      }
+      return false
+    }
+  }
+
+  // 会員登録認証
+  async confirmRegistration(
+    email: string,
+    verificationCode: string
+  ): Promise<boolean> {
+    try {
+      const user = await Auth.currentAuthenticatedUser();
+      const result = await Auth.verifyUserAttributeSubmit(user, 'email', verificationCode)
+      if (result !== 'SUCCESS') {
+        new Error('メールアドレス検証に失敗しました')
+      }
+
+      // NOTE: デフォルトの挙動だと検証する前にメールアドレスを変更してしまうので、
+      // その対応としてcustome:verified_emailに古いメアドを指定する。詳しくは以下のリンクを参照。
+      // https://zenn.dev/dove/articles/78ecf08b51ee0c
+
+      // 上記対応をしないのであればこの処理は不要
+      await Auth.updateUserAttributes(user, {
+        email, // ここと
+        'custom:verified_email': email, // ここに新しいメールアドレスをいれる。
+      });
+
+      return true
     } catch (error) {
       console.log('error signup in', error)
       if ((error as string).match(/UsernameExistsException/)) {

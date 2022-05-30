@@ -1,6 +1,6 @@
 <template>
   <pages-box
-    :breadcrumbs="[{ text: $t('メールに記載の認証コードを入力して下さい') }]"
+    :breadcrumbs="[{ text: 'メールに記載の認証コードを入力して下さい' }]"
     :small="true"
   >
     <VeeForm

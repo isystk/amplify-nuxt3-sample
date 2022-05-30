@@ -1,5 +1,5 @@
 <template>
-  <pages-box :breadcrumbs="[{ text: $t('会員登録') }]" :small="true">
+  <pages-box :breadcrumbs="[{ text: '会員登録' }]" :small="true">
     <VeeForm
       v-slot="{ errors }"
       :validation-schema="schema"
@@ -60,7 +60,8 @@ import { injectStore } from '@/store'
 // import { useI18n } from 'vue-i18n'
 // const { t } = useI18n()
 import { Url } from '@/constants/url'
-import router from '@/router'
+import {useRouter} from "vue-router";
+const router = useRouter()
 const main = injectStore()
 
 const schema = Yup.object().shape({
@@ -85,7 +86,7 @@ const onSubmit = async (values: FormValues) => {
   try {
     console.log(values)
     const { email, password } = values
-    const result = await main?.auth.signUp(email, password)
+    const result = await main?.auth.signUp(email, email, password)
     console.log(result)
     await router.push(Url.SIGNUP_VERIFICATION)
   } catch (e) {
