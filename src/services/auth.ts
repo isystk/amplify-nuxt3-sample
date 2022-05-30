@@ -14,8 +14,11 @@ export default class AuthService {
   constructor(main: MainService) {
     this.main = main
     this.id = undefined
-    this.name = ''
-    this.token = ''
+    this.name = '';
+    this.token = '';
+    (async () => {
+      await this.signCheck();
+    })()
   }
 
   async signOut() {
@@ -88,10 +91,15 @@ export default class AuthService {
       this.name = fullName
       this.token = await this.getJwtToken()
     }
+
   }
 
   async getJwtToken() {
+    console.log("getJwtToken")
+
     const session = await Auth.currentSession() //現在のセッション情報を取得
+    console.log("session", session)
+    console.log("token", session.getIdToken().getJwtToken())
     return session.getIdToken().getJwtToken()
   }
 

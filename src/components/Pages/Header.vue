@@ -17,7 +17,7 @@
                   v-bind="props"
                   two-line
                   prepend-avatar="/images/user_dummy.png"
-                  :title="userName"
+                  :title="name"
                   subtitle="Logged in"
               />
             </template>
@@ -50,7 +50,7 @@
     <v-list>
       <v-list-item
           prepend-avatar="/images/user_dummy.png"
-          :title="userName"
+          :title="name"
           subtitle="Logged in"
       />
     </v-list>
@@ -93,8 +93,8 @@ const toggleMenu = () => {
   drawer.value = !drawer.value
 }
 
-const isLogined = props.store?.auth.signCheck()
-const { userName } = props.store?.auth || {}
+const { name } = props.store?.auth || {}
+const isLogined = !!name
 
 const items = computed(() => {
   return [
