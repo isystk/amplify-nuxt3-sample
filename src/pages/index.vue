@@ -3,17 +3,17 @@
     <v-container fluid>
       <v-row dense>
         <v-col
-            v-for="({ data }, postId) in posts"
-            :key="postId"
-            cols="12"
-            md="4"
+          v-for="({ data }, postId) in posts"
+          :key="postId"
+          cols="12"
+          md="4"
         >
           <v-card>
             <NuxtLink :to="`${Url.POSTS}/${postId}`">
               <v-img
-                  :src="data.photo"
-                  style="width: 92vw; height: 50vh"
-                  cover
+                :src="data.photo"
+                style="width: 92vw; height: 50vh"
+                cover
               >
                 <v-card-title class="text-white">
                   {{ data.title }}
@@ -23,10 +23,10 @@
               <v-card-actions>
                 <v-spacer />
                 <v-btn
-                    size="small"
-                    color="surface-variant"
-                    variant="text"
-                    icon="mdi-heart"
+                  size="small"
+                  color="surface-variant"
+                  variant="text"
+                  icon="mdi-heart"
                 />
               </v-card-actions>
             </NuxtLink>

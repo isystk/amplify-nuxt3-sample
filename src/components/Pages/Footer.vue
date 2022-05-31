@@ -1,20 +1,22 @@
 <template>
   <v-footer
-      class="d-flex flex-column"
-      color="primary"
+    class="d-flex flex-column"
+    color="primary"
   >
     <div>
       <v-btn
-          v-for="(item, index) in items"
-          :key="index"
-          class="mx-4 text-white"
-          :icon="item.icon"
-          variant="text"
-          @click="locate(item)"
+        v-for="(item, index) in items"
+        :key="index"
+        class="mx-4 text-white"
+        :icon="item.icon"
+        variant="text"
+        @click="locate(item)"
       />
     </div>
 
-    <div class="text-white pt-0">© 2020 isystk&apos;s sample</div>
+    <div class="text-white pt-0">
+      © 2020 isystk&apos;s sample
+    </div>
   </v-footer>
 </template>
 

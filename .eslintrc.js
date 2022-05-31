@@ -2,37 +2,32 @@ module.exports = {
     "root": true,
     "env": {
         "browser": true,
+        "es2021": true,
         "node": true
+    },
+    "globals": {
+        "defineProps": "readonly",
+        "defineEmits": "readonly",
+        "defineExpose": "readonly",
+        "withDefaults": "readonly"
     },
     "parser": "vue-eslint-parser",
     "parserOptions": {
-      "parser": "@typescript-eslint/parser"
+        "ecmaVersion": 12
     },
     "extends": [
-      "prettier",
-      "plugin:@typescript-eslint/recommended",
-      "plugin:prettier/recommended",
-      "plugin:vue/recommended",
-      "@vue/prettier",
-      "@vue/typescript"
+        "plugin:vue/vue3-recommended",
+        "plugin:vue/vue3-essential",
+        "eslint:recommended",
+        "@vue/typescript/recommended"
     ],
     "plugins": [
-        "vue"
+        "vue",
+        "@typescript-eslint"
     ],
     "rules": {
-        "semi": [2, "never"],
-        "no-unused-vars": ["error", { "args": "none" }],
-        "prettier/prettier": [
-          "error",
-          {
-            "singleQuote": true,
-            "semi": false
-          },
-        ],
-        'vue/multi-word-component-names': ['warn'],
-        'vue/no-multiple-template-root': ['warn'],
-        "@typescript-eslint/ban-ts-comment": "off",
-        "@typescript-eslint/no-this-alias": "off",
-        "@typescript-eslint/no-var-requires": "off"
+        "vue/multi-word-component-names": "off",
+        "vue/no-setup-props-destructure": "off",
+       "@typescript-eslint/ban-ts-comment": "warn",
     }
 };

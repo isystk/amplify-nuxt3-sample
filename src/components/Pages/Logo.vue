@@ -1,6 +1,8 @@
 <template>
-  <NuxtLink :to="Url.TOP" >
-    <v-toolbar-title class="w-64">{{ $config.APP_NAME }}</v-toolbar-title>
+  <NuxtLink :to="Url.TOP">
+    <v-toolbar-title class="w-64">
+      {{ $config.APP_NAME }}
+    </v-toolbar-title>
   </NuxtLink>
 </template>
 

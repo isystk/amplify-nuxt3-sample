@@ -3,7 +3,7 @@ import API, { graphqlOperation } from '@aws-amplify/api'
 import { getUser } from '@/services/graphql/queries'
 import { createUser } from '@/services/graphql/mutations'
 import MainService from '@/services/main'
-import {CognitoUser, CognitoUserPool} from "amazon-cognito-identity-js";
+import { CognitoUser, CognitoUserPool } from 'amazon-cognito-identity-js'
 
 export default class AuthService {
   main: MainService
@@ -15,10 +15,10 @@ export default class AuthService {
   constructor(main: MainService) {
     this.main = main
     this.id = undefined
-    this.name = '';
-    this.token = '';
-    (async () => {
-      await this.signCheck();
+    this.name = ''
+    this.token = ''
+    ;(async () => {
+      await this.signCheck()
     })()
   }
 
@@ -39,7 +39,9 @@ export default class AuthService {
       if (user) {
         console.log('success signing in', user)
         this.useAuthTypeApiKey()
-        const userData = await API.graphql(graphqlOperation(getUser, { userSub: user.username }))
+        const userData = await API.graphql(
+          graphqlOperation(getUser, { userSub: user.username })
+        )
         // @ts-ignore
         const { id, fullName } = userData.data.listUsers.items[0]
         this.id = id
@@ -72,7 +74,9 @@ export default class AuthService {
     } catch (error) {
       console.log('error signup in', error)
       if ((error as string).match(/UsernameExistsException/)) {
-        alert('既に会員登録されています。認証済みでない場合はメールを確認してください。')
+        alert(
+          '既に会員登録されています。認証済みでない場合はメールを確認してください。'
+        )
       }
       return false
     }
@@ -84,8 +88,12 @@ export default class AuthService {
     verificationCode: string
   ): Promise<boolean> {
     try {
-      const user = await Auth.currentAuthenticatedUser();
-      const result = await Auth.verifyUserAttributeSubmit(user, 'email', verificationCode)
+      const user = await Auth.currentAuthenticatedUser()
+      const result = await Auth.verifyUserAttributeSubmit(
+        user,
+        'email',
+        verificationCode
+      )
       if (result !== 'SUCCESS') {
         new Error('メールアドレス検証に失敗しました')
       }
@@ -98,13 +106,15 @@ export default class AuthService {
       await Auth.updateUserAttributes(user, {
         email, // ここと
         'custom:verified_email': email, // ここに新しいメールアドレスをいれる。
-      });
+      })
 
       return true
     } catch (error) {
       console.log('error signup in', error)
       if ((error as string).match(/UsernameExistsException/)) {
-        alert('既に会員登録されています。認証済みでない場合はメールを確認してください。')
+        alert(
+          '既に会員登録されています。認証済みでない場合はメールを確認してください。'
+        )
       }
       return false
     }
@@ -116,7 +126,9 @@ export default class AuthService {
     const user = await Auth.currentUserInfo()
     if (user) {
       this.useAuthTypeApiKey()
-      const userData = await API.graphql(graphqlOperation(getUser, { userSub: user.username }))
+      const userData = await API.graphql(
+        graphqlOperation(getUser, { userSub: user.username })
+      )
       // @ts-ignore
       const { id, fullName } = userData.data.listUsers.items[0]
 
@@ -124,15 +136,14 @@ export default class AuthService {
       this.name = fullName
       this.token = await this.getJwtToken()
     }
-
   }
 
   async getJwtToken() {
-    console.log("getJwtToken")
+    console.log('getJwtToken')
 
     const session = await Auth.currentSession() //現在のセッション情報を取得
-    console.log("session", session)
-    console.log("token", session.getIdToken().getJwtToken())
+    console.log('session', session)
+    console.log('token', session.getIdToken().getJwtToken())
     return session.getIdToken().getJwtToken()
   }
 

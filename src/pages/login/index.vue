@@ -1,5 +1,8 @@
 <template>
-  <pages-box :breadcrumbs="[{ text:'ログイン' }]" :small="true">
+  <pages-box
+    :breadcrumbs="[{ text: 'ログイン' }]"
+    :small="true"
+  >
     <VeeForm
       v-slot="{ errors }"
       :validation-schema="schema"
@@ -16,7 +19,10 @@
             class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
             :class="{ 'is-invalid': errors.email }"
           />
-          <ErrorMessage class="text-red" name="email" />
+          <ErrorMessage
+            class="text-red"
+            name="email"
+          />
         </div>
         <div class="mb-4">
           <label class="block text-gray-700 text-sm font-bold mb-2">
@@ -28,10 +34,19 @@
             class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
             :class="{ 'is-invalid': errors.password }"
           />
-          <ErrorMessage class="text-red" name="password" />
+          <ErrorMessage
+            class="text-red"
+            name="password"
+          />
         </div>
         <div class="mb-4">
-          <v-btn depressed color="primary" type="submit">ログイン</v-btn>
+          <v-btn
+            depressed
+            color="primary"
+            type="submit"
+          >
+            ログイン
+          </v-btn>
         </div>
       </div>
     </VeeForm>
@@ -47,7 +62,7 @@ import * as Yup from 'yup'
 import { injectStore } from '@/store'
 const main = injectStore()
 import { Url } from '@/constants/url'
-import {useRouter} from "vue-router";
+import { useRouter } from 'vue-router'
 const router = useRouter()
 
 const schema = Yup.object().shape({

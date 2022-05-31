@@ -6,7 +6,9 @@
         <template #default>
           <slot />
         </template>
-        <template #fallback> loading... </template>
+        <template #fallback>
+          loading...
+        </template>
       </Suspense>
     </v-main>
     <pages-footer :store="main" />

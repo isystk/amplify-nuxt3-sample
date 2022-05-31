@@ -20,7 +20,7 @@ const nuxtConfig = defineNuxtConfig({
     server: {
         port: 3000,
         // 他のパソコンから IP でつながるように host を変更
-        host: "0.0.0.0"
+        // host: "0.0.0.0"
     },
     meta: {
         meta: [
@@ -35,7 +35,6 @@ const nuxtConfig = defineNuxtConfig({
             { rel: "icon", type: "image/x-icon", href: "/favicon.ico" }
         ],
         script: [
-          // { src: './polyfill.min.js' },
         ],
     },
     css: [
