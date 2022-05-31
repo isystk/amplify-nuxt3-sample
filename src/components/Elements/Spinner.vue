@@ -1,12 +1,6 @@
 <template>
-  <div
-    :class="className"
-    role="status"
-  >
-    <i
-      class="fas fa-spinner fa-spin"
-      :style="{ fontSize: '35px' }"
-    />
+  <div :class="className" role="status">
+    <i class="fas fa-spinner fa-spin" :style="{ fontSize: '35px' }" />
     <span class="sr-only">{{ label }}</span>
   </div>
 </template>

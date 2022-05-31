@@ -1,36 +1,21 @@
 <template>
   <pages-box :breadcrumbs="[{ text: 'マイページ' }]">
     <div class="mx-auto right-5 absolute">
-      <v-btn
-        color="info"
-        type="button"
-        @click="registPost"
-      >
-        新規登録
-      </v-btn>
+      <v-btn color="info" type="button" @click="registPost"> 新規登録 </v-btn>
     </div>
     <v-table>
       <thead>
         <tr>
+          <th class="text-left">タイトル</th>
+          <th class="text-left">本文</th>
+          <th class="text-left">画像</th>
           <th class="text-left">
-            タイトル
-          </th>
-          <th class="text-left">
-            本文
-          </th>
-          <th class="text-left">
-            画像
-          </th>
-          <th class="text-left">
-            <br>
+            <br />
           </th>
         </tr>
       </thead>
       <tbody>
-        <tr
-          v-for="({ id, data }, idx) in lists.displayLists"
-          :key="idx"
-        >
+        <tr v-for="({ id, data }, idx) in lists.displayLists" :key="idx">
           <td>{{ data.title }}</td>
           <td>{{ data.description }}</td>
           <td>

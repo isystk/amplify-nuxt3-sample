@@ -1,7 +1,5 @@
 <template>
-  <div v-if="loading">
-    Loading..
-  </div>
+  <div v-if="loading">Loading..</div>
   <div v-else>
     <pages-box :breadcrumbs="[{ text: post.title }]">
       <v-img :src="post.photo" />

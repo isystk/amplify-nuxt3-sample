@@ -2,17 +2,10 @@
   <v-dialog v-model="_isOpen">
     <v-container>
       <v-card class="md:max-w-lg">
-        <v-toolbar
-          dark
-          color="primary"
-        >
+        <v-toolbar dark color="primary">
           <v-toolbar-title>{{ title }}</v-toolbar-title>
           <v-spacer />
-          <v-btn
-            icon
-            dark
-            @click="handleClose"
-          >
+          <v-btn icon dark @click="handleClose">
             <v-icon>mdi-close</v-icon>
           </v-btn>
         </v-toolbar>

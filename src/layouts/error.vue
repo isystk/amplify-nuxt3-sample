@@ -10,9 +10,7 @@
           <div v-else>
             <h1>エラーが発生しました {{ error.message }}</h1>
           </div>
-          <nuxt-link to="/">
-            ホーム
-          </nuxt-link>
+          <nuxt-link to="/"> ホーム </nuxt-link>
         </article>
       </div>
     </v-main>

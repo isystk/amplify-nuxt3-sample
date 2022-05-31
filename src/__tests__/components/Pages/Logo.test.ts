@@ -3,8 +3,7 @@ import Logo from '@/components/Pages/Logo.vue'
 
 test('Logo', () => {
   const wrapper = mount(Logo, {
-    global: {
-    },
+    global: {},
   })
   expect(wrapper.element).toMatchSnapshot()
 })

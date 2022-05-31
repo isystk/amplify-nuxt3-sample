@@ -1,9 +1,5 @@
 <template>
-  <Modal
-    title="投稿フォーム"
-    :is-open="isOpen"
-    :handle-close="handleClose"
-  >
+  <Modal title="投稿フォーム" :is-open="isOpen" :handle-close="handleClose">
     <Form
       v-slot="{ errors, values, setFieldValue }"
       :validation-schema="schema"
@@ -21,10 +17,7 @@
             class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
             :class="{ 'is-invalid': errors.title }"
           />
-          <ErrorMessage
-            class="text-red"
-            name="title"
-          />
+          <ErrorMessage class="text-red" name="title" />
         </div>
         <div class="mb-4">
           <label class="block text-gray-700 text-sm font-bold mb-2">
@@ -36,10 +29,7 @@
             class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
             :class="{ 'is-invalid': errors.description }"
           />
-          <ErrorMessage
-            class="text-red"
-            name="description"
-          />
+          <ErrorMessage class="text-red" name="description" />
         </div>
         <div class="mb-4">
           <label class="block text-gray-700 text-sm font-bold mb-2">
@@ -52,11 +42,7 @@
           />
           <v-container fluid>
             <v-row dense>
-              <v-col
-                cols="12"
-                md="6"
-                class="width: 300px"
-              >
+              <v-col cols="12" md="6" class="width: 300px">
                 <VueImageBase64
                   :max-file-size="10485760"
                   :thumbnail-size="700"
@@ -69,10 +55,7 @@
                   "
                 />
               </v-col>
-              <v-col
-                cols="12"
-                md="6"
-              >
+              <v-col cols="12" md="6">
                 <v-img
                   :src="values.photo || '/images/no_image.png'"
                   style="width: 100%"
@@ -82,19 +65,10 @@
               </v-col>
             </v-row>
           </v-container>
-          <ErrorMessage
-            class="text-red"
-            name="photo"
-          />
+          <ErrorMessage class="text-red" name="photo" />
         </div>
         <div class="mb-4">
-          <v-btn
-            depressed
-            color="primary"
-            type="submit"
-          >
-            登録
-          </v-btn>
+          <v-btn depressed color="primary" type="submit"> 登録 </v-btn>
         </div>
       </div>
     </Form>

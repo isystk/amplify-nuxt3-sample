@@ -13,7 +13,16 @@
     "fix": "yarn format && yarn lint",
     "test": "jest",
     "test:coverage": "jest --collect-coverage",
-    "precommit": "npm run lint && npm run test"
+    "prepare": "husky install"
+  },
+  "lint-staged": {
+    "*.{js,jsx,ts,tsx}": [
+      "eslint --fix",
+      "prettier --write"
+    ],
+    "*.{css,less,sass,scss}": [
+      "stylelint --fix"
+    ]
   },
   "devDependencies": {
     "@aws-amplify/ui-vue": "^2.4.7",
@@ -48,8 +57,10 @@
     "eslint-loader": "^4.0.2",
     "eslint-plugin-prettier": "^4.0.0",
     "eslint-plugin-vue": "^9.0.1",
+    "husky": "^8.0.1",
     "jest": "^27.5.1",
     "jsonc-parser": "^3.0.0",
+    "lint-staged": "^12.4.3",
     "lodash": "^4.17.21",
     "moment": "^2.29.3",
     "nuxt3": "3.0.0-27277330.202617b",

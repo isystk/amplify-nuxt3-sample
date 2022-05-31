@@ -1,8 +1,5 @@
 <template>
-  <v-app-bar
-    color="primary"
-    prominent
-  >
+  <v-app-bar color="primary" prominent>
     <pages-logo />
     <v-spacer />
 
@@ -12,11 +9,7 @@
         width="300"
         absolute
       >
-        <v-list
-          density="compact"
-          theme="dark"
-          nav
-        >
+        <v-list density="compact" theme="dark" nav>
           <v-list-group>
             <template #activator="{ props }">
               <v-list-item
@@ -40,10 +33,7 @@
       </v-card>
     </template>
     <template v-else>
-      <NuxtLink
-        :to="Url.LOGIN"
-        class="invisible md:visible"
-      >
+      <NuxtLink :to="Url.LOGIN" class="invisible md:visible">
         ログイン
       </NuxtLink>
     </template>
@@ -55,12 +45,7 @@
     />
   </v-app-bar>
 
-  <v-navigation-drawer
-    v-model="drawer"
-    bottom
-    temporary
-    position="right"
-  >
+  <v-navigation-drawer v-model="drawer" bottom temporary position="right">
     <v-list>
       <v-list-item
         prepend-avatar="/images/user_dummy.png"
