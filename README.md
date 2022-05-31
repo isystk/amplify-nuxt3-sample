@@ -1,57 +1,113 @@
-🌙 nuxt3-typescript-aws
+🌙 amplify-nuxt3-sample
 ====
 
-![GitHub issues](https://img.shields.io/github/issues/isystk/nuxt3-typescript-aws)
-![GitHub forks](https://img.shields.io/github/forks/isystk/nuxt3-typescript-aws)
-![GitHub stars](https://img.shields.io/github/stars/isystk/nuxt3-typescript-aws)
-![GitHub license](https://img.shields.io/github/license/isystk/nuxt3-typescript-aws)
+![GitHub issues](https://img.shields.io/github/issues/isystk/amplify-nuxt3-sample)
+![GitHub forks](https://img.shields.io/github/forks/isystk/amplify-nuxt3-sample)
+![GitHub stars](https://img.shields.io/github/stars/isystk/amplify-nuxt3-sample)
+![GitHub license](https://img.shields.io/github/license/isystk/amplify-nuxt3-sample)
 
 ## 📗 プロジェクトの概要
 
-Nuxt3 ＆ AWS の学習用サンプルアプリケーションです。
+AWS Amplify の学習用サンプルアプリケーションです。
 
 
 ### 利用している技術
 
-- Nuxt3
-- Typescript 4.5
-- Tailwind Css
-
+- NuxtJS 3
+- Typescript
+- Vuetify
+- Amplify (Cognito/AppSync/DynamoDB)
+- GraghQL
 
 ## 🌐 Demo
+https://dev.d28qg1769uc44q.amplifyapp.com
 
-![投稿一覧画面](./app1.png "投稿一覧画面")
-![投稿画面](./app2.png "投稿画面")
+![TOP画面](./app1.png "TOP画面")
+![マイページ一覧](./app2.png "マイページ一覧")
+![投稿フォーム](./app3.png "投稿フォーム")
 
-- ログイン/ログアウト
-- 会員登録
-- 投稿一覧
-- 投稿詳細
-- マイページ（一覧・登録・更新・削除）
 
+## 🔧  AWS クライド上にamplifyの環境を構築する
+```text
+$ rm -Rf amplify
+$ amplify init
+? Initialize the project with the above configuration? No
+? Enter a name for the environment dev
+? Choose your default editor: IntelliJ IDEA
+? Choose the type of app that you're building javascript
+Please tell us about your project
+? What javascript framework are you using react
+? Source Directory Path:  src
+? Distribution Directory Path: build
+? Build Command:  npm run-script build
+? Start Command: npm run-script start
+Using default provider  awscloudformation
+? Select the authentication method you want to use: (Use arrow keys)
+❯ AWS profile 
+  AWS access keys (node:42574) [DEP0128] DeprecationWarning: Invalid 'main' field in '/Users/iseyoshitaka/.nodebrew/node/v16.13.1/lib/node_modules/@aws-amplify/cli/node_modules/cloudform/package.json' of 'packages/cloudform/index.js
+? Select the authentication method you want to use: AWS profile
+
+# init で作成した環境を AWS から一括で削除したい場合
+$ amplify delete
+```
 
 ## 📦 ディレクトリ構造
 
 ```
 .
-├── src/ (Next.js のソースコード)
-│   ├── assets/
-│   ├── auth/
-│   ├── common/
-│   ├── components/
-│   ├── layouts/
-│   ├── mixins/
-│   ├── pages/
-│   ├── plugins/
-│   ├── store/
-│   ├── test/
-│   └── utilities/
-└── package.json/
+├── LICENSE
+├── README.md
+├── amplify
+│   ├── README.md
+│   ├── backend
+│   ├── cli.json
+│   ├── hooks
+│   └── team-provider-info.json
+├── node_modules
+├── nuxt.config.ts
+├── package.json
+├── src
+│   ├── app.vue
+│   ├── assets
+│   ├── components
+│   ├── constants
+│   ├── layouts
+│   ├── mixins
+│   ├── pages
+│   ├── plugins
+│   ├── services
+│   ├── store
+│   └── utilities
+├── tailwind.config.js
+├── tsconfig.json
+└── yarn.lock
+```
+
+
+## 🖊️amplify の利用方法
+
+```shell
+# amplify コマンドをインストールする
+$ npm install -g @aws-amplify/cli
+$ amplify -v
+8.3.1
+
+# amplify を利用する為の設定
+$ amplify configure
+? user name:  amplify-lBpzV
+
+# AWS から amplify の状態をローカルに取り込む
+$ amplify pull --appId dl83z1vvxx26n --envName dev
+
+# ローカル の状態を AWS の amplify へ反映する
+$ amplify push
+
+# 最新モジュールをホスティング環境にデプロイする
+$ amplify publish
 ```
 
 ## 💬 使い方
-
-```
+```text
 yarn
 yarn dev
 ```
@@ -60,11 +116,18 @@ yarn dev
 
 | プロジェクト| 概要|
 | :---------------------------------------| :-------------------------------|
+| [AWS Amplify　はじめてみる編](https://qiita.com/t_okkan/items/38aca98993bf06598af6)| AWS Amplify　はじめてみる編 |
 | [Nuxt3 Docs](https://v3.nuxtjs.org/docs/usage/data-fetching)| Nuxt3 Docs |
+| [Vuetify 3 Beta](https://next.vuetifyjs.com/en/getting-started/installation/)| Vuetify 3 Beta |
+| [Material Design Icons](https://pictogrammers.github.io/@mdi/font/2.0.46/)| Material Design Icons |
+| [Tailwind CSS](https://tailwindcss.com/docs/installation)| Tailwind CSS |
+| [vee-validate](https://vee-validate.logaretm.com/v4/guide/components)| vee-validate |
+| [husky v6 のインストール方法と使い方。lint-staged も導入して、品質を保とう](https://fwywd.com/tech/husky-setup)| husky v6 のインストール方法と使い方。lint-staged も導入して、品質を保とう |
+
 
 ## 🎫 Licence
 
-[MIT](https://github.com/isystk/nuxt3-typescript-aws/blob/master/LICENSE)
+[MIT](https://github.com/isystk/amplify-nuxt3-sample/blob/master/LICENSE)
 
 ## 👀 Author
 

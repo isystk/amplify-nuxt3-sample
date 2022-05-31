@@ -1,5 +1,5 @@
 {
-  "name": "nuxt3-typescript-aws",
+  "name": "amplify-nuxt3-sample",
   "description": "Nuxt3 の学習用サンプルアプリケーションです。",
   "private": true,
   "scripts": {

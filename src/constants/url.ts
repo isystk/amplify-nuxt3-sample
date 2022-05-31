@@ -2,8 +2,7 @@
  * フロントエンド用の URL を作成する
  */
 const getFrontUrl = (path: string): string => {
-  // return [import.meta.env.VITE_INTERNAL_ENDPOINT, path].join('')
-  return ['', path].join('')
+  return [import.meta.env.VITE_INTERNAL_ENDPOINT, path].join('')
 }
 
 /** API のエンドポイント */

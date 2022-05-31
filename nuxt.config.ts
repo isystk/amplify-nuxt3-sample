@@ -35,7 +35,6 @@ const nuxtConfig = defineNuxtConfig({
         ],
     },
     css: [
-        "vuetify/lib/styles/main.sass",
         '~/assets/sass/app.scss',
     ],
     components: [
