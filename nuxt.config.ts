@@ -3,8 +3,9 @@ import { defineNuxtConfig } from 'nuxt3'
 import { name, description } from './package.json'
 
 const nuxtConfig = defineNuxtConfig({
-    // Amplifyを利用する為SSRをOFFにする
-    ssr: false,
+
+    ssr: false, // SPA (Amplifyを利用する為)
+    target: "static", // 静的サイトホスティング
     srcDir: "src/",
 
     /**
@@ -33,6 +34,9 @@ const nuxtConfig = defineNuxtConfig({
         link: [
             { rel: "icon", type: "image/x-icon", href: "/favicon.ico" }
         ],
+        script: [
+          // { src: './polyfill.min.js' },
+        ],
     },
     css: [
         '~/assets/sass/app.scss',
@@ -45,11 +49,11 @@ const nuxtConfig = defineNuxtConfig({
     ],
 
     buildModules: [
-        // pinia plugin - https://pinia.esm.dev
-        ['@pinia/nuxt'],
+      // pinia plugin - https://pinia.esm.dev
+      ['@pinia/nuxt'],
     ],
     build: {
-        transpile: ['vuetify', 'moment'], // pluginがビルドエラーになるので追加
+        transpile: ['vuetify', 'moment'],
         postcss: {
             postcssOptions: {
                 plugins: {
@@ -57,13 +61,18 @@ const nuxtConfig = defineNuxtConfig({
                     autoprefixer: {},
                 }
             }
-        },
+        }
     },
     vite: {
         define: {
             "process.env.DEBUG": false,
             global: {}
         },
+        resolve: {
+            alias: {
+                './runtimeConfig': './runtimeConfig.browser',
+            },
+        }
     },
 })
 

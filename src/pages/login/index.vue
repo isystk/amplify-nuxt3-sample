@@ -1,5 +1,5 @@
 <template>
-  <pages-box :breadcrumbs="[{ text: 'ログイン' }]" :small="true">
+  <pages-box :breadcrumbs="[{ text:'ログイン' }]" :small="true">
     <VeeForm
       v-slot="{ errors }"
       :validation-schema="schema"
@@ -46,8 +46,6 @@ import { Form as VeeForm, Field, ErrorMessage } from 'vee-validate'
 import * as Yup from 'yup'
 import { injectStore } from '@/store'
 const main = injectStore()
-// import { useI18n } from 'vue-i18n'
-// const { t } = useI18n()
 import { Url } from '@/constants/url'
 import {useRouter} from "vue-router";
 const router = useRouter()
