@@ -43,7 +43,6 @@ const main = injectStore()
 import { Url } from '@/constants/url'
 import { useRouter } from 'vue-router'
 const router = useRouter()
-
 const schema = Yup.object().shape({
   email: Yup.string()
     .required('メールアドレスを入力してください')
@@ -57,16 +56,11 @@ type FormValues = {
 }
 
 const onSubmit = async (values: FormValues) => {
-  console.log(values)
-  try {
-    const { email, password } = values
-    const user = await main?.auth.signIn(email, password)
-    console.log(user)
-    if (user) {
-      await router.push(Url.MEMBER)
-    }
-  } catch (e) {
-    alert(e.message)
+  const { email, password } = values
+  const result = await main?.auth.signIn(email, password)
+  if (result) {
+    console.log(router)
+    await router.push(Url.MEMBER)
   }
 }
 </script>

@@ -3,7 +3,6 @@ import API, { graphqlOperation } from '@aws-amplify/api'
 import { getUser } from '@/services/graphql/queries'
 import { createUser } from '@/services/graphql/mutations'
 import MainService from '@/services/main'
-import { CognitoUser, CognitoUserPool } from 'amazon-cognito-identity-js'
 
 export default class AuthService {
   main: MainService
@@ -33,7 +32,7 @@ export default class AuthService {
     }
   }
 
-  async signIn(email: string, password: string) {
+  async signIn(email: string, password: string): Promise<boolean> {
     try {
       const user = await Auth.signIn(email, password)
       if (user) {
@@ -47,10 +46,13 @@ export default class AuthService {
         this.id = id
         this.name = fullName
         this.token = await this.getJwtToken()
+        return true
       }
+      return false
     } catch (error) {
       console.log('error signing in', error)
       alert('メールアドレスまたはパスワードが違います')
+      return false
     }
   }
 
@@ -121,11 +123,10 @@ export default class AuthService {
   }
 
   async signCheck() {
-    console.log('signCheck')
     if (this.name) return
     const user = await Auth.currentUserInfo()
     if (user) {
-      this.useAuthTypeApiKey()
+      await this.useAuthTypeApiKey()
       const userData = await API.graphql(
         graphqlOperation(getUser, { userSub: user.username })
       )
@@ -135,15 +136,16 @@ export default class AuthService {
       this.id = id
       this.name = fullName
       this.token = await this.getJwtToken()
+      console.log(this)
     }
   }
 
-  async getJwtToken() {
-    console.log('getJwtToken')
+  isLogined() {
+    return this.token !== ''
+  }
 
+  async getJwtToken() {
     const session = await Auth.currentSession() //現在のセッション情報を取得
-    console.log('session', session)
-    console.log('token', session.getIdToken().getJwtToken())
     return session.getIdToken().getJwtToken()
   }
 

@@ -92,7 +92,7 @@ const toggleMenu = () => {
   drawer.value = !drawer.value
 }
 
-const { name } = props.store?.auth || {}
+const name = props.store?.auth.name
 const isLogined = !!name
 
 const items = computed(() => {
