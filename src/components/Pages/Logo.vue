@@ -1,7 +1,7 @@
 <template>
   <NuxtLink :to="Url.TOP">
     <v-toolbar-title class="w-64">
-      {{ $config.APP_NAME }}
+      amplify-nuxt3-sample
     </v-toolbar-title>
   </NuxtLink>
 </template>
