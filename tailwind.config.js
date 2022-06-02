@@ -1,15 +1,15 @@
-const defaultTheme = require("tailwindcss/defaultTheme");
+const defaultTheme = require('tailwindcss/defaultTheme')
 
 module.exports = {
-  mode: "jit",
+  mode: 'jit',
   content: {
     files: [
-      "./src/components/**/*.{vue,js}",
-      "./src/layouts/**/*.vue",
-      "./src/pages/**/*.vue",
-      "./src/app.vue",
-      "./src/plugins/**/*.{js,ts}",
-      "./nuxt.config.{js,ts}",
+      './src/components/**/*.{vue,js}',
+      './src/layouts/**/*.vue',
+      './src/pages/**/*.vue',
+      './src/app.vue',
+      './src/plugins/**/*.{js,ts}',
+      './nuxt.config.{js,ts}',
     ],
   },
   theme: {
@@ -22,10 +22,5 @@ module.exports = {
   variants: {
     extend: {},
   },
-  plugins: [
-    require("@tailwindcss/forms"),
-    require("@tailwindcss/typography"),
-    require("@tailwindcss/line-clamp"),
-    require("@tailwindcss/aspect-ratio"),
-  ],
-};
+  plugins: [],
+}

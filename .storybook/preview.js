@@ -1,9 +1,38 @@
 import { app } from '@storybook/vue3'
-// import vuetify from '@/plugins/vuetify'
-// import i18n from '@/plugins/i18n'
-// app.use(vuetify)
-// app.use(i18n)
+import { createVuetify } from 'vuetify'
+
 import '@/assets/sass/app.scss'
+
+// Styles
+import '@mdi/font/css/materialdesignicons.css'
+import 'vuetify/styles'
+
+// Vuetify
+import * as components from 'vuetify/components'
+import * as directives from 'vuetify/directives'
+const vuetify = createVuetify({
+  components,
+  directives,
+  theme: {
+    themes: {
+      light: {
+        colors: {
+          primary: '#000d6d',
+          background: '#fff',
+          error: '#d63031',
+          info: '#0984e3',
+          secondary: '#EDF2F7',
+          success: '#00cec9',
+          surface: '#fff',
+          warning: '#2d3436',
+        },
+        dark: false,
+        variables: {},
+      },
+    },
+  },
+})
+app.use(vuetify)
 
 // Components
 const pageContext = import.meta.globEager('../src/components/**/*.vue')

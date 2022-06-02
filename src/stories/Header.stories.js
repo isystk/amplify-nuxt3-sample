@@ -9,9 +9,9 @@ storiesOf('pages/Header', module)
     components: { Header },
     setup: () => {
       const main = new MainService()
-      main.auth.user = {}
-      main.auth.userName = 'sample'
-      main.auth.userId = '1234'
+      main.auth.id = 1111
+      main.auth.name = 'sample'
+      main.auth.token = 'abcd'
       return { main }
     },
     template: `<Header :store="main" />`,

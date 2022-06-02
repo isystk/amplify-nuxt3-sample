@@ -1,5 +1,5 @@
 <template>
-  <v-app-bar color="primary" prominent>
+  <v-app-bar class="overflow-visible" color="primary" prominent>
     <pages-logo />
     <v-spacer />
 
