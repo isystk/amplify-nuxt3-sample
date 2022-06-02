@@ -116,9 +116,9 @@ yarn dev
 
 | プロジェクト| 概要|
 | :---------------------------------------| :-------------------------------|
-| [AWS Amplify　はじめてみる編](https://qiita.com/t_okkan/items/38aca98993bf06598af6)| AWS Amplify　はじめてみる編 |
-| [Nuxt3 Docs](https://v3.nuxtjs.org/docs/usage/data-fetching)| Nuxt3 Docs |
+| [Nuxt3 Docs](https://v3.nuxtjs.org/guide/concepts/introduction)| Nuxt3 Docs |
 | [Vuetify 3 Beta](https://next.vuetifyjs.com/en/getting-started/installation/)| Vuetify 3 Beta |
+| [AWS Amplify　はじめてみる編](https://qiita.com/t_okkan/items/38aca98993bf06598af6)| AWS Amplify　はじめてみる編 |
 | [Material Design Icons](https://pictogrammers.github.io/@mdi/font/2.0.46/)| Material Design Icons |
 | [Tailwind CSS](https://tailwindcss.com/docs/installation)| Tailwind CSS |
 | [vee-validate](https://vee-validate.logaretm.com/v4/guide/components)| vee-validate |

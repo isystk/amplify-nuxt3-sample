@@ -3,10 +3,10 @@
     <v-container fluid>
       <v-row dense>
         <v-col
-          v-for="({ data }, postId) in posts"
-          :key="postId"
-          cols="12"
-          md="4"
+            v-for="({ data }, postId) in posts"
+            :key="postId"
+            cols="12"
+            md="4"
         >
           <v-card>
             <NuxtLink :to="`${Url.POSTS}/${postId}`">
@@ -19,10 +19,10 @@
               <v-card-actions>
                 <v-spacer />
                 <v-btn
-                  size="small"
-                  color="surface-variant"
-                  variant="text"
-                  icon="mdi-heart"
+                    size="small"
+                    color="surface-variant"
+                    variant="text"
+                    icon="mdi-heart"
                 />
               </v-card-actions>
             </NuxtLink>
@@ -31,6 +31,7 @@
       </v-row>
     </v-container>
   </v-card>
+
 </template>
 
 <script setup lang="ts">
@@ -45,4 +46,5 @@ onBeforeMount(async () => {
   await main?.post?.readPosts()
 })
 const posts = computed(() => main?.post?.posts)
+
 </script>
