@@ -40,6 +40,7 @@
             type="hidden"
             :class="{ 'is-invalid': errors.photo }"
           />
+
           <v-container fluid>
             <v-row dense>
               <v-col cols="12" md="6" class="width: 300px">
