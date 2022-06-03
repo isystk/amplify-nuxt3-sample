@@ -80,7 +80,7 @@
 // // import { useI18n } from 'vue-i18n'
 // // const { t } = useI18n()
 import { computed, onBeforeMount, ref } from 'vue'
-import { useRouter } from 'vue-router'
+import { useRouter } from 'nuxt/app'
 import { Url } from '@/constants/url'
 import MainService from '@/services/main'
 const props = defineProps<{
@@ -95,7 +95,7 @@ const toggleMenu = () => {
 }
 
 const name = computed(() => props.store.auth.name)
-const isLogined = computed(() => name.value !== '')
+const isLogined = computed(() => props.store.auth.isAuthenticated())
 
 const items = computed(() => {
   return [

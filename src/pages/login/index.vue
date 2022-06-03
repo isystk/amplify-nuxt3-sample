@@ -36,12 +36,15 @@
 </template>
 
 <script setup lang="ts">
+definePageMeta({
+  title: 'ログイン',
+})
 import { Form as VeeForm, Field, ErrorMessage } from 'vee-validate'
 import * as Yup from 'yup'
 import { injectStore } from '@/store'
 const main = injectStore()
 import { Url } from '@/constants/url'
-import { useRouter } from 'vue-router'
+import { useRouter } from 'nuxt/app'
 const router = useRouter()
 const schema = Yup.object().shape({
   email: Yup.string()

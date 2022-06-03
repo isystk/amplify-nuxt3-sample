@@ -142,7 +142,7 @@ export default class AuthService {
     }
   }
 
-  isLogined() {
+  isAuthenticated() {
     return this.token !== ''
   }
 

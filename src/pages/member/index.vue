@@ -70,6 +70,12 @@
 </template>
 
 <script setup lang="ts">
+definePageMeta({
+  title: 'マイページ',
+})
+definePageMeta({
+  middleware: ['auth'],
+})
 import { onBeforeMount, reactive, ref } from 'vue'
 import PostRegistModal, {
   FormValues,
@@ -80,7 +86,6 @@ import { injectStore } from '@/store'
 import { Post } from '@/services/post'
 const main = injectStore()
 import * as _ from 'lodash'
-
 const lists = reactive<{ displayLists: Post[] }>({ displayLists: [] })
 const page = ref(1)
 const length = ref(0)

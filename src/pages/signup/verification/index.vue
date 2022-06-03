@@ -38,11 +38,14 @@
 </template>
 
 <script setup lang="ts">
+definePageMeta({
+  title: 'メールに記載の認証コードを入力して下さい',
+})
 import { Form as VeeForm, Field, ErrorMessage } from 'vee-validate'
 import * as Yup from 'yup'
 import { injectStore } from '@/store'
 import { Url } from '@/constants/url'
-import { useRouter } from 'vue-router'
+import { useRouter } from 'nuxt/app'
 const router = useRouter()
 const main = injectStore()
 

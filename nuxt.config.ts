@@ -21,32 +21,8 @@ const nuxtConfig = defineNuxtConfig<NuxtConfig>({
     // 他のパソコンから IP でつながるように host を変更
     // host: "0.0.0.0"
   },
-  weta: {
-    titleTemplate: `%s - ${name}`,
-    meta: [
-      { name: 'viewport', content: 'width=device-width, initial-scale=1' },
-      { name: 'format-detection', content: 'telephone=no' },
-      { name: 'description', content: description },
-    ],
-    link: [{ rel: 'icon', type: 'image/x-icon', href: '/favicon.ico' }],
-    bodyAttrs: {
-      // bodyタグにClassを指定する場合はここに指定する
-      // class: 'column1'
-    },
-  },
   css: ['~/assets/sass/app.scss'],
-
-  // components: [
-  //     {
-  //         path: '@/components/',
-  //         pathPrefix: false
-  //     }
-  // ],
-
-  // buildModules: [
-  //   // pinia plugin - https://pinia.esm.dev
-  //   ['@pinia/nuxt'],
-  // ],
+  buildModules: [],
   build: {
     transpile: ['vuetify', 'moment'],
     postcss: {

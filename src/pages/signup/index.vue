@@ -48,13 +48,16 @@
 </template>
 
 <script setup lang="ts">
+definePageMeta({
+  title: '会員登録',
+})
 import { Form as VeeForm, Field, ErrorMessage } from 'vee-validate'
 import * as Yup from 'yup'
 import { injectStore } from '@/store'
 // import { useI18n } from 'vue-i18n'
 // const { t } = useI18n()
 import { Url } from '@/constants/url'
-import { useRouter } from 'vue-router'
+import { useRouter } from 'nuxt/app'
 const router = useRouter()
 const main = injectStore()
 
