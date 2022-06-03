@@ -15,5 +15,9 @@
 
 <script lang="ts" setup>
 import { injectStore } from '@/store'
+import { onBeforeMount } from 'vue'
 const main = injectStore()
+onBeforeMount(async () => {
+  await main?.auth.signCheck()
+})
 </script>
