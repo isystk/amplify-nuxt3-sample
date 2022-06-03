@@ -1,6 +1,7 @@
 🌙 amplify-nuxt3-sample
 ====
 
+[![CircleCI](https://circleci.com/gh/isystk/amplify-nuxt3-sample/tree/master.svg?style=svg)](https://circleci.com/gh/isystk/amplify-nuxt3-sample/tree/master)
 ![GitHub issues](https://img.shields.io/github/issues/isystk/amplify-nuxt3-sample)
 ![GitHub forks](https://img.shields.io/github/forks/isystk/amplify-nuxt3-sample)
 ![GitHub stars](https://img.shields.io/github/stars/isystk/amplify-nuxt3-sample)

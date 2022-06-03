@@ -138,7 +138,7 @@ export default class AuthService {
       this.id = id
       this.name = fullName
       this.token = await this.getJwtToken()
-      console.log(this)
+      // console.log(this)
     }
   }
 

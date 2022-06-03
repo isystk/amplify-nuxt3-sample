@@ -37,6 +37,7 @@ const nuxtConfig = defineNuxtConfig<NuxtConfig>({
   vite: {
     define: {
       'process.env.DEBUG': false,
+      // https://github.com/nuxt/framework/issues/4916
       global: {},
     },
     resolve: {

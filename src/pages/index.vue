@@ -3,7 +3,7 @@
     <v-container fluid>
       <v-row dense>
         <v-col
-          v-for="({ data }, postId) in posts"
+          v-for="(data, postId) in posts"
           :key="postId"
           cols="12"
           md="4"

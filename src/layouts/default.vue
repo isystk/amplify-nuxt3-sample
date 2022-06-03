@@ -19,7 +19,7 @@
 
 <script lang="ts" setup>
 import { injectStore } from '@/store'
-import {computed, onBeforeMount} from 'vue'
+import { computed, onBeforeMount } from 'vue'
 import { useRoute } from 'nuxt/app'
 const main = injectStore()
 onBeforeMount(async () => {

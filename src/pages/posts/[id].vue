@@ -45,6 +45,6 @@ const post = computed<Post>(() => {
   // definePageMeta({
   //   title: d.value.title
   // })
-  return d.data
+  return d
 })
 </script>

@@ -15,7 +15,7 @@
         </tr>
       </thead>
       <tbody>
-        <tr v-for="({ id, data }, idx) in lists.displayLists" :key="idx">
+        <tr v-for="( data, postId) in lists.displayLists" :key="postId">
           <td>{{ data.title }}</td>
           <td>{{ data.description }}</td>
           <td>
@@ -33,7 +33,7 @@
                   depressed
                   color="info"
                   type="button"
-                  @click="editPost(id, data)"
+                  @click="editPost(postId, data)"
                 >
                   変更
                 </v-btn>
@@ -43,7 +43,7 @@
                   depressed
                   color="error"
                   type="button"
-                  @click="deletePost(id)"
+                  @click="deletePost(postId)"
                 >
                   削除
                 </v-btn>
@@ -70,6 +70,8 @@
 </template>
 
 <script setup lang="ts">
+import {Post} from "@/services/models";
+
 definePageMeta({
   title: 'マイページ',
 })
@@ -83,7 +85,6 @@ import PostRegistModal, {
 import { injectStore } from '@/store'
 // import { useI18n } from 'vue-i18n'
 // const { t } = useI18n()
-import { Post } from '@/services/post'
 const main = injectStore()
 import * as _ from 'lodash'
 const lists = reactive<{ displayLists: Post[] }>({ displayLists: [] })
