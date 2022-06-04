@@ -1,6 +1,6 @@
 {
   "name": "amplify-nuxt3-sample",
-  "description": "Nuxt3 の学習用サンプルアプリケーションです。",
+  "description": "Nuxt3 & Vuetify3 & Amplify を利用した学習用のサンプルアプリケーションです。",
   "private": true,
   "scripts": {
     "dev": "nuxi dev",

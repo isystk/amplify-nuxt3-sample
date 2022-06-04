@@ -38,7 +38,7 @@ const nuxtConfig = defineNuxtConfig({
     define: {
       'process.env.DEBUG': false,
       // https://github.com/nuxt/framework/issues/4916
-      global: {}, // ← buildするときはコメントアウト
+      // global: {}, // ← yarn dev するときはコメントアウトを外す
     },
     resolve: {
       alias: {

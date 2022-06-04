@@ -70,18 +70,24 @@ $ amplify delete
 ├── nuxt.config.ts
 ├── package.json
 ├── src
+│   ├── __tests__
 │   ├── app.vue
 │   ├── assets
+│   ├── aws-exports.js
 │   ├── components
 │   ├── constants
 │   ├── layouts
+│   ├── locales
+│   ├── middleware
 │   ├── mixins
 │   ├── pages
 │   ├── plugins
+│   ├── public
 │   ├── services
 │   ├── store
-│   └── utilities
+│   └── stories
 ├── tailwind.config.js
+├── tsconfig.jest.json
 ├── tsconfig.json
 └── yarn.lock
 ```

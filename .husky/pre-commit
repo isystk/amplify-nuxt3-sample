@@ -7,3 +7,5 @@ yarn lint-staged
 yarn fix
 # jest
 #yarn test
+# build
+yarn build
