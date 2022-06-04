@@ -1,0 +1,18 @@
+{
+  "version": 1,
+  "serviceConfiguration": {
+    "apiName": "amplifynuxt3sample",
+    "serviceName": "AppSync",
+    "gqlSchemaPath": "/Users/iseyoshitaka/github/isystk/nuxt3-typescript-aws/amplify/backend/api/amplifynuxt3sample/schema.graphql",
+    "defaultAuthType": {
+      "mode": "API_KEY",
+      "expirationTime": 7
+    },
+    "additionalAuthTypes": [
+      {
+        "mode": "AMAZON_COGNITO_USER_POOLS",
+        "cognitoUserPoolId": "authamplifynuxt3sampleef1f0a11"
+      }
+    ]
+  }
+}

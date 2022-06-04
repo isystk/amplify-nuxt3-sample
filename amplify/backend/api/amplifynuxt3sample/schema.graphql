@@ -1,0 +1,31 @@
+type User
+  @model
+  @auth(rules: [
+    { allow: owner, operations: [update, delete]}
+    { allow: public, operations:[read, create]}
+  ]) {
+  id: ID!
+  userSub: String!
+  fullName: String!
+  profileImageFileName: String!
+  createdAt: String
+  updatedAt: String
+  Posts: [Post] @hasMany(indexName: "byUser", fields: ["id"])
+}
+
+type Post
+  @model
+  @auth(rules: [
+    {allow: owner, ownerField:"authorId", provider: userPools, operations:[create, update, delete]},
+    {allow: public, operations:[read]}
+  ]) {
+  id: ID!
+  title: String
+  description: String
+  photo: String
+  authorId: String
+  createdAt: String
+  updatedAt: String
+  userID: ID! @index(name: "byUser")
+}
+ 

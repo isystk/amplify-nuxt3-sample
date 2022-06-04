@@ -1,0 +1,110 @@
+version: 2.1
+executors:
+  default:
+    working_directory: ~/amplify-nuxt3-sample
+    docker:
+      - image: node:16
+
+commands:
+  restore_npm:
+    steps:
+      - restore_cache:
+          name: Restore npm dependencies
+          key: npm-{{ checksum "yarn.lock" }}
+
+  save_npm:
+    steps:
+      - save_cache:
+          name: Cache npm dependencies
+          key: npm-{{ checksum "yarn.lock" }}
+          paths:
+            - ~/amplify-nuxt3-sample/node_modules
+
+jobs:
+  setup:
+    executor:
+      name: default
+    steps:
+      - checkout
+      - run:
+          name: Install dependencies
+          command: yarn
+      - save_npm
+
+  lint:
+    executor:
+      name: default
+    steps:
+      - checkout
+      - restore_npm
+      - run:
+          name: Lint
+          command: yarn lint
+      - save_npm
+
+#  build:
+#    executor:
+#      name: default
+#    steps:
+#      - checkout
+#      - restore_npm
+#      - run:
+#          name: Build
+#          command: yarn build
+#      - save_npm
+
+#  test:
+#    executor:
+#      name: default
+#    steps:
+#      - checkout
+#      - restore_npm
+#      - run:
+#          name: Test
+#          command: yarn test
+#      - save_npm
+
+#  deploy:
+#    executor:
+#      name: default
+#    steps:
+#      - checkout
+#      - restore_npm
+#      - run:
+#          name: Build
+#          command: yarn build
+#      - run:
+#          name: Check dist
+#          command: ls -la dist
+#      - run:
+#          name: deploy to now
+#          command: |
+#            if [ ! ${CIRCLE_BRANCH} = master ]; then
+#              yarn deploy:preview
+#            else
+#              yarn deploy:production
+#            fi
+#      - save_npm
+
+workflows:
+  version: 2
+  build_and_test:
+    jobs:
+      - setup
+      - lint:
+          requires:
+            - setup
+#      - build:
+#          requires:
+#            - lint
+#      - test:
+#          requires:
+#            - build
+#      - deploy:
+#          name: Deploy to production
+#          requires:
+#            - test
+#          filters:
+#            branches:
+#              only:
+#                - master

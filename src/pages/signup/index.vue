@@ -1,114 +1,93 @@
 <template>
-  <section>
-    <div class="entry-header">
-      <h1 class="entry-title">会員登録</h1>
-    </div>
-    <div class="entry-content">
-      <div class="bg-white rounded px-8 pt-6 pb-8 mb-4">
-        <div class="grid grid-cols-1 md:grid-cols-1">
-          <div class="form-control">
-            <p>メールアドレス</p>
-            <ElementsInputText
-              name="email"
-              type="text"
-              :default-value="emailField.props.value.value"
-              :errors="
-                emailField.meta.isTouched.value && emailField.meta.error.value
-                  ? 'メールアドレスを入力してください。'
-                  : ''
-              "
-              @input="(e) => emailField.props.onInput(e)"
-              @blur="(e) => emailField.props.onBlur(e)"
-            />
-          </div>
-          <div class="form-control">
-            <p>パスワード</p>
-            <ElementsInputText
-              name="password"
-              type="password"
-              :default-value="passwordField.props.value.value"
-              :errors="
-                passwordField.meta.isTouched.value &&
-                passwordField.meta.error.value
-                  ? 'パスワードを入力してください。'
-                  : ''
-              "
-              @input="(e) => passwordField.props.onInput(e)"
-              @blur="(e) => passwordField.props.onBlur(e)"
-            />
-          </div>
-          <div>
-            <ElementsButtonBasic
-              label="会員登録する"
-              name="Regist"
-              @click="onSubmit"
-            />
-          </div>
-          <div class="mt-5">
-            <NuxtLink :to="$C.URL.LOGIN"> ログインはこちら </NuxtLink>
-          </div>
+  <pages-box :breadcrumbs="[{ text: '会員登録' }]" :small="true">
+    <VeeForm v-slot="{ errors }" :validation-schema="schema" @submit="onSubmit">
+      <div class="mt">
+        <div class="mb-4">
+          <label class="block text-gray-700 text-sm font-bold mb-2">
+            メールアドレス
+          </label>
+          <Field
+            name="email"
+            type="text"
+            class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
+            :class="{ 'is-invalid': errors.email }"
+          />
+          <ErrorMessage class="text-red" name="email" />
+        </div>
+        <div class="mb-4">
+          <label class="block text-gray-700 text-sm font-bold mb-2">
+            パスワード
+          </label>
+          <Field
+            name="password"
+            type="password"
+            class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
+            :class="{ 'is-invalid': errors.password }"
+          />
+          <ErrorMessage class="text-red" name="password" />
+        </div>
+        <div class="mb-4">
+          <label class="block text-gray-700 text-sm font-bold mb-2">
+            パスワード (確認)
+          </label>
+          <Field
+            name="confirmPassword"
+            type="password"
+            class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
+            :class="{ 'is-invalid': errors.confirmPassword }"
+          />
+          <ErrorMessage class="text-red" name="confirmPassword" />
+        </div>
+        <div class="mb-4">
+          <v-btn depressed color="primary" type="submit"> 登録 </v-btn>
         </div>
       </div>
-    </div>
-  </section>
+    </VeeForm>
+    <NuxtLink :to="Url.LOGIN"> ログインはこちら </NuxtLink>
+  </pages-box>
 </template>
 
-<script lang="ts" setup>
-const useField = (
-  initialValue: string,
-  validate: (value: string) => boolean = () => false
-) => {
-  const value = ref(initialValue)
-  const isTouched = ref(false)
-
-  const error = computed(() => {
-    return !validate(value.value)
-  })
-
-  const onInput = (v) => {
-    value.value = v
-  }
-
-  const onBlur = () => {
-    isTouched.value = true
-  }
-
-  return {
-    props: { value, onInput, onBlur },
-    meta: {
-      isTouched,
-      error,
-    },
-  }
-}
-
-const presenceValidator = (value: string) => {
-  return value.length > 0
-}
-
-const emailValidator = (value: string) => {
-  const re = /^\w+([-+.]\w+)*@\w+([-.]\w+)*\.\w+([-.]\w+)*$/
-  return re.test(value)
-}
-
+<script setup lang="ts">
+definePageMeta({
+  title: '会員登録',
+})
+import { Form as VeeForm, Field, ErrorMessage } from 'vee-validate'
+import * as Yup from 'yup'
+import { injectStore } from '@/store'
+// import { useI18n } from 'vue-i18n'
+// const { t } = useI18n()
+import { Url } from '@/constants/url'
+import { useRouter } from 'nuxt/app'
 const router = useRouter()
-const { $C } = useNuxtApp()
+const main = injectStore()
 
-// 各フィールドの定義(バリデーションメソッドの詳細は後述する)
-const emailField = useField('', emailValidator)
-const passwordField = useField('', presenceValidator)
-
-// フォームのエラー判定。各フィールドにエラー情報を元に判定する。
-const error = computed(() => {
-  return emailField.meta.error.value || passwordField.meta.error.value
+const schema = Yup.object().shape({
+  email: Yup.string()
+    .required('メールアドレスを入力してください')
+    .email('メールアドレスを正しく入力してください'),
+  password: Yup.string()
+    .min(6, 'パスワードは6文字以上で入力して下さい')
+    .required('パスワードを入力してください'),
+  confirmPassword: Yup.string()
+    .oneOf([Yup.ref('password'), null], 'パスワードが一致しません')
+    .required('パスワード(確認)を入力してください'),
 })
 
-// submitメソッド。各フィールドの値を使い、サーバーにPOSTリクエストを送信する。
-const onSubmit = async () => {
-  if (error.value) {
-    console.log(error.value)
-    return
+type FormValues = {
+  email: string
+  password: string
+  confirmPassword: string
+}
+
+const onSubmit = async (values: FormValues) => {
+  try {
+    console.log(values)
+    const { email, password } = values
+    const result = await main?.auth.signUp(email, email, password)
+    console.log(result)
+    await router.push(Url.SIGNUP_VERIFICATION)
+  } catch (e) {
+    alert(e.message)
   }
-  router.push($C.URL.SIGNUP_VERIFICATION)
 }
 </script>
