@@ -28,7 +28,8 @@ const nuxtConfig = defineNuxtConfig({
     postcss: {
       postcssOptions: {
         plugins: {
-          tailwindcss: {},
+          'tailwindcss/nesting': {},
+          // tailwindcss: {}
           autoprefixer: {},
         },
       },

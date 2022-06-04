@@ -42,16 +42,16 @@ jobs:
           command: yarn lint
       - save_npm
 
-  build:
-    executor:
-      name: default
-    steps:
-      - checkout
-      - restore_npm
-      - run:
-          name: Build
-          command: yarn build
-      - save_npm
+#  build:
+#    executor:
+#      name: default
+#    steps:
+#      - checkout
+#      - restore_npm
+#      - run:
+#          name: Build
+#          command: yarn build
+#      - save_npm
 
 #  test:
 #    executor:
@@ -94,9 +94,9 @@ workflows:
       - lint:
           requires:
             - setup
-      - build:
-          requires:
-            - lint
+#      - build:
+#          requires:
+#            - lint
 #      - test:
 #          requires:
 #            - build

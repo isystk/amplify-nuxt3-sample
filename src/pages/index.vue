@@ -2,12 +2,7 @@
   <v-card class="mx-auto">
     <v-container fluid>
       <v-row dense>
-        <v-col
-          v-for="(data, postId) in posts"
-          :key="postId"
-          cols="12"
-          md="4"
-        >
+        <v-col v-for="(data, postId) in posts" :key="postId" cols="12" md="4">
           <v-card>
             <NuxtLink :to="`${Url.POSTS}/${postId}`">
               <v-img :src="data.photo" style="width: 92vw; height: 50vh" cover>

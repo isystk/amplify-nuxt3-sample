@@ -15,7 +15,7 @@
         </tr>
       </thead>
       <tbody>
-        <tr v-for="( data, postId) in lists.displayLists" :key="postId">
+        <tr v-for="(data, postId) in lists.displayLists" :key="postId">
           <td>{{ data.title }}</td>
           <td>{{ data.description }}</td>
           <td>
@@ -70,7 +70,7 @@
 </template>
 
 <script setup lang="ts">
-import {Post} from "@/services/models";
+import { Post } from '@/services/models'
 
 definePageMeta({
   title: 'マイページ',
