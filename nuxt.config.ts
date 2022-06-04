@@ -1,8 +1,8 @@
-import { defineNuxtConfig, NuxtConfig } from 'nuxt'
+import { defineNuxtConfig } from 'nuxt'
 
-import { name, description } from './package.json'
+import { name } from './package.json'
 
-const nuxtConfig = defineNuxtConfig<NuxtConfig>({
+const nuxtConfig = defineNuxtConfig({
   ssr: false, // SPA (Amplifyを利用する為)
   target: 'static', // 静的サイトホスティング
   srcDir: 'src/',
@@ -38,7 +38,7 @@ const nuxtConfig = defineNuxtConfig<NuxtConfig>({
     define: {
       'process.env.DEBUG': false,
       // https://github.com/nuxt/framework/issues/4916
-      global: {},
+      global: {}, // ← buildするときはコメントアウト
     },
     resolve: {
       alias: {

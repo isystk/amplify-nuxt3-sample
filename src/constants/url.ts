@@ -2,7 +2,7 @@
  * フロントエンド用の URL を作成する
  */
 const getFrontUrl = (path: string): string => {
-  return [import.meta.env.VITE_INTERNAL_ENDPOINT, path].join('')
+  return ['', path].join('')
 }
 
 /** API のエンドポイント */
@@ -17,10 +17,6 @@ export const Url = {
   SIGNUP_VERIFICATION: getFrontUrl('/signup/verification'),
   /** 投稿詳細 */
   POSTS: getFrontUrl('/posts'),
-  /** マイページ TOP */
+  /** マイページ */
   MEMBER: getFrontUrl('/member'),
-  /** マイページ 投稿詳細 */
-  MEMBER_POSTS: getFrontUrl('/member/posts'),
-  /** マイページ 投稿 新規登録 */
-  MEMBER_POSTS_NEW: getFrontUrl('/member/posts/new'),
 }

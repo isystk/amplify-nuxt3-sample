@@ -14,14 +14,16 @@ AWS Amplify の学習用サンプルアプリケーションです。
 
 ### 利用している技術
 
-- NuxtJS 3
+- Nuxt.js 3
 - Typescript
 - Vuetify
+- TailwindCSS & Sass
 - Amplify (Cognito/AppSync/DynamoDB)
 - GraghQL
+- Storybook
 
 ## 🌐 Demo
-https://dev.d28qg1769uc44q.amplifyapp.com
+https://dev.dl83z1vvxx26n.amplifyapp.com
 
 ![TOP画面](./app1.png "TOP画面")
 ![マイページ一覧](./app2.png "マイページ一覧")
@@ -39,9 +41,9 @@ $ amplify init
 Please tell us about your project
 ? What javascript framework are you using react
 ? Source Directory Path:  src
-? Distribution Directory Path: build
-? Build Command:  npm run-script build
-? Start Command: npm run-script start
+? Distribution Directory Path: .output/public
+? Build Command:  npm run build
+? Start Command: npm run start
 Using default provider  awscloudformation
 ? Select the authentication method you want to use: (Use arrow keys)
 ❯ AWS profile 

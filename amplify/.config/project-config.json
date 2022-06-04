@@ -9,9 +9,9 @@
     "framework": "none",
     "config": {
       "SourceDir": "src",
-      "DistributionDir": "dist",
+      "DistributionDir": ".output/public",
       "BuildCommand": "npm run build",
-      "StartCommand": "npm run dev"
+      "StartCommand": "npm run start"
     }
   }
 }
