@@ -30,6 +30,8 @@
     "@aws-amplify/ui-vue": "^2.4.7",
     "@mdi/font": "^6.7.96",
     "@nuxt/types": "^2.15.8",
+    "@nuxtjs/tailwindcss": "^5.1.2",
+    "@pinia/nuxt": "^0.1.9",
     "@storybook/addon-essentials": "^6.5.6",
     "@storybook/addon-links": "^6.5.4",
     "@storybook/addon-postcss": "^2.0.0",
@@ -60,6 +62,7 @@
     "lodash": "^4.17.21",
     "moment": "^2.29.3",
     "nuxt": "3.0.0-rc.3",
+    "pinia": "^2.0.14",
     "postcss": "^8.4.14",
     "prettier": "^2.6.2",
     "sass": "1.52.1",
@@ -75,7 +78,6 @@
     "vue3-jest": "^27.0.0-alpha.1",
     "vuejs-image-base64": "^1.2.0",
     "vuetify": "^3.0.0-beta.2",
-    "yup": "^0.32.11",
-    "@nuxtjs/tailwindcss": "^5.1.2"
+    "yup": "^0.32.11"
   }
 }

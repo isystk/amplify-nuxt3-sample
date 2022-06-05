@@ -41,6 +41,7 @@ export default class PostService {
         (post) => !post._deleted
       )
       this.posts = _.mapKeys(filterPosts, 'id')
+      this.main.setMainService()
     } catch (error) {
       console.log('error read posts', error)
       alert('データ取得に失敗しました')
@@ -55,6 +56,7 @@ export default class PostService {
       const postData = await API.graphql(graphqlOperation(getPost, { id }))
       // @ts-ignore
       this.posts[id] = postData.data.getPost
+      this.main.setMainService()
     } catch (error) {
       console.log('error read posts', error)
       alert('データ取得に失敗しました')
@@ -100,7 +102,7 @@ export default class PostService {
       const input = {
         ...post,
         userID: this.main.auth.id,
-        _version: this.posts[post.id]._version,
+        _version: this.posts[postId]._version,
       }
       this.main.auth.useAuthTypeCognito()
       await API.graphql(
