@@ -1,12 +1,13 @@
-import { computed, inject, InjectionKey, provide } from 'vue'
-import { useMainStore } from '@/store/main'
+import { inject, reactive, InjectionKey, provide } from 'vue'
+import MainService from '@/services/main'
 
 const rootStore = () => {
-  const store = useMainStore()
-  const main = computed(() => store.getMain())
+  const state = reactive<{ main: MainService | null }>({
+    main: new MainService(),
+  })
   return {
     get main() {
-      return main.value
+      return state.main
     },
   }
 }

@@ -22,7 +22,7 @@ const nuxtConfig = defineNuxtConfig({
     // host: "0.0.0.0"
   },
   css: ['~/assets/sass/app.scss'],
-  buildModules: ['@nuxtjs/tailwindcss', '@pinia/nuxt'],
+  buildModules: ['@nuxtjs/tailwindcss'],
   build: {
     transpile: ['vuetify', 'moment'],
   },

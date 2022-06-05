@@ -27,7 +27,6 @@ export default class AuthService {
       this.id = undefined
       this.name = ''
       this.token = ''
-      this.main.setMainService()
       return true
     } catch (error) {
       console.log('error signing out', error)
@@ -49,7 +48,6 @@ export default class AuthService {
         this.id = id
         this.name = fullName
         this.token = await this.getJwtToken()
-        this.main.setMainService()
         return true
       }
       return false
@@ -141,7 +139,6 @@ export default class AuthService {
       this.name = fullName
       this.token = await this.getJwtToken()
       // console.log(this)
-      this.main.setMainService()
     }
   }
 
