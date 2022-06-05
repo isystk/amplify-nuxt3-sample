@@ -3,7 +3,7 @@
   "serviceConfiguration": {
     "apiName": "amplifynuxt3sample",
     "serviceName": "AppSync",
-    "gqlSchemaPath": "/Users/iseyoshitaka/github/isystk/nuxt3-typescript-aws/amplify/backend/api/amplifynuxt3sample/schema.graphql",
+    "gqlSchemaPath": "/Users/iseyoshitaka/github/isystk/amplify-nuxt3-sample/amplify/backend/api/amplifynuxt3sample/schema.graphql",
     "defaultAuthType": {
       "mode": "API_KEY",
       "expirationTime": 7
