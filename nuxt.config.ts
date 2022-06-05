@@ -1,5 +1,4 @@
 import { defineNuxtConfig } from 'nuxt'
-import path from 'path'
 
 import { name } from './package.json'
 
