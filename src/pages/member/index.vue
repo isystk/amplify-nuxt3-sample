@@ -72,8 +72,9 @@
 </template>
 
 <script setup lang="ts">
+import { useMeta } from 'nuxt/app'
 import { Post } from '@/services/models'
-definePageMeta({
+useMeta({
   title: 'マイページ',
 })
 definePageMeta({

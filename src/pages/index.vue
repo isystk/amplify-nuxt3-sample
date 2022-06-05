@@ -30,7 +30,8 @@
 
 <script setup lang="ts">
 import { computed, onBeforeMount } from 'vue'
-definePageMeta({
+import { useMeta } from 'nuxt/app'
+useMeta({
   title: 'Top',
 })
 import { Url } from '@/constants/url'

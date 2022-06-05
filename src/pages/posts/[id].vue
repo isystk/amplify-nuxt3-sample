@@ -13,12 +13,11 @@
 
 <script setup lang="ts">
 import { onBeforeMount, computed, ref } from 'vue'
-
+import { Post } from '@/services/models'
 import { injectStore } from '@/store'
 // import { useI18n } from 'vue-i18n'
 // const { t } = useI18n()
-import { Post } from '@/services/post'
-import { useRoute } from 'nuxt/app'
+import { useMeta, useRoute } from 'nuxt/app'
 const main = injectStore()
 const route = useRoute()
 
@@ -42,9 +41,11 @@ const post = computed<Post>(() => {
       photo: '',
     }
   }
-  // definePageMeta({
-  //   title: d.value.title
-  // })
+
+  useMeta({
+    title: d.title,
+  })
+
   return d
 })
 </script>
