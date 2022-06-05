@@ -6,12 +6,12 @@
   <v-app>
     <pages-header :store="main" />
     <v-main>
-      <Suspense>
-        <template #default>
-          <slot />
-        </template>
-        <template #fallback> loading... </template>
-      </Suspense>
+      <template v-if="loading">
+        <elements-loading />
+      </template>
+      <template v-else>
+        <slot />
+      </template>
     </v-main>
     <pages-footer :store="main" />
   </v-app>
@@ -19,11 +19,13 @@
 
 <script lang="ts" setup>
 import { injectStore } from '@/store'
-import { computed, onBeforeMount } from 'vue'
+import { ref, computed, onBeforeMount } from 'vue'
 import { useRoute } from 'nuxt/app'
+const loading = ref(true)
 const main = injectStore()
 onBeforeMount(async () => {
   await main?.auth.signCheck()
+  loading.value = false
 })
 const route = useRoute()
 import { name, description as _description } from '../../package.json'

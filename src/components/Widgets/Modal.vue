@@ -1,19 +1,18 @@
 <template>
   <v-dialog v-model="_isOpen">
-    <v-container>
-      <v-card class="md:max-w-lg">
-        <v-toolbar dark color="primary">
-          <v-toolbar-title>{{ title }}</v-toolbar-title>
-          <v-spacer />
-          <v-btn icon dark @click="handleClose">
-            <v-icon>mdi-close</v-icon>
-          </v-btn>
-        </v-toolbar>
-        <v-card-text>
-          <slot />
-        </v-card-text>
-      </v-card>
-    </v-container>
+    <v-card>
+      <v-card-title class="card-header">
+        {{ title }}
+        <v-spacer />
+        <v-btn icon @click="handleClose">
+          <v-icon>mdi-close</v-icon>
+        </v-btn>
+      </v-card-title>
+      <v-divider />
+      <v-card-text>
+        <slot />
+      </v-card-text>
+    </v-card>
   </v-dialog>
 </template>
 

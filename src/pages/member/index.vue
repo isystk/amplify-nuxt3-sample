@@ -1,9 +1,11 @@
 <template>
   <pages-box :breadcrumbs="[{ text: 'マイページ' }]">
-    <div class="mx-auto right-5 absolute">
-      <v-btn color="info" type="button" @click="registPost"> 新規登録 </v-btn>
+    <div class="relative h-16">
+      <div class="absolute top-0 right-0">
+        <v-btn color="info" type="button" @click="registPost"> 新規登録 </v-btn>
+      </div>
     </div>
-    <v-table>
+    <v-table density="compact" class="table-fixed">
       <thead>
         <tr>
           <th class="text-left">タイトル</th>
@@ -21,7 +23,7 @@
           <td>
             <v-img
               :src="data.photo"
-              style="width: 6vw; height: 8vh"
+              style="width: 120px; height: 90px"
               :transition="false"
               cover
             />
@@ -60,18 +62,17 @@
         @update:modelValue="pageChange"
       />
     </div>
+    <PostRegistModal
+      :is-open="isOpen"
+      :handle-close="handleClose"
+      :post-id="store.postId"
+      :initial-values="store.initialValues"
+    />
   </pages-box>
-  <PostRegistModal
-    :is-open="isOpen"
-    :handle-close="handleClose"
-    :post-id="store.postId"
-    :initial-values="store.initialValues"
-  />
 </template>
 
 <script setup lang="ts">
 import { Post } from '@/services/models'
-
 definePageMeta({
   title: 'マイページ',
 })

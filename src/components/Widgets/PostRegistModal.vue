@@ -43,7 +43,7 @@
 
           <v-container fluid>
             <v-row dense>
-              <v-col cols="12" md="6" class="width: 300px">
+              <v-col cols="12" md="6">
                 <VueImageBase64
                   :max-file-size="10485760"
                   :thumbnail-size="700"

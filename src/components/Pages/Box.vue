@@ -7,7 +7,7 @@
     </v-breadcrumbs>
     <v-container :fluid="fluid">
       <v-card class="mx-auto">
-        <v-card-title class="mb-3">
+        <v-card-title class="mb-3 card-header">
           {{ items[items.length - 1].text }}
         </v-card-title>
         <v-card-text>

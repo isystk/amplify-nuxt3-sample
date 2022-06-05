@@ -1,9 +1,6 @@
 <template>
-  <div class="text-center my-10" />
-  <div id="site_loader_overlay">
-    <div className="site_loader_spinner">
-      <ElementsSpinner :label="label" :variant="variant" :small="small" />
-    </div>
+  <div class="mt-15">
+    <elements-spinner :label="label" :variant="variant" :small="small" />
   </div>
 </template>
 <script>
