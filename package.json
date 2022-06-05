@@ -49,7 +49,6 @@
     "autoprefixer": "^10.4.7",
     "aws-amplify": "^4.3.24",
     "aws-sdk": "^2.1146.0",
-    "axios": "^0.27.2",
     "eslint": "^8.16.0",
     "eslint-config-prettier": "^8.5.0",
     "eslint-loader": "^4.0.2",
@@ -76,6 +75,7 @@
     "vue3-jest": "^27.0.0-alpha.1",
     "vuejs-image-base64": "^1.2.0",
     "vuetify": "^3.0.0-beta.2",
-    "yup": "^0.32.11"
+    "yup": "^0.32.11",
+    "@nuxtjs/tailwindcss": "^5.1.2"
   }
 }

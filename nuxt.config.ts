@@ -22,18 +22,9 @@ const nuxtConfig = defineNuxtConfig({
     // host: "0.0.0.0"
   },
   css: ['~/assets/sass/app.scss'],
-  buildModules: [],
+  buildModules: ['@nuxtjs/tailwindcss'],
   build: {
     transpile: ['vuetify', 'moment'],
-    postcss: {
-      postcssOptions: {
-        plugins: {
-          'tailwindcss/nesting': {},
-          // tailwindcss: {}
-          autoprefixer: {},
-        },
-      },
-    },
   },
   vite: {
     define: {
