@@ -53,16 +53,16 @@ jobs:
 #          command: yarn build
 #      - save_npm
 
-#  test:
-#    executor:
-#      name: default
-#    steps:
-#      - checkout
-#      - restore_npm
-#      - run:
-#          name: Test
-#          command: yarn test
-#      - save_npm
+  test:
+    executor:
+      name: default
+    steps:
+      - checkout
+      - restore_npm
+      - run:
+          name: Test
+          command: yarn test
+      - save_npm
 
 #  deploy:
 #    executor:
@@ -97,9 +97,9 @@ workflows:
 #      - build:
 #          requires:
 #            - lint
-#      - test:
-#          requires:
-#            - build
+      - test:
+          requires:
+            - build
 #      - deploy:
 #          name: Deploy to production
 #          requires:

@@ -6,6 +6,6 @@ yarn lint-staged
 # eslint & prettier
 yarn fix
 # jest
-#yarn test
+yarn test
 # build
 yarn build
