@@ -16,9 +16,6 @@ export default class AuthService {
     this.id = undefined
     this.name = ''
     this.token = ''
-    // ;(async () => {
-    //   await this.signCheck()
-    // })()
   }
 
   async signOut(): Promise<boolean> {
@@ -134,7 +131,7 @@ export default class AuthService {
       this.id = id
       this.name = fullName
       this.token = await this.getJwtToken()
-      // console.log(this)
+      console.log('signCheck', this)
     }
   }
 

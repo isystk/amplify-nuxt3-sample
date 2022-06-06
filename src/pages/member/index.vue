@@ -5,74 +5,80 @@
         <v-btn color="info" type="button" @click="registPost"> 新規登録 </v-btn>
       </div>
     </div>
-    <v-table density="compact" class="table-fixed">
-      <thead>
-        <tr>
-          <th class="text-left">タイトル</th>
-          <th class="text-left">本文</th>
-          <th class="text-left">画像</th>
-          <th class="text-left">
-            <br />
-          </th>
-        </tr>
-      </thead>
-      <tbody>
-        <tr v-for="(data, index) in lists.displayLists" :key="index">
-          <td>{{ data.title }}</td>
-          <td>{{ data.description }}</td>
-          <td>
-            <v-img
-              :src="data.photo"
-              style="width: 120px; height: 90px"
-              :transition="false"
-              cover
-            />
-          </td>
-          <td>
-            <ul>
-              <li class="ma-1">
-                <v-btn
-                  depressed
-                  color="info"
-                  type="button"
-                  @click="editPost(data.id, data)"
-                >
-                  変更
-                </v-btn>
-              </li>
-              <li class="ma-1">
-                <v-btn
-                  depressed
-                  color="error"
-                  type="button"
-                  @click="deletePost(data.id)"
-                >
-                  削除
-                </v-btn>
-              </li>
-            </ul>
-          </td>
-        </tr>
-      </tbody>
-    </v-table>
-    <div class="text-center">
-      <v-pagination
-        v-model="page"
-        :length="length"
-        @update:modelValue="pageChange"
+    <template v-if="!isLogined">
+      <elements-loading />
+    </template>
+    <template v-else>
+      <v-table density="compact" class="table-fixed">
+        <thead>
+          <tr>
+            <th class="text-left">タイトル</th>
+            <th class="text-left">本文</th>
+            <th class="text-left">画像</th>
+            <th class="text-left">
+              <br />
+            </th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr v-for="(data, index) in lists.displayLists" :key="index">
+            <td>{{ data.title }}</td>
+            <td>{{ data.description }}</td>
+            <td>
+              <v-img
+                :src="data.photo"
+                style="width: 120px; height: 90px"
+                :transition="false"
+                cover
+              />
+            </td>
+            <td>
+              <ul>
+                <li class="ma-1">
+                  <v-btn
+                    depressed
+                    color="info"
+                    type="button"
+                    @click="editPost(data.id, data)"
+                  >
+                    変更
+                  </v-btn>
+                </li>
+                <li class="ma-1">
+                  <v-btn
+                    depressed
+                    color="error"
+                    type="button"
+                    @click="deletePost(data.id)"
+                  >
+                    削除
+                  </v-btn>
+                </li>
+              </ul>
+            </td>
+          </tr>
+        </tbody>
+      </v-table>
+      <div class="text-center">
+        <v-pagination
+          v-model="page"
+          :length="length"
+          @update:modelValue="pageChange"
+        />
+      </div>
+      <PostRegistModal
+        :is-open="isOpen"
+        :handle-close="handleClose"
+        :post-id="store.postId"
+        :initial-values="store.initialValues"
       />
-    </div>
-    <PostRegistModal
-      :is-open="isOpen"
-      :handle-close="handleClose"
-      :post-id="store.postId"
-      :initial-values="store.initialValues"
-    />
+    </template>
   </pages-box>
 </template>
 
 <script setup lang="ts">
 import { useMeta } from 'nuxt/app'
+import { computed } from 'vue'
 import { Post } from '@/services/models'
 useMeta({
   title: 'マイページ',
@@ -80,28 +86,39 @@ useMeta({
 definePageMeta({
   middleware: ['auth'],
 })
-import { onBeforeMount, reactive, ref } from 'vue'
+import { reactive, ref } from 'vue'
 import PostRegistModal, {
   FormValues,
 } from '@/components/Widgets/PostRegistModal.vue'
 import { injectStore } from '@/store'
+import { useMainStore } from '@/store/main'
 // import { useI18n } from 'vue-i18n'
 // const { t } = useI18n()
-const main = injectStore()
+// const main = injectStore()
 import * as _ from 'lodash'
+const store = useMainStore()
+const main = store.getMain()
+
+const isLogined = computed(() => {
+  const isLogined = main?.auth.isAuthenticated()
+  if (isLogined) {
+    loadList()
+  }
+  return isLogined
+})
+
 const lists = reactive<{ displayLists: Post[] }>({ displayLists: [] })
 const page = ref(1)
 const length = ref(0)
 const pageSize = 3
 const isOpen = ref(false)
 
-const store = reactive<{ initialValues: FormValues; postId: string | null }>({
+const postStore = reactive<{
+  initialValues: FormValues
+  postId: string | null
+}>({
   initialValues: {},
   postId: null,
-})
-
-onBeforeMount(async () => {
-  await loadList()
 })
 
 const loadList = async () => {
@@ -131,14 +148,14 @@ const deletePost = async (postId: string) => {
 }
 
 const editPost = (postId: string, post: Post) => {
-  store.postId = postId
-  store.initialValues = { ...post } as FormValues
+  postStore.postId = postId
+  postStore.initialValues = { ...post } as FormValues
   isOpen.value = true
 }
 
 const registPost = () => {
-  store.postId = null
-  store.initialValues = {}
+  postStore.postId = null
+  postStore.initialValues = {}
   isOpen.value = true
 }
 

@@ -2,27 +2,18 @@
   <v-app>
     <pages-header :store="main" />
     <v-main>
-      <template v-if="loading">
-        <elements-loading />
-      </template>
-      <template v-else>
-        <slot />
-      </template>
+      <slot />
     </v-main>
     <pages-footer :store="main" />
   </v-app>
 </template>
 
 <script lang="ts" setup>
-import { injectStore } from '@/store'
-import { ref, computed, onBeforeMount } from 'vue'
+import { computed } from 'vue'
 import { useHead, useRoute } from 'nuxt/app'
-const loading = ref(true)
+import { injectStore } from '@/store'
 const main = injectStore()
-onBeforeMount(async () => {
-  await main?.auth.signCheck()
-  loading.value = false
-})
+
 const route = useRoute()
 import { name, description as _description } from '../../package.json'
 const title = computed(() => `${route.meta.title || ''} - ${name}`)
