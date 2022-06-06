@@ -17,7 +17,7 @@
         </tr>
       </thead>
       <tbody>
-        <tr v-for="(data, postId) in lists.displayLists" :key="postId">
+        <tr v-for="(data, index) in lists.displayLists" :key="index">
           <td>{{ data.title }}</td>
           <td>{{ data.description }}</td>
           <td>
@@ -35,7 +35,7 @@
                   depressed
                   color="info"
                   type="button"
-                  @click="editPost(postId, data)"
+                  @click="editPost(data.id, data)"
                 >
                   変更
                 </v-btn>
@@ -45,7 +45,7 @@
                   depressed
                   color="error"
                   type="button"
-                  @click="deletePost(postId)"
+                  @click="deletePost(data.id)"
                 >
                   削除
                 </v-btn>

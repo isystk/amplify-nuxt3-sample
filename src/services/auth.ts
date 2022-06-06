@@ -92,12 +92,7 @@ export default class AuthService {
     verificationCode: string
   ): Promise<boolean> {
     try {
-      const user = await Auth.currentAuthenticatedUser()
-      const result = await Auth.verifyUserAttributeSubmit(
-        user,
-        'email',
-        verificationCode
-      )
+      const result = await Auth.confirmSignUp(email, verificationCode)
       if (result !== 'SUCCESS') {
         new Error('メールアドレス検証に失敗しました')
       }
@@ -107,6 +102,7 @@ export default class AuthService {
       // https://zenn.dev/dove/articles/78ecf08b51ee0c
 
       // 上記対応をしないのであればこの処理は不要
+      const user = await Auth.currentAuthenticatedUser()
       await Auth.updateUserAttributes(user, {
         email, // ここと
         'custom:verified_email': email, // ここに新しいメールアドレスをいれる。

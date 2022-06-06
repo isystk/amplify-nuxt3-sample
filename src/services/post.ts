@@ -65,7 +65,6 @@ export default class PostService {
     // return _.filter(this.posts, (post) => {
     //   return post.data.userId === this.main.auth.id
     // })
-    console.log('getMyPosts', this.posts, this.main.auth.id)
     if (!this.main.auth.id) return []
     return _.filter(this.posts, (post) => post.userID === this.main.auth.id)
   }
@@ -101,7 +100,9 @@ export default class PostService {
         ...post,
         userID: this.main.auth.id,
         _version: this.posts[post.id]._version,
-      }
+      } as Post
+      delete input['_deleted']
+      delete input['_lastChangedAt']
       this.main.auth.useAuthTypeCognito()
       await API.graphql(
         graphqlOperation(updatePost, { input }, this.main.auth.token)
@@ -126,7 +127,7 @@ export default class PostService {
       )
       await this.readPosts()
     } catch (error) {
-      console.log('error delete post', error)
+      console.log('error delete post', error.errors[0]['message'])
       alert('削除に失敗しました')
     }
   }

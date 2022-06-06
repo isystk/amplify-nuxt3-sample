@@ -6,7 +6,7 @@
   "version": "3.1",
   "frontend": "javascript",
   "javascript": {
-    "framework": "none",
+    "framework": "vue",
     "config": {
       "SourceDir": "src",
       "DistributionDir": ".output/public",
