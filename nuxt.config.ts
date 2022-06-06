@@ -22,9 +22,15 @@ const nuxtConfig = defineNuxtConfig({
     // host: "0.0.0.0"
   },
   css: ['~/assets/sass/app.scss'],
-  buildModules: ['@nuxtjs/tailwindcss', '@pinia/nuxt'],
+  buildModules: ['@nuxtjs/tailwindcss', '@pinia/nuxt', '@intlify/nuxt3'],
   build: {
     transpile: ['vuetify', 'moment'],
+  },
+  intlify: {
+    localeDir: 'locales', // set the `locales` directory at source directory of your Nuxt application
+    vueI18n: {
+      locale: 'ja-JP',
+    },
   },
   vite: {
     define: {

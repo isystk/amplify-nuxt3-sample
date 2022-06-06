@@ -31,6 +31,19 @@ const vuetify = createVuetify({
 })
 app.use(vuetify)
 
+// // i18n
+// import { createI18n } from 'vue-i18n'
+// import jaJP from '@/locales/ja.json'
+// import enUS from '@/locales/en.json'
+// const i18n = createI18n({
+//   locale: 'ja-JP',
+//   messages: {
+//     'ja-JP': jaJP,
+//     'en-US': enUS,
+//   },
+// })
+// app.use(i18n)
+
 import '@/assets/sass/app.scss'
 
 // Components

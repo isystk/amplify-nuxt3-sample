@@ -117,7 +117,11 @@ $ amplify publish
 
 ## 💬 使い方
 ```text
+# edit nuxt.config.ts
+// global: {}, // ← yarn dev するときはコメントアウトを外して下さい
+# module install
 yarn
+# app run
 yarn dev
 ```
 
