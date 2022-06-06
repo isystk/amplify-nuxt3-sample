@@ -50,7 +50,8 @@ jobs:
       - restore_npm
       - run:
           name: Build
-          command: # yarn build
+#          command: yarn build
+          command: echo "TODO build"
       - save_npm
 
   test:

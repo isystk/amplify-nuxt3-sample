@@ -29,3 +29,7 @@ amplifytools.xcconfig
 .secret-*
 **.sample
 #amplify-do-not-edit-end
+
+#editor
+.idea
+.vscode

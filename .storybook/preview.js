@@ -1,8 +1,5 @@
 import { app } from '@storybook/vue3'
 import { createVuetify } from 'vuetify'
-
-import '@/assets/sass/app.scss'
-
 // Styles
 import '@mdi/font/css/materialdesignicons.css'
 import 'vuetify/styles'
@@ -33,6 +30,8 @@ const vuetify = createVuetify({
   },
 })
 app.use(vuetify)
+
+import '@/assets/sass/app.scss'
 
 // Components
 const pageContext = import.meta.globEager('../src/components/**/*.vue')
