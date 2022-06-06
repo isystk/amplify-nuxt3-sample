@@ -21,3 +21,5 @@ nuxt.config.ts
 tailwind.config.js
 
 
+
+src/models

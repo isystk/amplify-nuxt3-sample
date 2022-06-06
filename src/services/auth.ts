@@ -118,20 +118,24 @@ export default class AuthService {
   }
 
   async signCheck() {
-    if (this.name) return
-    const user = await Auth.currentUserInfo()
-    if (user) {
-      await this.useAuthTypeApiKey()
-      const userData = await API.graphql(
-        graphqlOperation(getUser, { userSub: user.username })
-      )
-      // @ts-ignore
-      const { id, fullName } = userData.data.listUsers.items[0]
+    try {
+      if (this.name) return
+      const user = await Auth.currentUserInfo()
+      if (user) {
+        await this.useAuthTypeApiKey()
+        const userData = await API.graphql(
+          graphqlOperation(getUser, { userSub: user.username })
+        )
+        // @ts-ignore
+        const { id, fullName } = userData.data.listUsers.items[0]
 
-      this.id = id
-      this.name = fullName
-      this.token = await this.getJwtToken()
-      console.log('signCheck', this)
+        this.id = id
+        this.name = fullName
+        this.token = await this.getJwtToken()
+        console.log('signCheck', this)
+      }
+    } catch (error) {
+      return
     }
   }
 

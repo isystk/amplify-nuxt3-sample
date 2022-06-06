@@ -69,8 +69,8 @@
       <PostRegistModal
         :is-open="isOpen"
         :handle-close="handleClose"
-        :post-id="store.postId"
-        :initial-values="store.initialValues"
+        :post-id="postStore.postId"
+        :initial-values="postStore.initialValues"
       />
     </template>
   </pages-box>
