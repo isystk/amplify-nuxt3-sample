@@ -35,8 +35,6 @@ useMeta({
   title: 'Top',
 })
 import { Url } from '@/constants/url'
-// import { useI18n } from 'vue-i18n'
-// const { t } = useI18n()
 import { injectStore } from '@/store'
 const main = injectStore()
 onBeforeMount(async () => {

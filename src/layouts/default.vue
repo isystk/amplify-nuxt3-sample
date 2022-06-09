@@ -9,15 +9,12 @@
 </template>
 
 <script lang="ts" setup>
-import { computed } from 'vue'
 import { useHead, useRoute } from 'nuxt/app'
 import { injectStore } from '@/store'
 const main = injectStore()
 
 const route = useRoute()
-import { name, description as _description } from '../../package.json'
-const title = computed(() => `${route.meta.title || ''} - ${name}`)
-const description = computed(() => `${route.meta.title || ''}、${_description}`)
+import { name, description } from '../../package.json'
 useHead({
   titleTemplate: `%s - ${name}`,
   // title: route.meta.title,
@@ -25,7 +22,6 @@ useHead({
     { name: 'viewport', content: 'width=device-width, initial-scale=1' },
     { name: 'format-detection', content: 'telephone=no' },
     { name: 'description', content: description },
-    { name: 'og:title', content: `App Name - ${route.meta.title || ''}` },
   ],
   link: [{ rel: 'icon', type: 'image/x-icon', href: '/favicon.ico' }],
   bodyAttrs: {

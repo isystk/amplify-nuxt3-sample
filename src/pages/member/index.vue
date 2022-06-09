@@ -90,11 +90,7 @@ import { reactive, ref } from 'vue'
 import PostRegistModal, {
   FormValues,
 } from '@/components/Widgets/PostRegistModal.vue'
-import { injectStore } from '@/store'
 import { useMainStore } from '@/store/main'
-// import { useI18n } from 'vue-i18n'
-// const { t } = useI18n()
-// const main = injectStore()
 import * as _ from 'lodash'
 const store = useMainStore()
 const main = store.getMain()

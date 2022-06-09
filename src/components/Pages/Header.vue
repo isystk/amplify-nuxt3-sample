@@ -77,8 +77,6 @@
 </template>
 
 <script setup lang="ts">
-// import { useI18n } from 'vue-i18n'
-// const { t } = useI18n()
 import { computed, ref } from 'vue'
 import { useRouter } from 'nuxt/app'
 import { Url } from '@/constants/url'

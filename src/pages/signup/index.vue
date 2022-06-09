@@ -55,8 +55,6 @@ useMeta({
 import { Form as VeeForm, Field, ErrorMessage } from 'vee-validate'
 import * as Yup from 'yup'
 import { injectStore } from '@/store'
-// import { useI18n } from 'vue-i18n'
-// const { t } = useI18n()
 import { Url } from '@/constants/url'
 const router = useRouter()
 const main = injectStore()

@@ -7,10 +7,7 @@ const nuxtConfig = defineNuxtConfig({
   target: 'static', // 静的サイトホスティング
   srcDir: 'src/',
 
-  /**
-   * 環境変数
-   * ビルド時に渡される env の値は、ここに記載することで文字列に置換される
-   */
+  // 環境変数
   publicRuntimeConfig: {
     APP_NAME: name,
   },
@@ -27,7 +24,7 @@ const nuxtConfig = defineNuxtConfig({
     transpile: ['vuetify', 'moment'],
   },
   intlify: {
-    localeDir: 'locales', // set the `locales` directory at source directory of your Nuxt application
+    localeDir: 'locales',
     vueI18n: {
       locale: 'ja-JP',
     },
