@@ -5,6 +5,7 @@
   "scripts": {
     "dev": "nuxi dev",
     "build": "nuxi build",
+    "generate": "nuxi generate",
     "start": "node .output/server/index.mjs",
     "allupdate": "yarn upgrade-interactive --latest",
     "lint": "eslint --ext .js,.ts,.vue .",
