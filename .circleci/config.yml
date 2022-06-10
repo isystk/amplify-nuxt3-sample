@@ -76,7 +76,7 @@ jobs:
 #          command: yarn generate
 #      - run:
 #          name: Check dist
-#          command: ls -la .output/public
+#          command: ls -la dist
 #      - run:
 #          name: deploy to now
 #          command: |
