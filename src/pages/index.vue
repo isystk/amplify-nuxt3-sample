@@ -30,7 +30,6 @@
 
 <script setup lang="ts">
 import { computed, onBeforeMount } from 'vue'
-import { useMeta } from 'nuxt/app'
 useMeta({
   title: 'Top',
 })

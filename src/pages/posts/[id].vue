@@ -15,7 +15,6 @@
 import { onBeforeMount, computed, ref } from 'vue'
 import { Post } from '@/services/models'
 import { injectStore } from '@/store'
-import { useMeta, useRoute } from 'nuxt/app'
 const main = injectStore()
 const route = useRoute()
 

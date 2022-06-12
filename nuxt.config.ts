@@ -1,15 +1,17 @@
 import { defineNuxtConfig } from 'nuxt'
 
-import { name } from './package.json'
+import { name, description } from './package.json'
 
 const nuxtConfig = defineNuxtConfig({
-  ssr: false, // SPA (Amplifyを利用する為)
+  ssr: false, // ← SPA
+  // ssr: true, // ← SSG
   target: 'static', // 静的サイトホスティング
   srcDir: 'src/',
 
   // 環境変数
   publicRuntimeConfig: {
     APP_NAME: name,
+    APP_DESCRIPTION: description,
   },
 
   // https://ja.nuxtjs.org/faq/host-port/

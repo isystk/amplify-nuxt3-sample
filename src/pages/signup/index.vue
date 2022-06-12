@@ -48,7 +48,6 @@
 </template>
 
 <script setup lang="ts">
-import { useMeta, useRouter } from 'nuxt/app'
 useMeta({
   title: '会員登録',
 })

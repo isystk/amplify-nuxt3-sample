@@ -38,7 +38,6 @@
 </template>
 
 <script setup lang="ts">
-import { useMeta, useRouter } from 'nuxt/app'
 useMeta({
   title: 'メールに記載の認証コードを入力して下さい',
 })

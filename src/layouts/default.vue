@@ -9,7 +9,6 @@
 </template>
 
 <script lang="ts" setup>
-import { useHead, useRoute } from 'nuxt/app'
 import { injectStore } from '@/store'
 const main = injectStore()
 

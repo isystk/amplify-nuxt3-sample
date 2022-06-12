@@ -77,7 +77,6 @@
 </template>
 
 <script setup lang="ts">
-import { useMeta } from 'nuxt/app'
 import { computed } from 'vue'
 import { Post } from '@/services/models'
 useMeta({

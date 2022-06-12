@@ -12,6 +12,9 @@ module.exports = {
     withDefaults: 'readonly',
     definePageMeta: 'readonly',
     useHead: 'readonly',
+    useMeta: 'readonly',
+    useRoute: 'readonly',
+    useRouter: 'readonly',
   },
   parser: 'vue-eslint-parser',
   parserOptions: {

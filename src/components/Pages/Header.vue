@@ -78,7 +78,7 @@
 
 <script setup lang="ts">
 import { computed, ref } from 'vue'
-import { useRouter } from 'nuxt/app'
+import { useRouter } from 'nuxt/app' // TODO StorybookでRouterがえらーいなるので追加
 import { Url } from '@/constants/url'
 import MainService from '@/services/main'
 const props = defineProps<{

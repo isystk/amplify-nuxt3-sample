@@ -36,7 +36,6 @@
 </template>
 
 <script setup lang="ts">
-import { useMeta, useRouter } from 'nuxt/app'
 useMeta({
   title: 'ログイン',
 })

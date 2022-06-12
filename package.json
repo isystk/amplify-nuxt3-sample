@@ -5,8 +5,8 @@
   "scripts": {
     "dev": "nuxi dev",
     "build": "nuxi build",
-    "generate": "nuxi generate",
-    "start": "node .output/server/index.mjs",
+    "generate": "NODE_OPTIONS='--max-old-space-size=8192' nuxi generate",
+    "start": "nuxi preview",
     "allupdate": "yarn upgrade-interactive --latest",
     "lint": "eslint --ext .js,.ts,.vue .",
     "lintfix": "eslint --fix --ext .js,.ts,.vue .",
