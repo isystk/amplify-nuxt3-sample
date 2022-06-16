@@ -3,11 +3,11 @@
     <pages-header :store="main" />
     <v-main>
       <pages-box :breadcrumbs="[{ text: error.statusCode }]" :small="true">
-        <div v-if="error.statusCode === 404" class="mb-4">
+        <div v-if="error.statusCode == 404" class="mb-4">
           <h1>ページが見つかりません</h1>
         </div>
         <div v-else class="mb-4">
-          <h1>エラーが発生しました {{ info.message }}</h1>
+          <h1>エラーが発生しました {{ error.message }}</h1>
         </div>
         <nuxt-link to="/">TOPへ戻る</nuxt-link>
       </pages-box>
