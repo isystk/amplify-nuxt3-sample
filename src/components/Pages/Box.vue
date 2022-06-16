@@ -2,7 +2,7 @@
   <div>
     <v-breadcrumbs :items="items">
       <template #text="{ item }">
-        {{ item.text.toUpperCase() }}
+        {{ item.text }}
       </template>
     </v-breadcrumbs>
     <v-container :fluid="fluid">

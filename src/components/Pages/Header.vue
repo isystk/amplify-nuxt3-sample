@@ -4,7 +4,7 @@
       <pages-logo />
       <v-spacer />
 
-      <template v-if="isLogined">
+      <template v-if="state.isLogined">
         <v-card
           class="mx-auto top-0 right-0 invisible md:visible"
           width="300"
@@ -17,7 +17,7 @@
                   v-bind="props"
                   two-line
                   prepend-avatar="/images/user_dummy.png"
-                  :title="name"
+                  :title="state.name"
                   subtitle="Logged in"
                 />
               </template>
@@ -46,58 +46,70 @@
       />
     </v-app-bar>
 
-    <v-navigation-drawer v-model="drawer" bottom temporary position="right">
+    <v-navigation-drawer
+      v-model="state.drawer"
+      bottom
+      temporary
+      position="right"
+    >
       <v-list>
         <v-list-item
           prepend-avatar="/images/user_dummy.png"
-          :title="name"
+          :title="state.name"
           subtitle="Logged in"
         />
       </v-list>
       <v-divider />
       <v-list density="compact">
         <v-list-subheader>Menu</v-list-subheader>
-        <v-list-item-group>
-          <v-list-item
-            v-for="(item, i) in items"
-            :key="i"
-            :value="item"
-            active-color="primary"
-            @click="item.func"
-          >
-            <v-list-item-avatar start>
-              <v-icon :icon="item.icon" />
-            </v-list-item-avatar>
-            <v-list-item-title>{{ item.text }}</v-list-item-title>
-          </v-list-item>
-        </v-list-item-group>
+        <v-list-item
+          v-for="(item, i) in items"
+          :key="i"
+          :value="item"
+          active-color="primary"
+          @click="item.func"
+        >
+          <v-list-item-avatar start>
+            <v-icon :icon="item.icon" />
+          </v-list-item-avatar>
+          <v-list-item-title>{{ item.text }}</v-list-item-title>
+        </v-list-item>
       </v-list>
     </v-navigation-drawer>
   </div>
 </template>
 
 <script setup lang="ts">
-import { computed, ref } from 'vue'
+import { computed, reactive, watch } from 'vue'
 import { useRouter } from 'nuxt/app' // TODO StorybookでRouterがえらーいなるので追加
 import { Url } from '@/constants/url'
 import MainService from '@/services/main'
 const props = defineProps<{
   store: MainService
 }>()
+const state = reactive({
+  name: '',
+  isLogined: false,
+  drawer: false,
+})
 
 const router = useRouter()
-const drawer = ref(false)
+
+watch(props.store, () => {
+  if (!props.store) {
+    return
+  }
+  state.name = props.store.auth.name
+  state.isLogined = props.store.auth.isAuthenticated()
+})
 
 const toggleMenu = () => {
-  drawer.value = !drawer.value
+  state.drawer = !state.drawer
 }
-
-const name = computed(() => props.store.auth.name)
-const isLogined = computed(() => props.store.auth.isAuthenticated())
 
 const items = computed(() => {
   return [
-    isLogined.value
+    state.isLogined
       ? {
           text: 'ログアウト',
           icon: 'mdi-login-variant',
