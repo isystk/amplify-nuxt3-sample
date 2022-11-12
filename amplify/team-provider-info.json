@@ -20,6 +20,9 @@
           "appId": "dl83z1vvxx26n",
           "type": "manual"
         }
+      },
+      "api": {
+        "amplifynuxt3sample": {}
       }
     }
   }

@@ -9,6 +9,11 @@ nuxt.d.ts
 
 .env
 
+
+#editor
+.idea
+.vscode
+
 #amplify-do-not-edit-begin
 amplify/\#current-cloud-backend
 amplify/.config/local-*
@@ -29,7 +34,3 @@ amplifytools.xcconfig
 .secret-*
 **.sample
 #amplify-do-not-edit-end
-
-#editor
-.idea
-.vscode
